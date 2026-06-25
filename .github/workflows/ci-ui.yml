@@ -49,17 +49,25 @@ jobs:
 
       - name: Run UI tests (headless)
         run: |
-          mvn test \
+          mvn test --no-transfer-progress \
             -Dexecution.type=UI \
             -Dheadless=true \
+            -Dapi.mock=false \
+            -Dui.mock=false \
             -Dbrowser=${{ inputs.browser || 'chrome' }} \
-            -Dbase.url=${{ secrets.BASE_URL }} \
-            -Dapi.base.url=${{ secrets.API_BASE_URL }} \
-            -Dauth.token=${{ secrets.AUTH_TOKEN }} \
-            -Dadmin.username=${{ secrets.ADMIN_USERNAME }} \
-            -Dadmin.password=${{ secrets.ADMIN_PASSWORD }} \
-            -Dstaff.username=${{ secrets.STAFF_USERNAME }} \
-            -Dstaff.password=${{ secrets.STAFF_PASSWORD }}
+            -Dbase.url="${{ secrets.BASE_URL }}" \
+            -Dapi.base.url="${{ secrets.API_BASE_URL }}" \
+            -Dauth.token="${{ secrets.AUTH_TOKEN }}" \
+            -Dadmin.username="${{ secrets.ADMIN_USERNAME }}" \
+            -Dadmin.password="${{ secrets.ADMIN_PASSWORD }}" \
+            -Dstaff.username="${{ secrets.STAFF_USERNAME }}" \
+            -Dstaff.password="${{ secrets.STAFF_PASSWORD }}"
+
+      - name: Print Surefire failure details
+        if: failure()
+        run: |
+          echo "===== SUREFIRE FAILURE REPORTS ====="
+          find target/surefire-reports -name '*.txt' | xargs cat || true
 
       - name: Upload Surefire Reports
         if: always()
