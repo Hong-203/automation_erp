@@ -1,0 +1,115 @@
+name: CI — Full Suite (Push to main)
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  api-tests:
+    name: API Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Create config.properties from example
+        run: cp src/test/resources/config.properties.example src/test/resources/config.properties
+
+      - name: Run API tests
+        run: |
+          mvn test \
+            -Dexecution.type=API \
+            -Dbase.url=${{ secrets.BASE_URL }} \
+            -Dapi.base.url=${{ secrets.API_BASE_URL }} \
+            -Dauth.token=${{ secrets.AUTH_TOKEN }} \
+            -Dadmin.username=${{ secrets.ADMIN_USERNAME }} \
+            -Dadmin.password=${{ secrets.ADMIN_PASSWORD }} \
+            -Dstaff.username=${{ secrets.STAFF_USERNAME }} \
+            -Dstaff.password=${{ secrets.STAFF_PASSWORD }}
+
+      - name: Upload API Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-suite-api-reports
+          path: |
+            target/surefire-reports/
+            target/extent-reports/
+          retention-days: 14
+
+  ui-tests:
+    name: UI Tests (Headless)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Setup Google Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
+      - name: Create config.properties from example
+        run: cp src/test/resources/config.properties.example src/test/resources/config.properties
+
+      - name: Run UI tests (headless)
+        run: |
+          mvn test \
+            -Dexecution.type=UI \
+            -Dheadless=true \
+            -Dbrowser=chrome \
+            -Dbase.url=${{ secrets.BASE_URL }} \
+            -Dapi.base.url=${{ secrets.API_BASE_URL }} \
+            -Dauth.token=${{ secrets.AUTH_TOKEN }} \
+            -Dadmin.username=${{ secrets.ADMIN_USERNAME }} \
+            -Dadmin.password=${{ secrets.ADMIN_PASSWORD }} \
+            -Dstaff.username=${{ secrets.STAFF_USERNAME }} \
+            -Dstaff.password=${{ secrets.STAFF_PASSWORD }}
+
+      - name: Upload UI Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-suite-ui-reports
+          path: |
+            target/surefire-reports/
+            target/extent-reports/
+          retention-days: 14
+
+      - name: Upload Screenshots on Failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-suite-screenshots-failure
+          path: screenshots/
+          retention-days: 7
