@@ -1,0 +1,4236 @@
+Collection	Request/Endpoint	Method	Test Case ID	Module
+ERP Module M2 API	/warehouses	GET	TC-WH-08.01	M2 - Warehouses
+ERP Module M2 API	/warehouses	GET	TC-SEC-06.01	M2 - Warehouses
+ERP Module M2 API	/warehouses	POST	TC-WH-01.01	M2 - Warehouses
+ERP Module M2 API	/warehouses	POST	TC-WH-01.02	M2 - Warehouses
+ERP Module M2 API	/warehouses	POST	TC-SEC-06.01	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}	GET	TC-WH-11.01	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}	GET	TC-WH-11.02	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}	PUT	TC-WH-07.01	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}	PUT	TC-WH-07.02	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}	PUT	TC-WH-07.02	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}	PUT	TC-WH-07.02	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}	DELETE	TC-WH-10.01	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}	DELETE	TC-WH-10.02	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}	DELETE	TC-WH-10.02	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}/disable	PATCH	TC-WH-08.01	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}/disable	PATCH	TC-WH-08.02	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}/enable	PATCH	TC-WH-09.01	M2 - Warehouses
+ERP Module M2 API	/warehouses/{id}/enable	PATCH	TC-WH-09.02	M2 - Warehouses
+ERP Module M2 API	/warehouse-scopes	GET	TC-SEC-01.01	M2 - Warehouse Scopes
+ERP Module M2 API	/warehouse-scopes	GET	TC-SEC-06.01	M2 - Warehouse Scopes
+ERP Module M2 API	/warehouse-scopes	POST	TC-SEC-04.01	M2 - Warehouse Scopes
+ERP Module M2 API	/warehouse-scopes	POST	TC-SEC-04.02	M2 - Warehouse Scopes
+ERP Module M2 API	/warehouse-scopes	POST	TC-SEC-06.01	M2 - Warehouse Scopes
+ERP Module M2 API	/warehouse-scopes/{id}	DELETE	TC-SEC-04.01	M2 - Warehouse Scopes
+ERP Module M2 API	/warehouse-scopes/{id}	DELETE	TC-SEC-04.02	M2 - Warehouse Scopes
+ERP Module M2 API	/inbound-documents	GET	TC-IN-03.01	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents	POST	TC-IN-01.01	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents	POST	TC-IN-01.02	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents	POST	TC-SEC-06.01	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents/{id}	GET	TC-IN-04.01	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents/{id}/submit	POST	TC-IN-02.01	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents/{id}/submit	POST	TC-IN-02.01	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents/{id}/approve	POST	TC-IN-02.01	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents/{id}/post-receipt	POST	TC-IN-03.01	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents/{id}/post-receipt	POST	TC-IN-03.02	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents/{id}/record-loss	POST	TC-IN-03.03	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents/{id}/reject	POST	TC-IN-08.01	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/inbound-documents/{id}/cancel	POST	TC-IN-07.01	M2 - Inbound (Nhập kho)
+ERP Module M2 API	/outbound-documents	GET	TC-OUT-03.01	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents	POST	TC-OUT-01.01	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents	POST	TC-OUT-01.02	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents	POST	TC-SEC-06.01	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}	GET	TC-OUT-04.01	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}/submit	POST	TC-OUT-02.01	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}/approve	POST	TC-OUT-02.01	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}/approve	POST	TC-OUT-02.02	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}/approve	POST	TC-OUT-02.03	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}/approve	POST	TC-OUT-04.02	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}/post-issue	POST	TC-OUT-03.01	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}/post-issue	POST	TC-OUT-03.02	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}/record-loss	POST	TC-OUT-03.03	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}/reject	POST	TC-OUT-12.01	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/outbound-documents/{id}/cancel	POST	TC-OUT-07.01	M2 - Outbound (Xuất kho)
+ERP Module M2 API	/transfer-orders	GET	TC-TR-03.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders	POST	TC-TR-01.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders	POST	TC-TR-01.02	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders	POST	TC-SEC-06.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}	GET	TC-TR-04.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/submit	POST	TC-TR-02.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/approve	POST	TC-TR-02.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/approve	POST	TC-TR-02.02	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/approve	POST	TC-TR-02.02	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/dispatch	POST	TC-TR-05.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/dispatch	POST	TC-TR-05.02	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/receive	POST	TC-TR-06.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/receive	POST	TC-TR-06.02	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/record-loss	POST	TC-TR-06.02	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/return	POST	TC-TR-10.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/reject	POST	TC-TR-10.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/transfer-orders/{id}/cancel	POST	TC-TR-13.01	M2 - Transfer (Điều chuyển)
+ERP Module M2 API	/document-status-history	GET	TC-LOG-08.03	M2 - Document Status History
+ERP Module M2 API	/document-status-history	GET	TC-SEC-06.01	M2 - Document Status History
+ERP Module M2 API	/document-status-transitions	GET	TC-LOG-08.03	M2 - 5. In-transit & Tồn kho
+ERP Module M2 API	/document-status-transitions/{id}/toggle	PATCH	TC-LOG-08.03	M2 - 5. In-transit & Tồn kho
+ERP Module M2 API	/in-transit-ledger	GET	TC-IT-01.01	M2 - In-Transit Ledger
+ERP Module M2 API	/in-transit-ledger	GET	TC-SEC-06.01	M2 - In-Transit Ledger
+ERP Module M2 API	/inventory/balances	GET	TC-IT-04.01	M2 - Inventory (Tồn kho)
+ERP Module M2 API	/inventory-snapshots	GET	TC-SSC-02.01	M2 - Inventory Snapshots
+ERP Module M2 API	/inventory-snapshots	GET	TC-SEC-06.01	M2 - Inventory Snapshots
+ERP Module M2 API	/inventory-snapshots/generate	POST	TC-SSC-01.01	M2 - Inventory Snapshots
+ERP Module M2 API	/inventory-snapshots/generate	POST	TC-SSC-01.02	M2 - Inventory Snapshots
+ERP Module M2 API	/inventory-snapshots/generate	POST	TC-SEC-06.01	M2 - Inventory Snapshots
+ERP Module M2 API	/inventory-reservations	GET	TC-SSC-03.01	M2 - Inventory Reservations
+ERP Module M2 API	/inventory-reservations	GET	TC-SEC-06.01	M2 - Inventory Reservations
+ERP Module M2 API	/inventory-reservations/{id}	GET	TC-SSC-04.01	M2 - Inventory Reservations
+ERP Module M2 API	/inventory-reservations/{id}	GET	TC-SSC-04.02	M2 - Inventory Reservations
+ERP Module M2 API	/safe-stock-configs	GET	TC-IT-08.01	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs	GET	TC-SEC-06.01	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs	POST	TC-IT-08.01	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs	POST	TC-IT-08.02	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs	POST	TC-SEC-06.01	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs	POST	TC-IT-08.02	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs/{id}	GET	TC-IT-08.01	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs/{id}	GET	TC-IT-08.02	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs/{id}	PUT	TC-IT-08.01	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs/{id}	PUT	TC-IT-08.02	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs/{id}	PUT	TC-IT-08.02	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs/{id}	DELETE	TC-SSC-09.01	M2 - Safe Stock Configs
+ERP Module M2 API	/safe-stock-configs/{id}	DELETE	TC-SSC-09.02	M2 - Safe Stock Configs
+ERP Module M2 API	/stock-movements	GET	TC-LOG-04.01	M2 - Stock Movement (Lịch sử biến động)
+ERP Module M2 API	/stock-movements/{id}	GET	TC-LOG-04.02	M2 - Stock Movement (Lịch sử biến động)
+ERP Module M2 API	/stock-movements/{id}/trace-source	GET	TC-LOG-04.03	M2 - Stock Movement (Lịch sử biến động)
+ERP Module M2 API	/stock-requests	GET	TC-SSC-11.01	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	/stock-requests	POST	TC-SSC-12.01	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	/stock-requests	POST	TC-SSC-12.02	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	/stock-requests	POST	TC-SEC-06.01	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	/stock-requests/{id}	GET	TC-SSC-13.01	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	/stock-requests/{id}	PUT	TC-SSC-14.01	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	/stock-requests/{id}	PUT	TC-SSC-14.02	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	/stock-requests/{id}	DELETE	TC-SSC-15.01	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	/stock-requests/{id}	DELETE	TC-SSC-15.02	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	/stock-requests/{id}/submit	POST	TC-SSC-16.01	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	"
+/stock-requests/{id}/approve"	POST	TC-SSC-17.01	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	"
+/stock-requests/{id}/reject"	POST	TC-SSC-18.01	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	"
+/stock-requests/{id}/convert"	POST	TC-SSC-19.01	M2 - 7. Stock Movement & Audit
+ERP Module M2 API	/reports/revenue	GET	TC-REP-01.01	M2 - Report (Báo cáo XNT)
+ERP Module M2 API	/reports/revenue	GET	TC-SEC-06.01	M2 - Report (Báo cáo XNT)
+ERP Module M2 API	/reports/inventory-xnt	GET	TC-REP-01.01	M2 - Report (Báo cáo XNT)
+ERP Module M2 API	/reports/inventory-xnt	GET	TC-REP-05.02	M2 - Report (Báo cáo XNT)
+ERP Module M2 API	/reports/inventory-xnt	GET	TC-REP-05.02	M2 - Report (Báo cáo XNT)
+ERP Module M2 API	/reports/inventory-xnt	GET	TC-REP-05.02	M2 - Report (Báo cáo XNT) đọc cái api này và đọc tài liệu này 1. Tổng quan Module
+1.1. Mục tiêu module
+Xây dựng hệ thống quản lý kho đa tầng (Multi-Warehouse Management System) nhằm:
+Quản lý tập trung toàn bộ hàng hóa trong doanh nghiệp theo mô hình nhiều kho (kho tổng, kho chi nhánh, kho con).
+Kiểm soát toàn bộ vòng đời hàng hóa từ nhập kho, xuất kho, điều chuyển giữa các kho, trả hàng và kiểm kê. MVP hiện hỗ trợ nhập, xuất, điều chuyển; kiểm kê và trả hàng sẽ triển khai ở giai đoạn tiếp theo. 
+Đảm bảo tồn kho chính xác theo thời gian thực (real-time inventory).
+Hỗ trợ luồng vận hành kho có kiểm soát thông qua chứng từ (phiếu nhập, phiếu xuất, phiếu điều chuyển…).
+Theo dõi lịch sử biến động tồn kho để truy vết đầy đủ mọi thay đổi số lượng hàng hóa.
+Hỗ trợ báo cáo xuất – nhập – tồn phục vụ quản trị và ra quyết định.
+Thiết kế theo hướng mở rộng đa chi nhánh, đa kho, có thể nhân bản mô hình vận hành khi doanh nghiệp mở rộng.
+1.2. Phạm vi module
+Trong phạm vi (In-scope)
+Quản lý hệ thống kho
+Quản lý nhập kho 
+Quản lý xuất kho 
+Quản lý điều chuyển kho 
+Quản lý tồn kho 
+Lịch sử biến động tồn kho
+Báo cáo xuất nhập tồn
+Audit log kho (kho không có audit log riêng, chỉ gửi request đến audit log tổng của hệ thống)
+Ngoài phạm vi (Out-of-scope - thuộc module/giai đoạn khác)
+Quản lý tài khoản đăng nhập, xác thực người dùng, SSO, bảo mật phiên đăng nhập và các cơ chế authentication → thuộc module Quản trị hệ thống & Phân quyền (Module 10)
+Các nghiệp vụ nhân sự – tài chính nâng cao 
+Quản lý vận hành vận tải chuyên sâu: Quản lý đội xe, tài xế, chi phí logistics chi tiết,...
+1.3. Đối tượng sử dụng (Actors)
+
+Tác nhân
+Mô tả vai trò
+Mức tương tác với Module 2
+Quản trị viên hệ thống
+Thiết lập và quản trị toàn bộ hệ thống kho: tạo kho tổng, kho con; kiểm soát toàn bộ nghiệp vụ kho (nhập, xuất, điều chuyển, kiểm kê, báo cáo). Đồng thời chịu trách nhiệm đảm bảo dữ liệu kho hoạt động đúng logic hệ thống và không sai lệch tồn kho.
+Cao - người dùng chính
+Quản lý kho
+Người chịu trách nhiệm vận hành kho ở cấp quản lý: phê duyệt phiếu nhập/xuất/điều chuyển; theo dõi tồn kho; xử lý các vấn đề phát sinh (hủy phiếu, trả hàng, điều chỉnh kiểm kê). Đây là người đảm bảo tính chính xác của dữ liệu kho trước khi ghi nhận thay đổi tồn kho thực tế.
+Cao
+Nhân viên kho
+Thực hiện các nghiệp vụ vận hành trực tiếp trong kho: tạo phiếu nhập, xuất, điều chuyển; thực hiện nhập/xuất thực tế; cập nhật trạng thái chứng từ theo quy trình. Không có quyền phê duyệt và không được thay đổi các chứng từ đã duyệt/hoàn tất.
+Cao (vận hành trực tiếp)
+Ban lãnh đạo / Chủ doanh nghiệp
+Theo dõi tổng quan tình hình vận hành kho: xem báo cáo xuất–nhập–tồn, theo dõi tồn kho toàn hệ thống, đánh giá hiệu suất luân chuyển hàng hóa giữa các kho. Không tham gia thao tác nghiệp vụ.
+Trung bình (chủ yếu xem báo cáo)
+Bộ phận kinh doanh / yêu cầu nội bộ
+Tạo yêu cầu xuất kho, nhập kho hoặc điều chuyển hàng hóa để phục vụ hoạt động bán hàng hoặc vận hành. Không trực tiếp thực hiện nghiệp vụ kho, chỉ gửi yêu cầu để kho xử lý và phê duyệt. (non MVP)
+Thấp – gián tiếp
+
+1.4. Phụ thuộc và liên kết với các module khác
+Module 2 - Quản lý kho đa tầng phụ thuộc trực tiếp vào Module 1 - Quản lý tổ chức để xác định cấu trúc doanh nghiệp, phạm vi vận hành và phân quyền người dùng theo tổ chức. Ngược lại, Module 2 cung cấp dữ liệu vận hành kho phục vụ cho các module nghiệp vụ khác trong hệ thống. Module 2 cần cung cấp và đồng bộ dữ liệu liên quan đến kho để đảm bảo các module liên quan có thể vận hành chính xác theo thời gian thực:
+Module phụ thuộc
+Dữ liệu cần từ Module 2 - Quản lý kho đa tầng
+Module 5 - Bán hàng
+Tồn kho khả dụng theo từng kho, trạng thái tồn kho real-time, lịch sử xuất kho
+Module 6 - Hoa hồng
+Dữ liệu xuất kho theo nhân viên/kho để làm căn cứ tính doanh số và hoa hồng
+Module 7 - Kế toán & Tài chính
+Dữ liệu phiếu nhập/xuất, điều chuyển và đơn giá nhập được lưu phục vụ tích hợp kế toán trong tương lai. (MVP chưa hỗ trợ tính giá trị tồn kho hoặc tính giá vốn (COGS)). 
+Module 8 - Báo cáo quản trị
+Dữ liệu tồn kho, nhập - xuất - điều chuyển, lịch sử biến động tồn kho, báo cáo theo kho/thời gian
+Module 9 - Cổ đông & Gọi vốn
+Tổng giá trị tồn kho theo hệ thống, báo cáo tài sản hàng tồn theo pháp nhân (non MVP)
+Module 10 - Phân quyền hệ thống
+Danh sách kho, phạm vi kho được phép truy cập, dữ liệu phân quyền theo kho/chi nhánh
+
+1.5. Ranh giới giữa Module 2 và Module Quản lý phân quyền (liên quan đến quyền kho) (cần làm rõ)
+Hạng mục phân định tổng quan
+Hạng mục
+Module Kho (M2–M8: Quản lý kho & vận hành)
+Module 10 (Quản trị hệ thống & phân quyền)
+Sở hữu nghiệp vụ chính
+Toàn bộ nghiệp vụ kho: nhập kho, xuất kho, điều chuyển kho, tồn kho, cảnh báo tồn, báo cáo kho, lịch sử biến động tồn kho
+Quản lý tài khoản, xác thực, phân quyền hệ thống, audit log, cấu hình quyền truy cập và phạm vi dữ liệu
+Mục tiêu chính
+Quản lý luồng hàng hóa và số lượng tồn kho thực tế trong vận hành
+Kiểm soát truy cập hệ thống, đảm bảo đúng người – đúng quyền – đúng phạm vi dữ liệu
+Đơn vị nghiệp vụ trung tâm
+Phiếu kho (Stock Document) và Tồn kho (Stock Balance)
+User Account, Role, Permission, Access Control List (ACL)
+Phạm vi xử lý dữ liệu
+Dữ liệu phát sinh từ nghiệp vụ kho và trạng thái chứng từ kho
+Dữ liệu người dùng, quyền, xác thực, phân quyền và log hệ thống
+Nguyên tắc vận hành
+Tập trung vào tính đúng đắn của tồn kho và chứng từ
+Tập trung vào bảo mật, phân quyền và kiểm soát truy cập
+
+Phân định chi tiết dữ liệu & trách nhiệm hệ thống (Module 1 ↔ Module 10)
+Hạng mục
+Thuộc Module Kho (M2–M8)
+Thuộc Module 10 (Quản trị & phân quyền)
+Phiếu nhập / xuất / điều chuyển
+Sở hữu toàn bộ vòng đời chứng từ (tạo, duyệt, thực hiện, hủy)
+Không quản lý nghiệp vụ; chỉ kiểm tra quyền thao tác
+Tồn kho (Stock Balance)
+Sở hữu và cập nhật trực tiếp từ nghiệp vụ kho
+Không lưu trữ, chỉ truy vấn phục vụ hiển thị (nếu được phép)
+Stock Movement (biến động tồn kho)
+Sinh và quản lý lịch sử biến động theo nghiệp vụ kho
+Không tạo dữ liệu, chỉ kiểm soát quyền xem
+Audit Log kho (nhật ký hệ thống kho)
+Không sở hữu, chỉ gửi request đến audit log tổng để gửi yêu cầu cần thiết liên quan đến kho.
+Sở hữu toàn bộ log hệ thống.
+Tài khoản người dùng (User)
+Không quản lý
+Sở hữu toàn bộ tài khoản, xác thực, trạng thái hoạt động
+Liên kết User – Nhân sự
+Chỉ tham chiếu (nếu cần hiển thị người thực hiện)
+Sở hữu mapping tài khoản với nhân sự
+Vai trò (Role)
+Sử dụng vai trò theo phân quyền đã được cấp ở module 10(VD: Nhân viên kho, Quản lý kho)
+Định nghĩa, cấu hình và ánh xạ role → permission hệ thống
+Quyền thao tác (Permission)
+Không định nghĩa quyền
+Sở hữu toàn bộ cơ chế permission (API, UI, chức năng)
+Phạm vi kho (Data Scope)
+Cung cấp dữ liệu kho và cấu trúc kho (kho cha–con)
+Áp dụng scope để giới hạn quyền truy cập dữ liệu
+Trạng thái phiếu kho
+Định nghĩa và quản lý state machine nghiệp vụ
+Chỉ kiểm tra quyền thực thi theo trạng thái
+
+1.6. Giả định và ràng buộc
+Mã
+Giả định của BA
+Cần xác nhận bởi
+A1
+Hệ thống quản lý kho được thiết kế theo mô hình multi-warehouse trong cùng một hệ thống duy nhất, không tách thành nhiều hệ thống riêng biệt theo từng kho hoặc từng chi nhánh.
+Khách hàng / PM -> đã xác nhận 1 hệ thống
+A2
+Mô hình tổ chức kho được giả định gồm tối đa 3 cấp: Kho tổng → Kho con → Kho con cấp 2 (nếu có mở rộng). Các kho này dùng chung một hệ thống tồn kho nhưng khác phạm vi nghiệp vụ.
+Khách hàng
+A3
+Mỗi kho chỉ có một kho cha trực tiếp, không hỗ trợ cấu trúc DAG (nhiều kho cha).
+PM
+A4
+Kho tổng là nguồn nhập hàng duy nhất từ nhà cung cấp; các kho con không được phép nhập trực tiếp từ bên ngoài (trừ các trường hợp nghiệp vụ đặc biệt như trả hàng hoặc điều chỉnh). 
+Khách hàng
+A5
+Tồn kho được quản lý theo nguyên tắc real-time cập nhật ngay sau khi phát sinh nghiệp vụ hoàn tất, không áp dụng batch update hoặc đồng bộ theo lô trong MVP.
+PM / Technical Lead
+A6
+Hệ thống sử dụng cơ chế Available Stock + In-Transit Stock để tách biệt hàng đang điều chuyển và hàng có thể sử dụng, trong đó In-Transit không được phép xuất hoặc điều chuyển tiếp.
+BA đã xác nhận
+A7
+Một sản phẩm được định danh duy nhất theo SKU trên toàn hệ thống; tồn kho được phân tách theo kho, không theo SKU riêng của từng kho.
+Khách hàng
+A8
+Các chứng từ kho (nhập, xuất, điều chuyển) chỉ được phép cập nhật tồn kho khi đạt trạng thái nghiệp vụ cuối cùng (Đã nhập kho / Đã xuất kho / Hoàn tất) hoặc trạng thái Đang vận chuyển đối với điều chuyển kho. 
+BA đã xác nhận
+A9
+Các thao tác tạo/sửa/hủy chứng từ được ghi nhận trong Audit Log, tách hoàn toàn với Stock Movement History (chỉ ghi nhận thay đổi tồn kho).
+PM / Tech Lead -> Đã xác nhận
+A10
+Hệ thống phải xử lý đồng thời nhiều giao dịch kho, do đó cần áp dụng cơ chế lock dữ liệu (row-level locking / transaction) để tránh sai lệch tồn kho do race condition.
+Technical Lead -> Đã xác nhận
+A11
+Báo cáo xuất nhập tồn được tính toán dựa trên dữ liệu đã “chốt nghiệp vụ”, không bao gồm các chứng từ ở trạng thái nháp hoặc chờ duyệt.
+BA -> đã xác nhận
+A12
+Tồn kho an toàn (Min/Max stock) được cấu hình theo từng SKU và kho, và áp dụng thống nhất cho toàn hệ thống. Tuy nhiên Tồn kho an toàn chưa triển khai trong MVP.
+BA -> Đã xác nhận
+A13
+Hệ thống cho phép mở rộng các nghiệp vụ như kiểm kê, trả hàng, cảnh báo tồn kho nhưng các chức năng này có thể triển khai sau MVP (non-MVP phase).
+PM -> đã xác nhận
+A14
+Trong giai đoạn MVP, hệ thống chưa áp dụng cơ chế định giá tồn kho và chưa thực hiện tính giá vốn hàng bán (COGS). Hệ thống vẫn lưu đơn giá nhập tại từng dòng chi tiết phiếu nhập nhằm phục vụ khả năng mở rộng trong tương lai. Giá trị đơn giá nhập không tham gia vào xử lý nghiệp vụ tồn kho, tính tồn hoặc báo cáo giá trị tồn kho trong MVP (chỉ phục vụ mở rộng). Giai đoạn tiếp theo dự kiến sẽ hỗ trợ phương pháp FIFO.
+Đã chốt
+
+
+
+
+2. Phân rã chức năng (Danh sách chức năng module)
+Epic A - Quản lý kho 
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F1.1
+Tạo kho
+Tạo kho con trong hệ thống
+Must
+Có
+F1.2
+Cập nhật kho
+Sửa thông tin kho (trừ mã kho)
+Must
+Có
+F1.3
+Ngừng hoạt động kho
+Disable kho, chặn nghiệp vụ phát sinh
+Must
+Có
+F1.4
+Kích hoạt lại kho
+Mở lại kho đã bị disable
+Should
+MVP+
+F1.5
+Tra cứu kho
+Danh sách + tìm kiếm + lọc kho
+Must
+Có
+F1.6
+Thiết lập quan hệ kho cha - con
+Xây dựng cây kho đa tầng
+Must
+Có
+
+Epic B - Nhập kho 
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F2.1
+Tạo phiếu nhập kho
+Tạo chứng từ nhập hàng
+Must
+Có
+F2.2
+Lưu nháp phiếu nhập
+Lưu tạm chưa gửi duyệt
+Must
+Có
+F2.3
+Gửi duyệt phiếu nhập
+Chuyển sang trạng thái chờ duyệt
+Must
+Có
+F2.4
+Duyệt phiếu nhập
+Quản lý kho duyệt chứng từ
+Must
+Có
+F2.5
+Thực hiện nhập kho
+Cập nhật tồn kho thực tế
+Must
+Có
+F2.6
+Hủy phiếu nhập
+Hủy trước khi nhập kho
+Must
+Có
+F2.7
+Ghi nhận Stock Movement
+Ghi log biến động tồn kho
+Must
+Có
+
+Epic C - Xuất kho
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F3.1
+Tạo phiếu xuất kho
+Tạo chứng từ xuất hàng
+Must
+Có
+F3.2
+Lưu nháp phiếu xuất
+Lưu tạm phiếu xuất
+Must
+Có
+F3.3
+Gửi duyệt phiếu xuất
+Chờ duyệt từ quản lý
+Must
+Có
+F3.4
+Duyệt phiếu xuất
+Quản lý kho kiểm tra, duyệt chứng từ
+Must
+Có
+F3.5
+Thực hiện xuất kho
+Giảm tồn kho thực tế
+Must
+Có
+F3.6
+Hủy phiếu xuất
+Hủy trước khi xuất kho
+Must
+Có
+F3.7
+Ghi nhận Stock Movement
+Log xuất kho
+Must
+Có
+
+Epic D - Điều chuyển kho
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F4.1
+Tạo phiếu điều chuyển
+Chuyển hàng giữa các kho
+Must
+Có
+F4.2
+Lưu nháp điều chuyển
+Lưu tạm phiếu
+Must
+Có
+F4.3
+Gửi duyệt điều chuyển
+Chờ quản lý phê duyệt
+Must
+Có
+F4.4
+Phê duyệt điều chuyển
+Kiểm tra tồn kho nguồn
+Must
+Có
+F4.5
+Xuất điều chuyển
+Trừ kho nguồn + vào In Transit
+Must
+Có
+F4.6
+Nhận hàng điều chuyển
+Cộng kho đích + kết thúc
+Must
+Có
+F4.7
+Trả lại điều chuyển
+Hoàn trả kho nguồn
+Must
+Có
+F4.8
+Xử lý hao hụt điều chuyển
+Ghi nhận chênh lệch
+Must
+Có
+F4.9
+Quản lý In Transit
+Theo dõi hàng đang vận chuyển
+Must
+Có
+
+Epic E - Tồn kho 
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F5.1
+Xem tồn kho theo kho
+Theo từng kho cụ thể
+Must
+Có
+F5.2
+Xem tồn kho toàn hệ thống
+Tổng hợp tất cả kho
+Must
+Có
+F5.3
+Cập nhật tồn kho realtime
+Đồng bộ sau giao dịch
+Must
+Có
+F5.4
+Phân loại trạng thái tồn kho
+Bình thường / thiếu / vượt
+Should
+Không
+F5.5
+Quản lý tồn kho khả dụng
+Available stock logic
+Must
+Có
+F5.6
+Quản lý tồn kho In Transit
+Hàng đang vận chuyển
+Must
+Có
+
+Epic F - Tồn kho an toàn
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F6.1
+Cấu hình Min Stock
+Ngưỡng tồn tối thiểu
+Should
+Không
+F6.2
+Cấu hình Max Stock
+Ngưỡng tồn tối đa
+Should
+Không
+F6.3
+Kiểm tra tồn kho an toàn
+So sánh realtime với ngưỡng
+Should
+Không
+F6.4
+Cảnh báo tồn kho thấp
+Trigger khi dưới Min
+Should
+Không
+F6.5
+Cảnh báo vượt ngưỡng
+Trigger khi vượt Max
+Should
+Không
+
+Epic G - Lịch sử biến động tồn kho (Stock Movement) 
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F7.1
+Ghi nhận biến động tồn kho
+Log tất cả thay đổi số lượng
+Must
+Có
+F7.2
+Xem lịch sử biến động
+Tra cứu giao dịch kho
+Must
+Có
+F7.3
+Lọc lịch sử theo điều kiện
+Kho / sản phẩm / thời gian
+Must
+Có
+F7.4
+Xem chi tiết nguồn gốc
+Trace phiếu gốc
+Should
+MVP+
+F7.5
+Phân loại giao dịch
+Nhập / xuất / điều chuyển / kiểm kê
+Must
+Có
+
+Epic H - Báo cáo kho 
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F8.1
+Báo cáo nhập-xuất-tồn
+Theo thời gian
+Must
+Có
+F8.2
+Báo cáo theo kho
+Phân tích theo từng kho
+Must
+Có
+F8.3
+Báo cáo toàn hệ thống
+Tổng hợp tất cả kho
+Must
+Có
+F8.4
+Xuất báo cáo Excel
+Download file
+Should
+Không
+F8.5
+Xuất báo cáo PDF
+File in ấn
+Should
+Không
+
+Epic I - Kiểm kê kho
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F9.1
+Tạo phiếu kiểm kê
+Ghi nhận kiểm kê thực tế
+Should
+Không
+F9.2
+Nhập số lượng thực tế
+So sánh tồn hệ thống
+Should
+Không
+F9.3
+Tạo phiếu điều chỉnh
+Tự sinh adjustment doc
+Should
+Không
+F9.4
+Duyệt điều chỉnh tồn kho
+Áp dụng thay đổi
+Should
+Không
+
+Epic J - Trả hàng 
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F10.1
+Trả hàng nhà cung cấp
+Ghi nhận hàng lỗi / trả NCC
+Should
+Không
+F10.2
+Khách trả hàng
+Nhập lại kho
+Should
+Không
+F10.3
+Cập nhật tồn kho trả hàng
+Tăng/giảm theo loại
+Should
+Không
+F10.4
+Ghi nhận lý do trả hàng
+Audit lý do
+Should
+Không
+
+Epic K - Audit Log tích hợp Audit Service 
+Module Kho không lưu audit log cục bộ. Chỉ gọi API Audit Service để ghi và đọc log. 
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F11.1
+Ghi nhận sự kiện thao tác người dùng
+Gửi yêu cầu phát sinh sự kiện thao tác nghiệp vụ kho (create / update / delete /…) tới Audit Service 
+Must
+Có
+F11.2
+Xem audit log
+Gửi request để lấy và hiển thị lịch sử thao tác liên quan đến nghiệp vụ kho 
+Must
+Có
+F11.3
+Liên kết chứng từ
+Gửi request để lấy và tra cứu lịch sử thao tác theo chứng từ (phiếu nhập, phiếu xuất, phiếu điều chuyển...) 
+Must
+Có
+
+Epic L - Business Rules & Realtime Engine
+Mã
+Chức năng
+Mô tả ngắn
+Ưu tiên
+MVP
+F13.1
+Engine cập nhật tồn kho realtime
+Sau mỗi transaction
+Must
+Có
+F13.2
+Transaction lock chống race condition
+Tránh sai lệch số liệu với nhiều thao tác đồng thời
+Must
+Có
+F13.3
+Validate tồn kho trước xuất
+Tránh âm kho
+Must
+Có
+F13.4
+Quản lý trạng thái chứng từ
+State machine engine. Tránh nhảy trạng thái không theo quy định
+Must
+Có
+F13.5
+Quản lý In Transit layer
+Tách lớp trung gian (đang vận chuyển)
+Must
+Có
+
+
+3. Phạm vi MVP (Minimum Viable Product)
+3.1. Chức năng thuộc MVP
+Toàn bộ các chức năng được đánh dấu “MVP = Có” trong Phần 2, tóm tắt theo nhóm:
+Quản lý kho: tạo kho tổng/kho con, cập nhật, tra cứu, ngừng hoạt động, thiết lập quan hệ kho cha - kho con (F1.1-F1.3, F1.5, F1.6).
+Nhập kho: tạo phiếu nhập, lưu nháp, gửi duyệt, duyệt phiếu, thực hiện nhập kho và ghi nhận lịch sử biến động tồn kho (F2.1-F2.7). MVP chỉ có đúng 1 kho tổng.
+Xuất kho: tạo phiếu xuất, lưu nháp, gửi duyệt, duyệt phiếu xuất, thực hiện xuất kho và ghi nhận biến động tồn kho (F3.1-F3.7).
+Điều chuyển kho: tạo phiếu điều chuyển, phê duyệt điều chuyển, xuất điều chuyển, nhận hàng điều chuyển, xử lý trả lại điều chuyển, quản lý hàng hóa đang vận chuyển (In Transit) và ghi nhận hao hụt điều chuyển (F4.1-F4.9).
+Quản lý tồn kho: theo dõi tồn kho theo từng kho hoặc toàn hệ thống, quản lý tồn kho khả dụng (Available Stock), tồn kho đang vận chuyển (In Transit), cập nhật tồn kho realtime (F5.1-F5.3, F5.5, F5.6).
+Lịch sử biến động tồn kho (Stock Movement): ghi nhận, tra cứu, lọc và phân loại toàn bộ các giao dịch làm thay đổi tồn kho (F7.1-F7.3, F7.5).
+Báo cáo kho: báo cáo xuất - nhập - tồn theo thời gian, theo từng kho hoặc toàn hệ thống (F8.1-F8.3).
+Audit Log kho: ghi nhận toàn bộ thao tác người dùng trên hệ thống để gửi về audit log tổng của hệ thống, hỗ trợ tra cứu thao tác (F11.1-F11.3).
+Business Rules & Realtime Engine: cơ chế cập nhật tồn kho realtime, validate tồn kho trước khi xuất, quản lý trạng thái chứng từ, quản lý lớp tồn kho trung gian In Transit và xử lý đồng thời nhằm tránh sai lệch dữ liệu (F13.1-F13.5).
+3.2. Loại khỏi MVP (làm sau)
+Các chức năng được đánh dấu “MVP = Không” sẽ được triển khai ở giai đoạn tiếp theo sau khi hệ thống vận hành ổn định:
+Thông báo tồn kho an toàn: phân loại trạng thái tồn kho(F5.4), cấu hình ngưỡng tồn kho tối thiểu/tối đa và kiểm tra trạng thái tồn kho an toàn theo thời gian thực (F6.1-F6.3). Cảnh báo tồn kho thấp hơn Min Stock hoặc vượt quá Max Stock theo cơ chế realtime hoặc theo lịch chạy định kỳ (F6.1, F6.5). 
+Kiểm kê kho: tạo phiếu kiểm kê, nhập số lượng thực tế, tự động sinh phiếu điều chỉnh và thực hiện điều chỉnh tồn kho sau khi được phê duyệt (F9.1-F9.4).
+Quản lý trả hàng: xử lý trả hàng nhà cung cấp, khách hàng trả hàng, cập nhật tồn kho liên quan và ghi nhận lý do trả hàng (F10.1-F10.4).
+Định giá tồn kho và tính giá vốn (COGS): chưa triển khai trong MVP. Hệ thống chỉ lưu đơn giá nhập trên từng dòng nhập kho để phục vụ mở rộng sau này.
+Các mở rộng quy trình vận hành kho: hoàn thiện các nghiệp vụ kiểm kê, trả hàng và các quy trình kiểm soát vận hành nâng cao phục vụ doanh nghiệp có quy mô lớn hoặc yêu cầu kiểm soát nội bộ chặt chẽ.
+3.3. Tiêu chí “đủ MVP”
+Module 2 được coi là đạt MVP khi một doanh nghiệp có thể thực hiện trọn vẹn các nghiệp vụ kho cơ bản sau:
+Thiết lập hệ thống kho gồm kho tổng và nhiều kho con, quản lý được cấu trúc kho MVP hỗ trợ tối đa 3 cấp.
+Thực hiện đầy đủ quy trình nhập kho gồm tạo phiếu nhập, duyệt phiếu và cập nhật tồn kho thực tế.
+Thực hiện đầy đủ quy trình xuất kho gồm tạo phiếu xuất, kiểm tra tồn kho khả dụng, duyệt phiếu, xác nhận xuất kho và cập nhật tồn kho.
+Thực hiện điều chuyển hàng hóa giữa các kho theo quy trình chuẩn gồm tạo phiếu điều chuyển, phê duyệt, xuất điều chuyển, quản lý trạng thái In Transit, nhận hàng tại kho đích và xử lý trường hợp trả lại hoặc hao hụt.
+Theo dõi tồn kho realtime theo từng kho hoặc toàn hệ thống, bao gồm tồn kho khả dụng và tồn kho đang vận chuyển.
+Tự động cập nhật và ghi nhận lịch sử biến động tồn kho sau mọi nghiệp vụ nhập kho, xuất kho hoặc điều chuyển.
+Truy vết được nguyên nhân thay đổi tồn kho thông qua Stock Movement History.
+Xem báo cáo xuất - nhập - tồn theo khoảng thời gian, theo từng kho hoặc toàn hệ thống phục vụ vận hành và quản trị.
+Đảm bảo tính nhất quán dữ liệu thông qua các cơ chế kiểm tra tồn kho, quản lý trạng thái chứng từ và xử lý đồng thời (transaction lock, chống race condition).
+4. Phân loại yêu cầu theo MoSCoW
+Bảng phân loại scope giúp thống nhất phạm vi triển khai của Module. Các chức năng Must-have là bắt buộc để hệ thống vận hành được quy trình kho hoàn chỉnh trong MVP. Các chức năng Should-have giúp tăng hiệu quả quản lý và trải nghiệm sử dụng nhưng có thể triển khai sau MVP nếu cần rút ngắn thời gian phát triển. Các chức năng Could-have / Future là các nghiệp vụ mở rộng, phù hợp khi doanh nghiệp có nhu cầu quản trị chuyên sâu hơn. 
+Phân loại
+Chức năng (mã)
+Lý do phân loại
+Must-have (MVP)
+F1.1-F1.6, F2.1-F2.7, F3.1-F3.7, 
+F4.1- F4.9, F5.1-F5.3, F5.5,F5.6, F7.1-F7.3,F7.5, F8.1-F8.3, F11.1-F11.3, F13.1-F13.5
+Đây là nhóm chức năng cốt lõi để vận hành kho. Bao gồm quản lý kho, nhập kho, xuất kho, điều chuyển kho, quản lý tồn kho, lịch sử biến động, xử lý hao hụt điều chuyển, báo cáo và các engine nghiệp vụ nền tảng (realtime, khóa giao dịch, kiểm tra tồn kho, quản lý trạng thái chứng từ). Nếu thiếu các chức năng này thì hệ thống không thể đảm bảo tính chính xác của tồn kho và quy trình vận hành kho hoàn chỉnh.
+Should-have
+F1.4, 
+F6.1-F6.5,
+F7.4, F8.4, F8.5
+Các chức năng này nâng cao hiệu quả quản lý và hỗ trợ vận hành thực tế. Bao gồm kích hoạt lại kho, truy vết chi tiết nguồn gốc biến động tồn kho và xuất báo cáo Excel/PDF. Hệ thống vẫn có thể vận hành ổn định nếu tạm thời chưa triển khai phần này trong giai đoạn MVP.
+Could-have / Future
+F9.1-F9.4, F10.1-F10.4
+Đây là các chức năng mở rộng phục vụ quản trị nâng cao như cảnh báo tồn kho tự động, kiểm kê kho, điều chỉnh tồn kho và xử lý trả hàng. Các chức năng này mang lại giá trị lớn cho doanh nghiệp khi quy mô vận hành tăng lên nhưng không ảnh hưởng đến luồng nhập - xuất - điều chuyển cơ bản của hệ thống.
+
+
+
+
+
+5. Danh sách câu hỏi cần làm rõ với khách hàng
+Nhóm A - Mô hình kho & cấu trúc kho 
+
+Mã
+Câu hỏi
+Vì sao cần làm rõ
+Giả định / Câu trả lời
+A1
+Hiện tại doanh nghiệp có bao nhiêu kho tổng và bao nhiêu kho chi nhánh?
+Xác định quy mô triển khai và thiết kế dữ liệu kho
+Hiện tại có 1 kho tổng và nhiều kho chi nhánh
+A2
+Trong tương lai có thể phát sinh nhiều kho tổng không?
+Ảnh hưởng thiết kế quan hệ kho cha - kho con
+Có khả năng mở rộng nên vẫn lưu trường Kho cha
+A3
+Kho chi nhánh có được nhập hàng trực tiếp từ nhà cung cấp không?
+Xác định phạm vi nghiệp vụ nhập kho
+MVP giả định chỉ kho tổng được nhập hàng
+A4
+Có cho phép điều chuyển giữa các kho chi nhánh với nhau không?
+Ảnh hưởng nghiệp vụ điều chuyển
+Có
+A5
+Có giới hạn điều chuyển theo cấu trúc cha-con hay điều chuyển tự do giữa các kho?
+Xác định rule điều chuyển
+Cần làm rõ, giả định có cả 2.
+A6
+Kho có sức chứa tối đa hay giới hạn lưu trữ không?
+Ảnh hưởng validate nhập kho và điều chuyển
+Chưa có trong MVP
+A7
+Khi kho ngừng hoạt động thì có yêu cầu chuyển toàn bộ tồn kho sang kho khác trước không?
+Xác định điều kiện ngừng hoạt động kho
+Cần làm rõ
+A8
+Có cần quản lý kho vật lý theo khu vực, kệ, vị trí lưu trữ (Bin Location) không?
+Ảnh hưởng thiết kế kho nhiều tầng bên trong
+Chưa thuộc MVP
+
+Nhóm B - Nghiệp vụ nhập kho 
+Mã
+Câu hỏi
+Vì sao cần làm rõ
+Giả định / Câu trả lời
+B1
+Phiếu nhập kho được tạo từ những nguồn nào?
+Xác định loại nghiệp vụ nhập
+Giả định MVP chỉ có nhà cung cấp
+B2
+Có bắt buộc chọn nhà cung cấp khi nhập kho không?
+Xác định validate dữ liệu
+Hiện để tùy chọn
+B3
+Một phiếu nhập kho có được nhập nhiều lần không?
+Ảnh hưởng trạng thái chứng từ
+Không, chỉ nhập kho một lần
+B4
+Khi phiếu đã duyệt nhưng chưa nhập kho, có được chỉnh sửa không?
+Ảnh hưởng workflow
+Không được sửa
+B5
+Có cho phép nhập vượt số lượng dự kiến trên chứng từ nguồn không?
+Ảnh hưởng kiểm soát dữ liệu
+Cần làm rõ, giả định là không
+B6
+Khi nhập kho phát hiện sai số lượng thực nhận thì xử lý như thế nào?
+Xác định nghiệp vụ thực tế
+Cần làm rõ, giả định là hệ thống chưa bao gồm cái này trong MVP
+B7
+Phiếu nhập chỉ được tạo cho kho tổng?
+Xác định nghiệp vụ thực tế
+Phạm vi MVP chỉ tạo phiếu nhập cho kho tổng
+
+Nhóm C - Nghiệp vụ xuất kho 
+Mã
+Câu hỏi
+Vì sao cần làm rõ
+Giả định / Câu trả lời
+C1
+Kho tổng có được xuất bán trực tiếp cho khách hàng không?
+Ảnh hưởng thiết kế nghiệp vụ xuất kho
+Đang cần làm rõ
+C2
+Phiếu xuất kho được tạo trực tiếp hay bắt buộc từ Yêu cầu xuất kho?
+Xác định quy trình vận hành
+Hiện đang theo luồng xuất trực tiếp
+C3
+Có cho phép xuất kho âm (negative stock) không?
+Ảnh hưởng logic tồn kho
+Không
+C4
+Có cho phép xuất một phần số lượng trên phiếu không?
+Ảnh hưởng trạng thái phiếu
+Cần làm rõ, giả định là không
+C5
+Khi xuất kho không đủ hàng thực tế thì xử lý thế nào?
+Ảnh hưởng nghiệp vụ giao hàng
+Cần làm rõ, giả định là chưa có cái này trong MVP
+C6
+Có cần ghi nhận người nhận hàng hoặc đơn vị nhận hàng không?
+Bổ sung dữ liệu chứng từ
+Cần làm rõ, giả định là không
+
+Nhóm D - Điều chuyển kho 
+Mã
+Câu hỏi
+Vì sao cần làm rõ
+Giả định / Câu trả lời
+D1
+Điều chuyển có bắt buộc qua bước phê duyệt không?
+Xác định workflow
+Có
+D2
+Ai được phép duyệt điều chuyển?
+Xác định phân quyền
+Quản lý kho
+D3
+Có cho phép điều chuyển một phần số lượng không?
+Ảnh hưởng trạng thái điều chuyển
+Cần làm rõ, giả định là không
+D4
+Khi nhận thiếu hàng, phần hao hụt có cần quy trách nhiệm không?
+Ảnh hưởng nghiệp vụ hao hụt
+Cần làm rõ, giả định là không
+D5
+Có cần lưu đơn vị vận chuyển hoặc biển số xe vận chuyển không?
+Bổ sung dữ liệu điều chuyển
+Chưa có trong MVP
+D6
+Có thời gian tối đa cho trạng thái Đang vận chuyển không?
+Hỗ trợ cảnh báo điều chuyển chậm
+Cần làm rõ, giả định là không
+D7
+Khi trả lại điều chuyển có cần xác nhận từ kho nguồn không?
+Ảnh hưởng workflow
+Cần làm rõ, giả định là không
+D8
+Có cho phép chỉnh sửa phiếu điều chuyển sau khi đã duyệt không?
+Xác định quy tắc chứng từ
+Không
+
+Nhóm E - Tồn kho & tính tồn 
+Mã
+Câu hỏi
+Vì sao cần làm rõ
+Giả định / Câu trả lời
+E1
+Hệ thống tính tồn kho realtime hay theo batch định kỳ?
+Ảnh hưởng kiến trúc hệ thống
+Realtime
+E2
+Có cần phân biệt tồn khả dụng và tồn giữ chỗ không?
+Ảnh hưởng logic tồn kho
+Hiện chỉ có tồn khả dụng
+E3
+Có cần quản lý tồn đang vận chuyển (In Transit) riêng không?
+Ảnh hưởng điều chuyển kho
+Có
+E5
+Có cần theo dõi giá trị tồn kho ngoài số lượng không?
+Ảnh hưởng báo cáo và tài chính
+Chưa thuộc MVP. Giả định đang là không. MVP chỉ quản lý số lượng tồn kho (chưa tính giá trị tồn hoặc COGS)
+E6
+Khi nhiều người cùng xuất kho đồng thời thì hệ thống xử lý thế nào?
+Xác định cơ chế khóa dữ liệu
+Cần áp dụng Record Lock
+
+ Nhóm F - Kiểm kê kho 
+Mã
+Câu hỏi
+Vì sao cần làm rõ
+Giả định / Câu trả lời
+F1
+Kiểm kê được thực hiện định kỳ hay khi cần?
+Xác định nghiệp vụ thực tế
+Cần làm rõ, giả định là khi cần
+F2
+Có cho phép kiểm kê một phần kho hay bắt buộc toàn kho?
+Ảnh hưởng phạm vi kiểm kê
+Cần làm rõ, giả định là 1 phần
+F3
+Trong thời gian kiểm kê có khóa phát sinh giao dịch kho không?
+Ảnh hưởng tính chính xác dữ liệu
+Cần làm rõ, giả định không khoá trong MVP
+F4
+Ai có quyền duyệt phiếu điều chỉnh tồn kho?
+Xác định phân quyền
+Quản lý kho
+F5
+Có cần lưu nguyên nhân chênh lệch kiểm kê không?
+Hỗ trợ truy vết
+Nên có
+
+ Nhóm G - Báo cáo & truy vết 
+Mã
+Câu hỏi
+Vì sao cần làm rõ
+Giả định / Câu trả lời
+G1
+Báo cáo xuất nhập tồn tính theo thời điểm hiện tại hay theo lịch sử giao dịch?
+Ảnh hưởng cách tính báo cáo
+Theo lịch sử giao dịch
+G2
+Có yêu cầu xuất báo cáo theo Excel/PDF không?
+Ảnh hưởng chức năng báo cáo
+Có
+G3
+Có yêu cầu gửi báo cáo định kỳ qua email không?
+Xác định phạm vi mở rộng
+Chưa thuộc MVP
+G4
+Ban lãnh đạo được xem toàn hệ thống hay chỉ các kho được phân quyền?
+Xác định phạm vi dữ liệu
+Cần làm rõ, giả định toàn hệ thống
+G5
+Cần lưu lịch sử biến động tồn kho trong bao lâu?
+Ảnh hưởng lưu trữ dữ liệu
+Cần làm rõ, giả định vô hạn
+G6
+Audit Log cần ghi nhận những thao tác nào ngoài tạo/sửa/xóa chứng từ?
+Xác định phạm vi kiểm toán
+Cần làm rõ, giả định chỉ ghi những thao tác này
+
+ Nhóm H - Quản lý sản phẩm trong kho 
+Mã
+Câu hỏi
+Vì sao cần làm rõ
+Giả định / Câu trả lời
+H1
+Có quản lý lô hàng (Batch/Lot) không?
+Ảnh hưởng cấu trúc dữ liệu tồn kho
+Không triển khai trong MVP
+H2
+Có quản lý hạn sử dụng không?
+Ảnh hưởng nhập/xuất/kiểm kê
+Không triển khai trong MVP
+H3
+Có quản lý Serial Number hoặc IMEI không?
+Ảnh hưởng mức độ chi tiết tồn kho
+Không triển khai trong MVP
+H4
+Có quản lý hàng lỗi, hàng hỏng, hàng chờ xử lý riêng không?
+Ảnh hưởng loại tồn kho
+Có nhu cầu, giả định là không trong MVP
+H5
+Có cần tích hợp máy quét Barcode/QR Code không?
+Ảnh hưởng giao diện và thiết bị
+Có nhu cầu
+H6
+Khi quét mã Barcode/QR Code cần hỗ trợ những nghiệp vụ nào?
+Xác định phạm vi triển khai
+Nhập kho, xuất kho, kiểm kê, tra cứu tồn kho
+
+ 
+6. Luồng nghiệp vụ (Business Flow)
+BF-01 — Quản lý kho 
+Mục tiêu: Thiết lập và quản lý hệ thống kho trong doanh nghiệp.
+Tác nhân chính: Quản trị viên hệ thống / Quản lý kho
+Tiền điều kiện:
+Người dùng đã đăng nhập hệ thống.
+Có quyền quản lý kho.
+Các bước:
+Bước 1: Vào chức năng Quản lý kho.
+Bước 2: Chọn tạo mới hoặc chỉnh sửa kho.
+Bước 3: Nhập thông tin kho (mã kho, tên kho, loại kho, chi nhánh, địa chỉ, người phụ trách).
+Bước 4: Nếu là kho con, chọn kho cha tương ứng.
+Bước 5: Xác nhận lưu thông tin.
+Bước 6: Hệ thống cập nhật danh sách kho.
+Bước 7: Ghi nhận vào AuditLog.
+Bước 8: Hiển thị kết quả thành công.
+Điểm rẽ nhánh / kiểm tra:
+Mã kho đã tồn tại → báo lỗi.
+Thiếu thông tin bắt buộc → không cho lưu.
+Người dùng không có quyền → chức năng bị khóa.
+Hậu điều kiện:
+Thông tin kho được lưu.
+Cấu trúc kho được cập nhật trên hệ thống.
+BF-02 — Nhập kho (Quy tắc chi tiết xem ở phụ lục D)
+Mục tiêu: Ghi nhận hàng hóa đi vào hệ thống và cập nhật tồn kho.
+Tác nhân chính: Nhân viên kho
+Tiền điều kiện:
+Người dùng đã đăng nhập hệ thống.
+Có quyền tạo phiếu nhập kho.
+Các bước:
+	Bước 1: Vào chức năng Nhập kho.
+	Bước 2: Chọn tạo phiếu nhập kho mới.
+	Bước 3: Nhập thông tin phiếu nhập(ngày nhập, sản phẩm, số lượng nhập, ghi chú)
+(Chỉ cho phép nhập sản phẩm với mã SKU đã tồn tại trên hệ thống. )
+	Bước 4: Lưu nháp hoặc gửi duyệt.
+Bước 5: Quản lý kho duyệt phiếu.
+Bước 6: Nhân viên kho thực hiện nhập hàng thực tế.
+Bước 7: Hệ thống cập nhật trạng thái Đã nhập kho cho phiếu.
+Bước 8: Hệ thống tăng tồn kho.
+Bước 9: Hệ thống ghi nhận Stock Movement History. 
+Điểm rẽ nhánh / kiểm tra:
+Số lượng nhập không hợp lệ → không cho lưu phiếu.
+Nhập sai 1 trường nào đó.
+Quản lý từ chối duyệt khi nhận được phiếu nhập từ nhân viên -> Hàng được đưa vào khu chờ xử lý, phiếu chuyển thành Đã huỷ (không phản ánh khu chờ xử lý trong nghiệp vụ kho, chỉ cần lưu trạng thái Đã huỷ là được)
+Nhập SKU sản phẩm chưa có trong hệ thống -> Không cho phép tạo phiếu.
+Người dùng không có quyền → chức năng bị khóa.
+Hậu điều kiện:
+Phiếu nhập kho được lưu.
+Tồn kho tăng tương ứng.
+Lịch sử giao dịch được ghi nhận.
+BF-03 — Điều chuyển kho (Quy tắc chi tiết xem ở phụ lục D)
+Mục tiêu: Chuyển hàng hóa từ kho nguồn sang kho đích.
+Tác nhân chính: Quản lý kho, nhân viên kho
+Tiền điều kiện:
+Kho nguồn và kho đích đã tồn tại.
+Kho nguồn có đủ hàng tồn.
+Người dùng có quyền điều chuyển kho.
+Các bước:
+Bước 1: Vào chức năng Điều chuyển kho.
+Bước 2: Tạo phiếu điều chuyển.
+Bước 3: Chọn kho nguồn.
+Bước 4: Chọn kho đích.
+Bước 5: Chọn sản phẩm và nhập số lượng điều chuyển.
+Bước 6: Xác nhận điều chuyển.
+Bước 7: Quản lý kho duyệt phiếu.
+Bước 8: Nhân viên kho nguồn xuất hàng điều chuyển.
+Bước 9: Hệ thống chuyển trạng thái Đang vận chuyển.
+Bước 10: Hệ thống giảm tồn kho nguồn, tăng In Transit tương ứng
+Bước 11: Hệ thống ghi nhận Stock Movement History.
+Bước 12: Kho đích xác nhận đã nhận được hàng.
+Bước 13: Hệ thống cộng tồn kho đích, giảm In Transit tương ứng
+Bước 14: Phiếu chuyển trạng thái Hoàn tất.
+Bước 15: Hệ thống ghi nhận Stock Movement History. 
+Điểm rẽ nhánh / kiểm tra:
+Số lượng điều chuyển lớn hơn tồn kho nguồn → không cho duyệt.
+Kho nguồn và kho đích trùng nhau → báo lỗi.
+Phiếu bị hủy → không cập nhật tồn kho.
+Nếu đang vận chuyển nhưng kho đích từ chối nhận: Phiếu sẽ chuyển trạng thái sang Bị trả lại, hệ thống hoàn tồn kho về kho nguồn. 
+Hậu điều kiện:
+Phiếu điều chuyển được lưu.
+Tồn kho các kho liên quan được cập nhật.
+Lịch sử điều chuyển được ghi nhận.
+BF-04 — Xuất kho (Quy tắc chi tiết xem ở phụ lục D)
+Mục tiêu: Ghi nhận hàng hóa rời khỏi kho.
+Tác nhân chính: Nhân viên kho
+Tiền điều kiện:
+Kho có tồn kho khả dụng.
+Người dùng có quyền xuất kho.
+Các bước:
+Bước 1: Vào chức năng Xuất kho.
+Bước 2: Tạo phiếu xuất kho. 
+Bước 3: Nhập thông tin phiếu xuất.
+Bước 4: Gửi duyệt.
+Bước 5: Quản lý kho duyệt.
+Bước 6: Nhân viên kho thực hiện xuất hàng.
+Bước 7: Hệ thống cập nhật trạng thái Đã xuất kho.
+Bước 8: Hệ thống giảm tồn kho.
+Bước 9: Ghi nhận Stock Movement History. 
+Điểm rẽ nhánh / kiểm tra:
+Số lượng xuất lớn hơn tồn kho → không cho xuất.
+Phiếu xuất bị hủy → không cập nhật tồn kho.
+Hậu điều kiện:
+Phiếu xuất kho được lưu.
+Tồn kho giảm tương ứng.
+Lịch sử giao dịch được ghi nhận.
+BF-05 — Quản lý tồn kho (Quy tắc chi tiết xem ở phụ lục D)
+Mục tiêu: Theo dõi số lượng tồn kho
+Tác nhân chính: Quản lý kho
+Tiền điều kiện:
+Người dùng có quyền xem tồn kho.
+Hệ thống đã có dữ liệu sản phẩm và tồn kho. 
+Các bước:
+Bước 1: Vào chức năng Tồn kho.
+Bước 2: Chọn bộ lọc (Kho, Sản phẩm, Nhóm sản phẩm, Số lượng tồn).
+Bước 3: Hệ thống truy xuất dữ liệu tồn kho hiện tại.
+Bước 4: Hệ thống hiển thị danh sách tồn kho theo điều kiện lọc.
+Bước 5: Người dùng xem thông tin tồn kho.
+Điểm rẽ nhánh / kiểm tra:
+Không có dữ liệu phù hợp điều kiện lọc → Hiển thị thông báo không có dữ liệu.
+Người dùng không có quyền xem tồn kho → Không cho phép truy cập chức năng.
+Hậu điều kiện: Người dùng nắm được số lượng tồn kho hiện tại.
+BF-06 — Kiểm kê kho (non MVP) 
+Mục tiêu: Đối chiếu tồn kho thực tế với tồn kho trên hệ thống.
+Tác nhân chính: Nhân viên kho / Quản lý kho
+Tiền điều kiện:
+Kho đã (mới) phát sinh giao dịch.
+Người dùng có quyền kiểm kê.
+Các bước:
+Bước 1: Vào chức năng Kiểm kê kho.
+Bước 2: Tạo đợt kiểm kê mới.
+Bước 3: Chọn kho cần kiểm kê.
+Bước 4: Hệ thống hiển thị số lượng tồn trên hệ thống.
+Bước 5: Nhập số lượng thực tế kiểm đếm.
+Bước 6: Hệ thống tính toán chênh lệch.
+Bước 7: Xác nhận kết quả kiểm kê.
+Bước 8: Hệ thống sinh phiếu điều chỉnh tồn kho (nếu có chênh lệch).
+Bước 9: Người quản lý duyệt phiếu điều chỉnh
+Bước 10: Hệ thống tự điều chỉnh theo phiếu
+Bước 11: Ghi nhận lịch sử giao dịch và hiển thị kết quả
+Điểm rẽ nhánh / kiểm tra:
+Các trường nhập không hợp lệ -> Báo lỗi
+Không có chênh lệch → không tạo phiếu điều chỉnh.
+Người dùng hủy kiểm kê → không cập nhật dữ liệu.
+Hậu điều kiện:
+Kết quả kiểm kê được lưu.
+Tồn kho được điều chỉnh theo thực tế.
+BF-07 — Quản lý yêu cầu xuất nhập kho (non MVP) (Quy tắc chi tiết xem ở phụ lục D)
+Mục tiêu: Quản lý quy trình đề nghị nhập kho hoặc xuất kho trước khi thực hiện nghiệp vụ thực tế.
+Tác nhân chính: Nhân viên kinh doanh / Bộ phận yêu cầu / Quản lý kho
+Tiền điều kiện:
+Người dùng có quyền tạo yêu cầu.
+Kho và sản phẩm đã tồn tại trên hệ thống.
+Các bước:
+Bước 1: Vào chức năng Yêu cầu xuất nhập kho.
+	Bước 2: Tạo yêu cầu mới.
+	Bước 3: Chọn loại yêu cầu (nhập kho hoặc xuất kho).
+	Bước 4: Chọn kho liên quan.
+	Bước 5: Chọn sản phẩm và số lượng.
+	Bước 6: Gửi yêu cầu.
+	Bước 7: Quản lý kho xem xét yêu cầu.
+	Bước 8: Phê duyệt hoặc từ chối.
+	Bước 9: Nếu được phê duyệt, hệ thống cho phép tạo phiếu nhập hoặc phiếu xuất tương ứng.
+Điểm rẽ nhánh / kiểm tra:
+Thiếu thông tin bắt buộc → không cho gửi yêu cầu.
+Yêu cầu bị từ chối → kết thúc quy trình.
+Người dùng không có quyền phê duyệt → không hiển thị chức năng duyệt.
+Hậu điều kiện:
+Yêu cầu được ghi nhận.
+Trạng thái yêu cầu được cập nhật.
+Có thể tiếp tục thực hiện nghiệp vụ nhập hoặc xuất kho.
+BF-08 — Quản lý trả hàng (non MVP) 
+Mục tiêu: Ghi nhận việc hàng hóa được trả về kho hoặc trả lại nhà cung cấp.
+Tác nhân chính: Nhân viên kho / Quản lý kho
+Tiền điều kiện: Người dùng có quyền quản lý trả hàng.
+Các bước:
+Bước 1: Vào chức năng Trả hàng.
+	Bước 2: Tạo phiếu trả hàng.
+	Bước 3: Chọn loại trả hàng (khách trả hoặc trả nhà cung cấp).
+	Bước 4: Chọn sản phẩm và số lượng trả.
+	Bước 5: Nhập lý do trả hàng.
+	Bước 6: Xác nhận phiếu trả hàng.
+	Bước 7: Hệ thống cập nhật tồn kho.
+	Bước 8: Ghi nhận lịch sử giao dịch.
+	Bước 9: Hiển thị kết quả xử lý.
+Điểm rẽ nhánh / kiểm tra:
+Phiếu bị hủy → không cập nhật tồn kho.
+Thiếu lý do trả hàng → yêu cầu nhập bổ sung.
+Hậu điều kiện:
+Phiếu trả hàng được lưu.
+Tồn kho được cập nhật phù hợp.
+Lịch sử trả hàng được ghi nhận.
+BF-09 — Báo cáo và lịch sử giao dịch kho (Quy tắc chi tiết xem ở phụ lục D)
+Mục tiêu: Theo dõi biến động kho và hỗ trợ ra quyết định.
+Tác nhân chính: Quản lý kho / Ban lãnh đạo
+Tiền điều kiện:
+Hệ thống có phát sinh dữ liệu giao dịch.
+Người dùng có quyền xem báo cáo.
+Các bước:
+	Bước 1: Vào chức năng Báo cáo kho.
+	Bước 2: Chọn loại báo cáo hoặc lịch sử giao dịch.
+	Bước 3: Chọn bộ lọc: khoảng thời gian, kho cần xem.
+	Bước 4: Hệ thống tổng hợp dữ liệu nhập, xuất, điều chuyển và tồn kho.
+	Bước 5: Hiển thị báo cáo.
+	Bước 6: Người dùng xem.
+Điểm rẽ nhánh / kiểm tra:
+Không có dữ liệu trong khoảng thời gian đã chọn → thông báo không có dữ liệu.
+Người dùng không có quyền xem báo cáo → chức năng bị khóa.
+Bộ lọc không hợp lệ → yêu cầu nhập lại.
+Hậu điều kiện:
+Báo cáo được tạo thành công.
+Người dùng có đầy đủ thông tin để theo dõi và đánh giá tình hình kho.
+
+
+
+7. User Story và Tiêu chí nghiệm thu (Acceptance Criteria)
+Quy ước: mỗi user story theo mẫu “Là <vai trò>, tôi muốn <mục tiêu>, để <giá trị>”. Tiêu chí nghiệm thu viết theo cấu trúc Cho trước – Khi – Thì (Given – When – Then) để Tester nghiệm thu và Dev hiểu chức năng cần code. Mức ưu tiên hiển thị trong ngoặc [Must/Should/Could] bám theo bảng MoSCoW ở Phần 4. Các story Must được mô tả chi tiết hơn; story Should/Could mô tả ở mức vừa đủ và sẽ được làm rõ thêm khi đưa vào sprint.
+Epic M1 – Quản lý kho
+US-M1-001 [Must]
+Là Quản trị viên hệ thống hoặc Quản lý kho, tôi muốn quản lý thông tin kho, để thiết lập và duy trì danh sách kho phục vụ các nghiệp vụ nhập kho, xuất kho và điều chuyển hàng hóa.
+Tác nhân
+Quản trị viên hệ thống
+Quản lý kho
+Đầu vào & trường dữ liệu (Chi tiết validate ở Phụ lục C)
+Trường
+Bắt buộc
+Mô tả / Quy tắc
+Mã kho
+Có
+Duy nhất toàn hệ thống, không được thay đổi sau khi tạo, tối đa 50 ký tự.
+Tên kho
+Có
+Tối đa 255 ký tự.
+Kho cha
+Không
+Chỉ áp dụng cho kho con; phải tồn tại trên hệ thống; không được chọn chính nó hoặc tạo quan hệ vòng.
+Loại kho
+Có
+Giá trị: Kho tổng, Kho con.
+Địa chỉ
+Có
+Tối đa 500 ký tự.
+Người phụ trách
+Có
+Chọn từ người dùng đang hoạt động trên hệ thống.
+Trạng thái
+Có
+Hoạt động / Ngừng hoạt động. Mặc định: Hoạt động.
+
+Tiêu chí nghiệm thu
+Cho trước người dùng có quyền quản lý kho, khi tạo mới kho, thì hệ thống cho phép nhập và lưu thông tin kho với các trường bắt buộc theo quy định.
+Cho trước người dùng tạo hoặc cập nhật kho, khi dữ liệu không hợp lệ (thiếu trường bắt buộc hoặc mã kho đã tồn tại), thì hệ thống hiển thị thông báo lỗi và không cho phép lưu.
+Cho trước một kho đã tồn tại, khi người dùng cập nhật thông tin kho, thì hệ thống lưu thay đổi và không cho phép sửa mã kho.
+Cho trước một kho đang hoạt động, khi người dùng ngừng hoạt động kho, thì hệ thống cập nhật trạng thái kho thành Ngừng hoạt động.
+Cho trước một kho đã ngừng hoạt động, khi người dùng thực hiện nghiệp vụ nhập kho, xuất kho hoặc điều chuyển kho, thì hệ thống không cho phép sử dụng kho đó.
+Cho trước một kho đã ngừng hoạt động, khi người dùng tra cứu dữ liệu lịch sử, thì hệ thống vẫn hiển thị các chứng từ và dữ liệu đã phát sinh trước đó.
+Cho trước người dùng không có quyền quản lý kho, khi thực hiện các thao tác tạo, sửa hoặc ngừng hoạt động kho, thì hệ thống từ chối thực hiện.
+
+US-M1-002 [Must]
+Là Quản lý kho, tôi muốn tra cứu và tìm kiếm kho, để nhanh chóng xác định kho cần quản lý.
+Tác nhân
+Quản lý kho
+Quản trị viên hệ thống
+Nhân viên kho (nếu được cấp quyền xem)
+Đầu vào & trường dữ liệu
+Bộ lọc tìm kiếm:
+Trường
+Bắt buộc
+Mô tả
+Mã kho
+Không
+Tìm kiếm gần đúng (contains)
+Tên kho
+Không
+Tìm kiếm gần đúng (contains)
+Loại kho
+Không
+Tất cả / Kho tổng / Kho con
+Trạng thái
+Không
+Tất cả / Hoạt động / Ngừng hoạt động
+
+Thông tin hiển thị danh sách:
+Mã kho
+Tên kho
+Kho cha
+Loại kho
+Người phụ trách
+Trạng thái
+Thông tin hiển thị chi tiết
+Nhóm
+Trường
+Thông tin cơ bản
+Mã kho, Tên kho, Loại kho, Kho cha, Địa chỉ, Người phụ trách, Trạng thái
+Thông tin hệ thống
+Ngày tạo, Người tạo, Ngày cập nhật gần nhất, Người cập nhật gần nhất
+
+ 
+Tiêu chí nghiệm thu
+Cho trước hệ thống có dữ liệu kho, khi người dùng truy cập chức năng Quản lý kho, thì hệ thống hiển thị danh sách kho với các thông tin theo thiết kế.
+Cho trước người dùng thực hiện tìm kiếm hoặc lọc dữ liệu, khi nhập một hoặc nhiều điều kiện, thì hệ thống chỉ hiển thị các kho thỏa mãn tất cả điều kiện đã chọn.
+Cho trước kết quả tìm kiếm không có dữ liệu phù hợp, khi hệ thống trả về kết quả, thì hệ thống hiển thị thông báo không tìm thấy dữ liệu.
+Cho trước người dùng chọn một kho trong danh sách, khi mở chi tiết kho, thì hệ thống hiển thị đầy đủ thông tin của kho đó.
+Cho trước người dùng không có quyền xem kho, khi truy cập chức năng, thì hệ thống từ chối truy cập.
+
+
+EPIC M2 – NHẬP KHO (Quy tắc chi tiết xem ở phụ lục D)
+US-M2-001 [Must] 
+Là Nhân viên kho, tôi muốn tạo phiếu nhập kho, để ghi nhận nhu cầu nhập hàng vào kho.
+Tác nhân: Nhân viên kho
+Đầu vào & trường dữ liệu
+Thông tin phiếu nhập (Header)
+Trường
+Bắt buộc
+Mô tả
+Mã phiếu nhập
+Có
+Duy nhất trong hệ thống; hệ thống có thể tự sinh hoặc cho phép nhập theo quy tắc doanh nghiệp
+Ngày nhập
+Có
+Ngày lập phiếu nhập
+Nhà cung cấp
+Không
+Chọn từ danh sách nhà cung cấp đã tồn tại
+Kho nhập
+Có
+Chọn 1 kho tổng đang hoạt động (hiện tại chỉ có 1 kho tổng nhưng trường này vẫn cần để phục vụ hệ thống có nhiều kho tổng trong tương lai)
+Ghi chú
+Không
+Nội dung bổ sung cho phiếu nhập
+Trạng thái
+Hệ thống
+Nháp / Chờ duyệt / Đã duyệt / Đã nhập kho / Đã hủy
+
+Chi tiết phiếu nhập (Detail)
+Trường
+Bắt buộc
+Mô tả
+Sản phẩm
+Có
+Chỉ được chọn sản phẩm đã tồn tại trên hệ thống
+Số lượng nhập
+Có
+Giá trị > 0
+Đơn giá nhập
+Có
+Giá trị ≥ 0
+Thành tiền
+Hệ thống
+= Số lượng × Đơn giá
+
+Tiêu chí nghiệm thu
+Cho trước người dùng có quyền nhập kho, khi tạo phiếu nhập kho, thì hệ thống cho phép nhập thông tin phiếu và danh sách sản phẩm nhập kho.
+Cho trước người dùng tạo hoặc cập nhật phiếu nhập, khi dữ liệu không hợp lệ (thiếu kho nhập, không có sản phẩm, số lượng nhập không hợp lệ hoặc sản phẩm không tồn tại), thì hệ thống hiển thị thông báo lỗi và không cho phép lưu.
+Cho trước người dùng chọn kho nhập, khi kho ở trạng thái Ngừng hoạt động, thì hệ thống không cho phép sử dụng kho đó trên phiếu nhập.
+Cho trước phiếu nhập có dữ liệu hợp lệ, khi người dùng lưu nháp, thì hệ thống tạo phiếu với trạng thái Nháp.
+Cho trước phiếu nhập có dữ liệu hợp lệ, khi người dùng gửi duyệt, thì hệ thống chuyển phiếu sang trạng thái Chờ duyệt.
+Cho trước người dùng không có quyền nhập kho, khi truy cập chức năng nhập kho, thì hệ thống từ chối thực hiện.
+Khi người dùng nhập đơn giá nhập, hệ thống lưu giá trị này trên dòng chi tiết phiếu nhập nhưng không sử dụng để tính tồn kho, giá trị tồn hoặc giá vốn trong MVP. 
+
+US-M2-002 [Must]
+Là Quản lý kho, tôi muốn duyệt phiếu nhập kho, để phê duyệt chứng từ trước khi thực hiện nhập hàng thực tế.
+Tác nhân: Quản lý kho
+Đầu vào & trường dữ liệu
+Thông tin xác nhận
+Trường
+Bắt buộc
+Mô tả
+Phiếu nhập kho
+Hệ thống
+Chỉ cho phép chọn phiếu ở trạng thái Chờ duyệt
+Người duyệt
+Hệ thống
+Người đang thực hiện thao tác
+Thời gian duyệt
+Hệ thống
+Thời điểm duyệt
+Ghi chú duyệt
+Không
+Ghi chú bổ sung nếu cần
+
+Tiêu chí nghiệm thu
+Cho trước phiếu nhập ở trạng thái Chờ duyệt, khi người dùng có quyền duyệt thực hiện duyệt phiếu, thì hệ thống kiểm tra tính hợp lệ của dữ liệu phiếu.
+Cho trước phiếu nhập có dữ liệu không hợp lệ, khi thực hiện duyệt phiếu, thì hệ thống không cho phép duyệt và hiển thị thông báo lỗi.
+Cho trước phiếu nhập có dữ liệu hợp lệ, khi duyệt phiếu thành công, thì hệ thống chuyển trạng thái phiếu sang Đã duyệt và chưa cập nhật tồn kho.
+Cho trước người dùng không có quyền duyệt hoặc phiếu không ở trạng thái Chờ duyệt, khi thực hiện duyệt phiếu, thì hệ thống không cho phép thao tác.
+US-M2-003 [Must]
+Là Nhân viên kho, tôi muốn thực hiện nhập kho cho phiếu đã được duyệt, để ghi nhận hàng hóa thực tế vào tồn kho.
+Tác nhân: Nhân viên kho
+Đầu vào & trường dữ liệu
+Thông tin thực hiện nhập kho
+Trường
+Bắt buộc
+Mô tả
+Phiếu nhập kho
+Hệ thống
+Chỉ cho phép chọn phiếu ở trạng thái Đã duyệt
+Người nhập kho
+Hệ thống
+Người thực hiện nghiệp vụ
+Thời gian nhập kho
+Hệ thống
+Thời điểm thực hiện nhập kho
+Kho nhập
+Hệ thống
+Lấy từ phiếu nhập đã duyệt
+Danh sách sản phẩm
+Hệ thống
+Lấy từ chi tiết phiếu nhập
+Ghi chú thực hiện
+Không
+Thông tin bổ sung khi nhập kho
+
+Dữ liệu phát sinh
+Dữ liệu
+Mô tả
+Tồn kho
+Tăng số lượng tồn tương ứng
+Lịch sử biến động tồn kho
+Tạo bản ghi Stock Movement History
+Trạng thái phiếu
+Chuyển sang Đã nhập kho
+
+Tiêu chí nghiệm thu
+Cho trước phiếu nhập ở trạng thái Đã duyệt, khi người dùng thực hiện nhập kho, thì hệ thống kiểm tra điều kiện thực hiện nhập kho.
+Cho trước phiếu không đủ điều kiện thực hiện nhập kho (ví dụ: kho nhập ngừng hoạt động hoặc phiếu đã được nhập kho), khi người dùng thực hiện nhập kho, thì hệ thống không cho phép thao tác.
+Cho trước phiếu đủ điều kiện thực hiện nhập kho, khi nhập kho thành công, thì hệ thống chuyển trạng thái phiếu sang Đã nhập kho.
+Cho trước phiếu được nhập kho thành công, thì hệ thống cập nhật tồn kho theo số lượng nhập và ghi nhận lịch sử biến động tồn kho.
+US-M2-004 [Must]
+Là Nhân viên kho hoặc Quản lý kho, tôi muốn hủy phiếu nhập kho chưa hoàn tất, để xử lý các phiếu tạo sai hoặc không còn nhu cầu thực hiện.
+Tác nhân: Nhân viên kho, Quản lý kho
+Đầu vào & trường dữ liệu
+Thông tin hủy phiếu
+Trường
+Bắt buộc
+Mô tả
+Phiếu nhập kho
+Có
+Phiếu ở trạng thái cho phép hủy
+Lý do hủy
+Có
+Nội dung giải thích nguyên nhân hủy
+Người hủy
+Hệ thống
+Người thực hiện thao tác
+Thời gian hủy
+Hệ thống
+Thời điểm hủy phiếu
+
+Dữ liệu phát sinh
+Dữ liệu
+Mô tả
+Trạng thái phiếu
+Chuyển sang Đã hủy
+Nhật ký thao tác
+Ghi nhận người hủy và thời gian hủy
+Tồn kho
+Không thay đổi
+
+Tiêu chí nghiệm thu
+Chỉ các phiếu nhập chưa hoàn tất (Nháp, Chờ duyệt hoặc Đã duyệt theo phân quyền) mới được phép hủy thông thường. 
+Nhân viên chỉ được huỷ đối với phiếu chưa duyệt (Nháp, chờ duyệt)
+Khi người dùng thực hiện hủy phiếu, hệ thống yêu cầu xác nhận trước khi thực hiện thao tác.
+Khi hủy phiếu thành công, hệ thống chuyển trạng thái phiếu sang Đã hủy.
+Khi phiếu bị hủy, hệ thống không cập nhật tồn kho và lưu thông tin hủy phiếu gồm người hủy, thời gian hủy và lý do hủy.
+Hệ thống không cho phép hủy đối với phiếu đã hủy, phiếu đã phát sinh biến động hoặc người dùng không có quyền hủy.
+ 
+EPIC M3 – XUẤT KHO(Quy tắc chi tiết xem ở phụ lục D)
+US-M3-001 [Must]
+Là Nhân viên kho, tôi muốn tạo phiếu xuất kho, để ghi nhận nhu cầu xuất hàng khỏi kho.
+Tác nhân: Nhân viên kho.
+Đầu vào & trường dữ liệu
+Thông tin phiếu xuất kho (Header)
+Trường dữ liệu
+Bắt buộc
+Mô tả / Ràng buộc
+Mã phiếu xuất
+Có
+Duy nhất trong hệ thống; tự sinh hoặc nhập tay theo quy tắc doanh nghiệp
+Ngày xuất
+Có
+Không được bỏ trống
+Kho xuất
+Có
+Chỉ cho phép chọn kho đang hoạt động
+Ghi chú
+Không
+Tối đa 1000 ký tự
+Trạng thái
+Hệ thống
+Nháp / Chờ duyệt / Đã duyệt / Đã xuất kho / Đã hủy
+
+Danh sách sản phẩm xuất kho (Detail)
+Trường dữ liệu
+Bắt buộc
+Mô tả / Ràng buộc
+Sản phẩm
+Có
+Chỉ được chọn sản phẩm đã tồn tại trên hệ thống
+SKU
+Hệ thống
+Hiển thị theo sản phẩm đã chọn
+Đơn vị tính
+Hệ thống
+Hiển thị theo sản phẩm
+Số lượng xuất
+Có
+Giá trị > 0
+Ghi chú dòng
+Không
+Ghi chú riêng cho từng sản phẩm
+
+Tiêu chí nghiệm thu
+Cho trước người dùng có quyền xuất kho, khi tạo phiếu xuất kho, thì hệ thống cho phép nhập thông tin phiếu và danh sách sản phẩm xuất kho.
+Cho trước người dùng tạo hoặc cập nhật phiếu xuất, khi dữ liệu không hợp lệ (thiếu kho xuất, không có sản phẩm, số lượng xuất không hợp lệ hoặc sản phẩm không tồn tại), thì hệ thống hiển thị thông báo lỗi và không cho phép lưu.
+Cho trước người dùng chọn kho xuất, khi kho ở trạng thái Ngừng hoạt động, thì hệ thống không cho phép sử dụng kho đó trên phiếu xuất.
+Cho trước phiếu xuất có dữ liệu hợp lệ, khi người dùng lưu nháp, thì hệ thống tạo phiếu với trạng thái Nháp.
+Cho trước phiếu xuất có dữ liệu hợp lệ, khi người dùng gửi duyệt, thì hệ thống chuyển phiếu sang trạng thái Chờ duyệt.
+Cho trước người dùng không có quyền xuất kho, khi truy cập chức năng xuất kho, thì hệ thống từ chối thực hiện.
+US-M3-002 [Must]
+Là Quản lý kho, tôi muốn duyệt phiếu xuất kho, để phê duyệt chứng từ trước khi thực hiện xuất hàng thực tế.
+Tác nhân: Quản lý kho.
+Đầu vào & trường dữ liệu
+Thông tin xác nhận
+Trường dữ liệu
+Bắt buộc
+Mô tả / Ràng buộc
+Phiếu xuất kho
+Hệ thống
+Chỉ cho phép chọn phiếu trạng thái Chờ duyệt
+Người duyệt
+Hệ thống
+Lấy theo tài khoản đăng nhập
+Thời gian duyệt
+Hệ thống
+Tự động ghi nhận
+Ghi chú duyệt
+Không
+Tối đa 1000 ký tự
+
+Dữ liệu kiểm tra tự động
+Trường dữ liệu
+Mô tả
+Trạng thái kho xuất
+Phải là Hoạt động
+Tồn kho khả dụng
+Phải đủ để đáp ứng số lượng xuất
+Tình trạng sản phẩm
+Phải tồn tại và còn hiệu lực trên hệ thống
+
+Tiêu chí nghiệm thu
+Phiếu xuất chỉ được duyệt khi ở trạng thái Chờ duyệt và có dữ liệu hợp lệ.
+Khi duyệt phiếu xuất, hệ thống kiểm tra điều kiện thực hiện, bao gồm:
+Kho xuất đang hoạt động.
+Tồn kho khả dụng đáp ứng số lượng xuất.
+Dữ liệu phiếu hợp lệ.
+Khi phiếu đủ điều kiện duyệt, hệ thống chuyển trạng thái phiếu sang Đã duyệt và chưa cập nhật tồn kho.
+Khi phiếu không đủ điều kiện duyệt, hệ thống không cho phép duyệt và hiển thị thông báo lỗi.
+Hệ thống không cho phép duyệt đối với người dùng không có quyền duyệt hoặc phiếu không ở trạng thái Chờ duyệt.
+US-M3-003 [Must]
+Là Nhân viên kho, tôi muốn thực hiện xuất kho cho phiếu đã được duyệt, để ghi nhận hàng hóa thực tế đã rời khỏi kho.
+Tác nhân: Nhân viên kho.
+Đầu vào & trường dữ liệu
+Thông tin thực hiện xuất kho
+Trường dữ liệu
+Bắt buộc
+Mô tả / Ràng buộc
+Phiếu xuất kho
+Có
+Chỉ cho phép chọn phiếu trạng thái Đã duyệt
+Người thực hiện xuất kho
+Hệ thống
+Lấy theo tài khoản đăng nhập
+Thời gian xuất kho
+Hệ thống
+Tự động ghi nhận
+Ghi chú thực hiện
+Không
+Tối đa 1000 ký tự
+
+ Thông tin tồn kho được kiểm tra
+Trường dữ liệu
+Mô tả
+Kho xuất
+Phải đang hoạt động
+Tồn kho khả dụng
+Phải đủ tại thời điểm xuất
+Sản phẩm
+Phải tồn tại trên hệ thống
+
+Thông tin ghi nhận lịch sử
+Trường dữ liệu
+Mô tả
+Loại giao dịch
+Xuất kho
+Kho liên quan
+Kho xuất
+Sản phẩm
+Theo chi tiết phiếu
+Số lượng biến động
+Giá trị âm tương ứng lượng xuất
+Người thực hiện
+Tài khoản đăng nhập
+Thời gian giao dịch
+Thời điểm xuất kho thành công
+
+Tiêu chí nghiệm thu
+Chỉ phiếu xuất ở trạng thái Đã duyệt mới được phép thực hiện xuất kho.
+Khi thực hiện xuất kho, hệ thống kiểm tra điều kiện thực hiện, bao gồm dữ liệu hợp lệ và tồn kho khả dụng đáp ứng số lượng xuất.
+Khi xuất kho thành công, hệ thống:
+Chuyển trạng thái phiếu sang Đã xuất kho.
+Cập nhật giảm tồn kho tương ứng.
+Ghi nhận lịch sử biến động tồn kho.
+Lưu thông tin người thực hiện và thời gian xuất kho.
+Hệ thống không cho phép xuất kho đối với phiếu không đủ điều kiện thực hiện hoặc phiếu đã xuất kho.
+US-M3-004 [Must]
+Là Nhân viên kho hoặc Quản lý kho, tôi muốn hủy phiếu xuất kho chưa hoàn tất, để xử lý các trường hợp tạo sai hoặc không còn nhu cầu xuất hàng.
+Tác nhân: Nhân viên kho, Quản lý kho.
+Đầu vào & trường dữ liệu
+Thông tin hủy phiếu
+Trường dữ liệu
+Bắt buộc
+Mô tả / Ràng buộc
+Phiếu xuất kho
+Có
+Chỉ cho phép hủy các trạng thái được phép theo quy trình
+Lý do hủy
+Có
+Tối đa 1000 ký tự
+Người hủy
+Hệ thống
+Lấy theo tài khoản đăng nhập
+Thời gian hủy
+Hệ thống
+Tự động ghi nhận
+
+Thông tin trạng thái
+Trường dữ liệu
+Mô tả
+Trạng thái hiện tại
+Nháp / Chờ duyệt / Đã duyệt
+Trạng thái sau hủy
+Đã hủy
+
+Thông tin lưu vết
+Trường dữ liệu
+Mô tả
+Người hủy
+Ghi nhận vào lịch sử
+Thời gian hủy
+Ghi nhận vào lịch sử
+Lý do hủy
+Lưu trên chứng từ
+Nhật ký thao tác
+Gửi request ghi nhận Audit Log
+
+Tiêu chí nghiệm thu
+Phiếu xuất chỉ được hủy khi đang ở trạng thái cho phép hủy và người dùng có quyền thực hiện.
+Khi người dùng thực hiện hủy phiếu, hệ thống yêu cầu xác nhận trước khi thực hiện thao tác.
+Khi hủy phiếu thành công, hệ thống chuyển trạng thái phiếu sang Đã hủy.
+Khi phiếu bị hủy, hệ thống không cập nhật tồn kho, không ghi nhận biến động tồn kho và lưu thông tin hủy phiếu (người hủy, thời gian hủy, lý do hủy nếu có).
+Hệ thống không cho phép hủy đối với phiếu đã hủy, phiếu đã phát sinh biến động hoặc người dùng không có quyền hủy. 
+Epic M4 – Điều chuyển kho(Quy tắc chi tiết xem ở phụ lục D)
+US-M4-001 [Must] – Tạo phiếu điều chuyển kho
+Là Nhân viên kho hoặc Quản lý kho, tôi muốn tạo phiếu điều chuyển kho, để chuyển hàng hóa từ kho nguồn sang kho đích.
+Tác nhân: Nhân viên kho / Quản lý kho.
+Đầu vào & trường dữ liệu (chi tiết validate ở Phụ lục C):
+Mã phiếu điều chuyển
+Bắt buộc; duy nhất toàn hệ thống; quy tắc định dạng/mã số theo chuẩn chứng từ.
+Ngày điều chuyển
+Bắt buộc; không được để trống; mặc định ngày hiện tại nếu doanh nghiệp cho phép.
+Kho nguồn
+Bắt buộc; phải tồn tại và ở trạng thái Hoạt động; không được trùng kho đích.
+Kho đích
+Bắt buộc; phải tồn tại và ở trạng thái Hoạt động; không được trùng kho nguồn.
+Ghi chú
+Không bắt buộc.
+Sản phẩm
+Bắt buộc; chỉ cho phép chọn sản phẩm đã tồn tại trong hệ thống.
+Số lượng điều chuyển
+Bắt buộc; > 0; tại bước tạo phiếu chưa bắt buộc kiểm tra tồn kho cuối cùng, nhưng phải kiểm tra trước khi duyệt/xuất điều chuyển.
+Trạng thái
+Mặc định Nháp khi lưu nháp.
+
+Tiêu chí nghiệm thu:
+Cho trước người dùng có quyền tạo phiếu điều chuyển, khi tạo phiếu điều chuyển kho, thì hệ thống cho phép nhập thông tin phiếu và danh sách sản phẩm điều chuyển.
+Cho trước người dùng tạo hoặc cập nhật phiếu điều chuyển, khi dữ liệu không hợp lệ (thiếu kho nguồn, kho đích, kho nguồn trùng kho đích, không có sản phẩm, số lượng điều chuyển không hợp lệ hoặc sản phẩm không tồn tại), thì hệ thống hiển thị thông báo lỗi và không cho phép lưu.
+Cho trước người dùng chọn kho nguồn hoặc kho đích, khi kho ở trạng thái Ngừng hoạt động, thì hệ thống không cho phép sử dụng kho đó trên phiếu điều chuyển.
+Cho trước phiếu điều chuyển có dữ liệu hợp lệ, khi người dùng lưu nháp, thì hệ thống tạo phiếu với trạng thái Nháp.
+Cho trước người dùng không có quyền tạo phiếu điều chuyển, khi truy cập chức năng điều chuyển kho, thì hệ thống từ chối thực hiện.
+US-M4-002 [Must] – Gửi phiếu điều chuyển để phê duyệt
+Là Nhân viên kho, tôi muốn gửi phiếu điều chuyển để phê duyệt, để chuẩn bị thực hiện điều chuyển hàng hóa.
+Tác nhân: Nhân viên kho.
+Đầu vào & trường dữ liệu (chi tiết validate ở Phụ lục C):
+Phiếu điều chuyển
+Bắt buộc; phải tồn tại và đang ở trạng thái Nháp.
+Danh sách sản phẩm
+Bắt buộc; ít nhất 1 dòng sản phẩm hợp lệ.
+Kho nguồn / Kho đích
+Bắt buộc; đều phải ở trạng thái Hoạt động tại thời điểm gửi duyệt.
+Trạng thái hiện tại
+Nháp → Chờ duyệt.
+
+Tiêu chí nghiệm thu:
+Phiếu điều chuyển chỉ được gửi duyệt khi đang ở trạng thái Nháp và có dữ liệu hợp lệ.
+Khi gửi duyệt thành công, hệ thống chuyển trạng thái phiếu sang Chờ duyệt.
+Khi phiếu ở trạng thái Chờ duyệt, hệ thống không cho phép chỉnh sửa dữ liệu.
+Hệ thống không cho phép gửi duyệt đối với người dùng không có quyền hoặc phiếu không đủ điều kiện gửi duyệt.
+US-M4-003 [Must] – Phê duyệt phiếu điều chuyển
+Là Quản lý kho, tôi muốn phê duyệt phiếu điều chuyển, để cho phép thực hiện xuất hàng từ kho nguồn.
+Tác nhân: Quản lý kho.
+Đầu vào & trường dữ liệu (chi tiết validate ở Phụ lục C):
+Phiếu điều chuyển
+Bắt buộc; phải tồn tại và đang ở trạng thái Chờ duyệt.
+Kho nguồn / Kho đích
+Phải tồn tại và ở trạng thái Hoạt động tại thời điểm duyệt.
+Danh sách sản phẩm & số lượng
+Hợp lệ; số lượng > 0.
+Tồn kho khả dụng
+Kiểm tra tại kho nguồn; phải ≥ số lượng điều chuyển cho từng sản phẩm.
+Thông tin duyệt
+Người duyệt và thời gian duyệt được hệ thống ghi nhận tự động khi duyệt thành công.
+Trạng thái hiện tại
+Chờ duyệt → Đã duyệt.
+
+Tiêu chí nghiệm thu:
+Phiếu điều chuyển chỉ được phê duyệt khi ở trạng thái Chờ duyệt, có dữ liệu hợp lệ và tồn kho khả dụng tại kho nguồn đáp ứng số lượng điều chuyển.
+Khi phê duyệt thành công, hệ thống chuyển trạng thái phiếu sang Đã duyệt và chưa cập nhật tồn kho.
+Khi phê duyệt thành công, hệ thống ghi nhận người duyệt và thời gian duyệt.
+Hệ thống không cho phép phê duyệt đối với phiếu không đủ điều kiện hoặc phiếu đã được phê duyệt.
+US-M4-004 [Must] – Xuất hàng điều chuyển (Đang vận chuyển)
+Là Nhân viên kho nguồn, tôi muốn thực hiện xuất điều chuyển, để đưa hàng sang trạng thái đang vận chuyển.
+Tác nhân: Nhân viên kho nguồn.
+Đầu vào & trường dữ liệu (chi tiết validate ở Phụ lục C):
+Phiếu điều chuyển
+Bắt buộc; phải tồn tại và đang ở trạng thái Đã duyệt.
+Kho nguồn
+Phải ở trạng thái Hoạt động tại thời điểm xuất điều chuyển.
+Tồn kho khả dụng
+Kiểm tra realtime; phải đủ cho từng sản phẩm trước khi xuất.
+Danh sách sản phẩm & số lượng
+Phải khớp với phiếu điều chuyển đã duyệt.
+Trạng thái hiện tại
+Đã duyệt → Đang vận chuyển.
+
+Tiêu chí nghiệm thu:
+Phiếu điều chuyển chỉ được phép xuất điều chuyển khi ở trạng thái Đã duyệt và tồn kho khả dụng tại kho nguồn đáp ứng số lượng điều chuyển.
+Khi xuất điều chuyển thành công, hệ thống:
+Chuyển trạng thái phiếu sang Đang vận chuyển (Transfer Status).
+Giảm tồn kho khả dụng tại kho nguồn.
+Ghi nhận số lượng hàng hóa vào tồn kho Đang vận chuyển (tăng In Transit).
+Hệ thống phải đảm bảo không cho phép xuất vượt tồn kho thực tế, kể cả khi có nhiều giao dịch đồng thời trên cùng một sản phẩm.
+Khi hàng hóa ở trạng thái Đang vận chuyển, hệ thống không cho phép sử dụng số lượng này cho các nghiệp vụ xuất kho hoặc điều chuyển khác.
+Khi xuất điều chuyển thành công, hệ thống ghi nhận lịch sử biến động tồn kho.
+US-M4-005 [Must] – Nhận hàng điều chuyển (Hoàn tất)
+Là Nhân viên kho đích, tôi muốn xác nhận nhận hàng điều chuyển, để cập nhật tồn kho kho đích.
+Tác nhân: Nhân viên kho đích.
+Đầu vào & trường dữ liệu (chi tiết validate ở Phụ lục C):
+Phiếu điều chuyển
+Bắt buộc; phải tồn tại và đang ở trạng thái Đang vận chuyển.
+Kho đích
+Phải ở trạng thái Hoạt động tại thời điểm nhận hàng.
+Số lượng thực nhận
+Bắt buộc; nhập theo từng sản phẩm; không được lớn hơn số lượng điều chuyển tương ứng.
+Thông tin nhận hàng
+Người nhận và thời gian nhận được hệ thống ghi nhận tự động khi xác nhận thành công.
+Trạng thái hiện tại
+Đang vận chuyển → Hoàn tất.
+
+Tiêu chí nghiệm thu:
+Chỉ phiếu điều chuyển ở trạng thái Đang vận chuyển mới được phép xác nhận nhận hàng.
+Khi xác nhận nhận hàng, hệ thống yêu cầu nhập số lượng thực nhận và không cho phép số lượng thực nhận lớn hơn số lượng điều chuyển.
+Khi xác nhận nhận hàng thành công, hệ thống:
+Giảm số lượng In Transit tương ứng của phiếu điều chuyển
+Tăng tồn khả dụng tại kho đích theo số lượng thực nhận
+Chuyển trạng thái phiếu sang Hoàn tất
+Ghi nhận stock movement hoàn tất điều chuyển
+Khi số lượng thực nhận nhỏ hơn số lượng điều chuyển, hệ thống yêu cầu ghi nhận hoặc tạo chứng từ xử lý phần chênh lệch theo quy trình nghiệp vụ.
+Khi phiếu hoàn tất, hệ thống ghi nhận lịch sử biến động tồn kho.
+US-M4-006 [Must] – Hủy / Trả lại điều chuyển
+Là Nhân viên kho hoặc Quản lý kho, tôi muốn hủy hoặc trả lại phiếu điều chuyển theo đúng trạng thái xử lý, để xử lý các trường hợp điều chuyển sai.
+Tác nhân: Nhân viên kho / Quản lý kho.
+Đầu vào & trường dữ liệu (chi tiết validate ở Phụ lục C):
+Phiếu điều chuyển
+Bắt buộc; phải tồn tại và ở một trong các trạng thái cho phép thao tác theo quy tắc nghiệp vụ.
+Lý do hủy / trả lại
+Bắt buộc khi doanh nghiệp yêu cầu; lưu vào ghi chú chứng từ.
+Người thực hiện
+Được hệ thống ghi nhận tự động.
+Thời gian thực hiện
+Được hệ thống ghi nhận tự động.
+Quyền thao tác
+Nhân viên kho: hủy ở trạng thái Nháp/Chờ duyệt theo quy định; Quản lý kho: hủy ở trạng thái Đã duyệt; Trả lại điều chuyển chỉ áp dụng khi phiếu đang Đang vận chuyển.
+Trạng thái kết quả
+Đã hủy hoặc Bị trả lại tùy nghiệp vụ.
+
+Tiêu chí nghiệm thu:
+Phiếu điều chuyển chỉ được hủy khi đang ở trạng thái cho phép hủy và người dùng có quyền thực hiện theo quy định.
+Khi hủy phiếu thành công, hệ thống:
+Chuyển trạng thái phiếu sang Đã hủy.
+Không cập nhật tồn kho.
+Phiếu điều chuyển ở trạng thái Đang vận chuyển có thể được thực hiện Trả lại điều chuyển theo quy trình nghiệp vụ.
+Khi trả lại điều chuyển thành công, hệ thống:
+Chuyển trạng thái phiếu sang Bị trả lại.
+Hoàn trả toàn bộ số lượng đang In Transit về tồn kho khả dụng của kho nguồn.
+Không cập nhật tồn kho cho kho đích.
+Khi thực hiện hủy hoặc trả lại điều chuyển, hệ thống lưu thông tin người thực hiện, thời gian thực hiện và lý do thực hiện.
+Hệ thống không cho phép hủy hoặc trả lại đối với phiếu không đủ điều kiện thực hiện thao tác.  
+US-M4-007 [Must] – Ghi nhận hao hụt điều chuyển
+Là Nhân viên kho hoặc Quản lý kho, tôi muốn ghi nhận hao hụt phát sinh trong quá trình điều chuyển hàng hóa, để phản ánh chính xác số lượng thực nhận và đảm bảo tồn kho khớp với thực tế.
+Tác nhân: Nhân viên kho / Quản lý kho.
+Đầu vào & trường dữ liệu:
+Thông tin hao hụt điều chuyển
+Trường dữ liệu
+Bắt buộc
+Mô tả / Ràng buộc
+Phiếu điều chuyển
+Có
+Chỉ cho phép chọn phiếu ở trạng thái Đang vận chuyển hoặc Chờ nhận hàng
+Sản phẩm
+Hệ thống
+Lấy từ danh sách sản phẩm của phiếu điều chuyển
+Số lượng điều chuyển
+Hệ thống
+Lấy theo số lượng đã xuất điều chuyển
+Số lượng thực nhận
+Có
+Giá trị > 0 và ≤ số lượng điều chuyển
+Số lượng hao hụt
+Hệ thống
+= Số lượng điều chuyển − Số lượng thực nhận
+Lý do hao hụt
+Có
+Nội dung mô tả nguyên nhân hao hụt; tối đa 1000 ký tự
+Người ghi nhận
+Hệ thống
+Lấy theo tài khoản đăng nhập
+Thời gian ghi nhận
+Hệ thống
+Tự động ghi nhận thời điểm thao tác
+
+Dữ liệu phát sinh
+Dữ liệu
+Mô tả
+Tồn kho đích
+Tăng theo số lượng thực nhận
+Tồn In Transit
+Giảm theo số lượng điều chuyển
+Lịch sử biến động tồn kho
+Tạo bản ghi Stock Movement History cho phần thực nhận và phần hao hụt
+Nhật ký thao tác
+Gửi request ghi nhận Audit Log
+Trạng thái phiếu
+Hoàn tất hoặc Hoàn tất có hao hụt
+
+Tiêu chí nghiệm thu
+Cho trước phiếu điều chuyển ở trạng thái Đang vận chuyển, khi người dùng xác nhận nhận hàng với số lượng thực nhận nhỏ hơn số lượng điều chuyển, thì hệ thống cho phép ghi nhận hao hụt.
+Cho trước số lượng thực nhận nhỏ hơn số lượng điều chuyển, khi người dùng xác nhận nhận hàng, thì hệ thống tự động tính số lượng hao hụt.
+Cho trước phát sinh hao hụt, khi người dùng lưu thông tin, thì hệ thống yêu cầu nhập lý do hao hụt.
+Cho trước việc ghi nhận hao hụt thành công, khi hệ thống xử lý hoàn tất, thì hệ thống cập nhật tồn kho, ghi nhận lịch sử biến động và Audit Log.
+Cho trước dữ liệu số lượng không hợp lệ, khi người dùng thực hiện lưu, thì hệ thống hiển thị thông báo lỗi và không cho phép thao tác.
+Cho trước phiếu không hợp lệ hoặc người dùng không có quyền, khi thực hiện ghi nhận hao hụt, thì hệ thống không cho phép xử lý.
+Cho trước ghi nhận hao hụt đã hoàn tất, khi người dùng xem chi tiết phiếu điều chuyển, thì hệ thống hiển thị đầy đủ thông tin hao hụt. 
+
+EPIC M5 – TỒN KHO(Quy tắc chi tiết xem ở phụ lục D)
+US-M5-001 [Must]
+Là Quản lý kho, tôi muốn xem tồn kho theo từng kho hoặc toàn hệ thống, để theo dõi số lượng hàng hóa hiện có.
+Tác nhân: Quản lý kho
+Đầu vào & Trường dữ liệu:
+Bộ lọc tìm kiếm:
+Trường
+Bắt buộc
+Mô tả
+Kho
+Không
+Chọn một kho cụ thể hoặc xem toàn hệ thống
+Mã sản phẩm
+Không
+Tìm kiếm theo mã sản phẩm
+Tên sản phẩm
+Không
+Tìm kiếm theo tên sản phẩm
+Nhóm sản phẩm
+Không
+Lọc theo nhóm sản phẩm
+Khoảng số lượng tồn
+Không
+Lọc theo khoảng tồn kho tối thiểu và tối đa
+Trạng thái tồn kho
+Không
+Bình thường / Sắp hết hàng / Vượt ngưỡng
+
+Dữ liệu hiển thị
+Trường
+Mô tả
+Mã sản phẩm
+Mã định danh sản phẩm
+Tên sản phẩm
+Tên sản phẩm
+Nhóm sản phẩm
+Nhóm phân loại sản phẩm
+Kho
+Kho đang lưu trữ sản phẩm
+Số lượng tồn hiện tại
+Số lượng tồn thực tế tại thời điểm truy vấn
+Đơn vị tính
+Cái, hộp, kg, lít...
+Ngày cập nhật gần nhất
+Thời điểm phát sinh giao dịch tồn kho gần nhất
+
+Quy tắc nghiệp vụ
+Mã
+Quy tắc
+BR-M5-001
+Dữ liệu tồn kho được tính theo các giao dịch đã hoàn tất
+BR-M5-002
+Phiếu Nháp, Chờ duyệt, Đã hủy không làm thay đổi tồn kho
+BR-M5-003
+Khi xem toàn hệ thống, tồn kho sản phẩm bằng tổng tồn của tất cả kho
+
+Tiêu chí nghiệm thu
+Cho trước người dùng có quyền xem tồn kho, khi truy cập chức năng Tồn kho, thì hệ thống hiển thị danh sách tồn kho theo phạm vi được phân quyền.
+Khi người dùng thực hiện tìm kiếm hoặc lọc dữ liệu, hệ thống chỉ hiển thị các bản ghi thỏa điều kiện lọc.
+Khi người dùng xem tồn kho theo kho hoặc toàn hệ thống, hệ thống hiển thị số lượng tồn kho chính xác theo dữ liệu hiện tại.
+Số lượng tồn kho hiển thị phải phản ánh đúng các giao dịch nhập kho, xuất kho và điều chuyển kho đã hoàn tất.
+Khi không có dữ liệu phù hợp, hệ thống hiển thị trạng thái "Không có dữ liệu".
+Cho trước người dùng không có quyền xem tồn kho, khi truy cập chức năng, thì hệ thống không cho phép xem dữ liệu. 
+US-M5-002 [Must]
+Là Quản lý kho, tôi muốn hệ thống tự động cập nhật tồn kho sau các nghiệp vụ kho, để số liệu tồn luôn chính xác.
+Tác nhân
+Hệ thống
+Nhân viên kho
+Quản lý kho
+Đầu vào & Trường dữ liệu:
+User Story này không có màn hình nhập liệu riêng.
+Dữ liệu được cập nhật từ các chứng từ:
+Nguồn dữ liệu
+Trạng thái kích hoạt
+Phiếu nhập kho
+Đã nhập kho
+Phiếu xuất kho
+Đã xuất kho
+Phiếu điều chuyển
+Đang vận chuyển (trạng thái của phiếu)
+Phiếu điều chuyển
+Hoàn tất
+Phiếu điều chuyển
+Bị trả lại
+
+Dữ liệu tồn kho được cập nhật
+Trường
+Mô tả
+Sản phẩm
+Sản phẩm phát sinh giao dịch
+Kho
+Kho liên quan
+Số lượng tồn khả dụng
+Số lượng có thể sử dụng
+Số lượng In Transit (không phải trạng thái
+Hàng đang điều chuyển
+Thời gian cập nhật
+Thời điểm cập nhật tồn kho
+Loại giao dịch
+Nhập kho / Xuất kho / Điều chuyển
+Chứng từ nguồn
+Mã phiếu phát sinh
+
+Tiêu chí nghiệm thu
+Khi các nghiệp vụ kho hoàn tất, hệ thống tự động cập nhật tồn kho theo quy tắc của từng loại nghiệp vụ (nhập kho, xuất kho, điều chuyển kho, trả lại điều chuyển).
+Khi nghiệp vụ điều chuyển kho được thực hiện, hệ thống cập nhật chính xác tồn kho tại kho nguồn, kho đích và số lượng hàng hóa đang vận chuyển (In Transit) theo trạng thái của phiếu.
+Mọi thay đổi tồn kho phải được phản ánh trên chức năng tra cứu tồn kho ngay sau khi giao dịch hoàn tất.
+Các job hoặc event cập nhật tồn kho phải idempotent theo (phiếu_id + loại giao dịch)
+US-M5-003 [Should]
+Là Quản lý kho, tôi muốn xem trạng thái tồn kho an toàn của sản phẩm, để nhận biết các sản phẩm sắp hết hoặc vượt ngưỡng tồn kho.
+Tác nhân: Quản lý kho
+Đầu vào & Trường dữ liệu:
+Bộ lọc tìm kiếm:
+Trường
+Bắt buộc
+Mô tả
+Kho
+Không
+Lọc theo kho
+Sản phẩm
+Không
+Lọc theo sản phẩm
+Nhóm sản phẩm
+Không
+Lọc theo nhóm sản phẩm
+Trạng thái tồn kho
+Không
+Bình thường / Sắp hết hàng / Vượt ngưỡng
+
+Dữ liệu hiển thị
+Trường
+Mô tả
+Mã sản phẩm
+Mã sản phẩm
+Tên sản phẩm
+Tên sản phẩm
+Kho
+Kho lưu trữ
+Tồn hiện tại
+Số lượng tồn thực tế
+Min Stock
+Ngưỡng tối thiểu
+Max Stock
+Ngưỡng tối đa
+Trạng thái tồn kho
+Kết quả đánh giá tồn kho
+Ngày cập nhật gần nhất
+Lần cập nhật tồn gần nhất
+
+Quy tắc nghiệp vụ
+Mã
+Quy tắc
+BR-M5-012
+Nếu tồn hiện tại < Min Stock → Sắp hết hàng
+BR-M5-013
+Nếu tồn hiện tại > Max Stock → Vượt ngưỡng
+BR-M5-014
+Nếu tồn nằm trong khoảng Min-Max → Bình thường
+BR-M5-015
+Nếu chưa cấu hình Min hoặc Max thì bỏ qua kiểm tra tương ứng
+BR-M5-016
+Trạng thái tồn kho được tính realtime khi dữ liệu tồn thay đổi
+
+Tiêu chí nghiệm thu
+Hệ thống tự động xác định trạng thái tồn kho dựa trên số lượng tồn hiện tại và các ngưỡng tồn kho được thiết lập.
+Khi người dùng xem danh sách tồn kho, hệ thống hiển thị trạng thái tồn kho tương ứng cho từng sản phẩm (Bình thường, Sắp hết hàng, Vượt ngưỡng).
+Khi số lượng tồn kho thay đổi, hệ thống cập nhật lại trạng thái tồn kho theo ngưỡng tồn tối thiểu và tồn tối đa đã cấu hình. 
+EPIC M6 – TỒN KHO AN TOÀN
+US-M6-001 [Should]
+Là Quản lý kho, tôi muốn cấu hình mức tồn kho tối thiểu và tối đa cho từng sản phẩm, để theo dõi tồn kho an toàn.
+Tác nhân: Quản lý kho
+Đầu vào & Trường dữ liệu:
+Trường dữ liệu
+Bắt buộc
+Mô tả / Ràng buộc
+Sản phẩm
+Có
+Chọn từ danh sách sản phẩm đã tồn tại trên hệ thống
+SKU / Mã sản phẩm
+Không
+Hiển thị tự động theo sản phẩm đã chọn, không cho phép chỉnh sửa
+Tên sản phẩm
+Không
+Hiển thị tự động theo sản phẩm đã chọn
+Kho áp dụng
+Không (*)
+Nếu doanh nghiệp quản lý ngưỡng tồn theo từng kho thì cho phép chọn kho; nếu cấu hình toàn hệ thống thì để trống
+Mức tồn tối thiểu (Min Stock)
+Không
+Giá trị số nguyên ≥ 0
+Mức tồn tối đa (Max Stock)
+Không
+Giá trị số nguyên ≥ 0
+Ghi chú
+Không
+Tối đa 500 ký tự
+Ngày cập nhật
+Không
+Hệ thống tự động ghi nhận
+Người cập nhật
+Không
+Hệ thống tự động ghi nhận
+
+(*) Phụ thuộc phạm vi triển khai:
+Cấu hình theo toàn hệ thống.
+Hoặc cấu hình riêng theo từng kho.
+Quy tắc nghiệp vụ
+Mã
+Quy tắc
+BR-M6-001
+Min Stock phải ≥ 0
+BR-M6-002
+Max Stock phải ≥ 0
+BR-M6-003
+Nếu đồng thời nhập Min và Max thì Max Stock ≥ Min Stock
+BR-M6-004
+Cho phép chỉ cấu hình Min hoặc chỉ cấu hình Max
+BR-M6-005
+Không cho phép lưu nếu giá trị nhập không phải số hợp lệ
+BR-M6-006
+Mỗi sản phẩm chỉ có một cấu hình tồn kho an toàn trong cùng phạm vi áp dụng
+BR-M6-007
+Hệ thống lưu lịch sử cập nhật cấu hình để phục vụ truy vết
+
+Tiêu chí nghiệm thu
+Hệ thống cho phép cấu hình mức tồn tối thiểu (Min Stock) và mức tồn tối đa (Max Stock) cho từng sản phẩm.
+Hệ thống kiểm tra tính hợp lệ của dữ liệu cấu hình trước khi lưu.
+Khi lưu thành công, cấu hình tồn kho an toàn được ghi nhận và hiển thị khi tra cứu sản phẩm.
+Chỉ người dùng có quyền mới được phép cấu hình tồn kho an toàn.
+
+US-M6-002 [Should]
+Là Quản lý kho, tôi muốn xem trạng thái tồn kho an toàn của sản phẩm, để phát hiện sản phẩm sắp hết hàng hoặc vượt ngưỡng tồn kho.
+Tác nhân: Quản lý kho
+Đầu vào & Trường dữ liệu:
+Dữ liệu hiển thị
+Trường dữ liệu
+Mô tả
+SKU / Mã sản phẩm
+Mã định danh sản phẩm
+Tên sản phẩm
+Tên sản phẩm
+Nhóm sản phẩm
+Nhóm sản phẩm
+Kho
+Kho đang lưu trữ hàng hóa
+Số lượng tồn hiện tại
+Số lượng tồn thực tế
+Mức tồn tối thiểu (Min Stock)
+Giá trị cấu hình
+Mức tồn tối đa (Max Stock)
+Giá trị cấu hình
+Trạng thái tồn kho
+Bình thường / Sắp hết hàng / Vượt ngưỡng
+Ngày cập nhật gần nhất
+Thời điểm cập nhật tồn kho gần nhất
+
+Bộ lọc tìm kiếm:
+Bộ lọc
+Mô tả
+Kho
+Lọc theo kho
+Sản phẩm
+Lọc theo sản phẩm
+Nhóm sản phẩm
+Lọc theo nhóm sản phẩm
+Trạng thái tồn kho
+Bình thường / Sắp hết hàng / Vượt ngưỡng
+Khoảng số lượng tồn
+Từ số lượng - Đến số lượng
+
+Quy tắc nghiệp vụ
+Mã
+Quy tắc
+BR-M6-008
+Nếu tồn hiện tại < Min Stock thì trạng thái = Sắp hết hàng
+BR-M6-009
+Nếu tồn hiện tại > Max Stock thì trạng thái = Vượt ngưỡng
+BR-M6-010
+Nếu tồn nằm trong ngưỡng cho phép thì trạng thái = Bình thường
+BR-M6-011
+Nếu chưa cấu hình Min hoặc Max thì không đánh giá điều kiện tương ứng
+BR-M6-012
+Trạng thái tồn kho được tính toán động dựa trên dữ liệu tồn kho hiện tại
+BR-M6-013
+Khi tồn kho thay đổi, trạng thái tồn kho phải được cập nhật tương ứng
+
+Tiêu chí nghiệm thu
+Hệ thống xác định trạng thái tồn kho an toàn dựa trên số lượng tồn hiện tại và ngưỡng Min/Max đã cấu hình cho sản phẩm.
+Khi người dùng xem thông tin tồn kho, hệ thống hiển thị trạng thái tồn kho tương ứng (Bình thường, Sắp hết hàng hoặc Vượt ngưỡng).
+Khi tồn kho hoặc cấu hình Min/Max thay đổi, hệ thống tự động cập nhật lại trạng thái tồn kho.
+Chỉ người dùng có quyền xem tồn kho mới được phép truy cập dữ liệu.
+US-M6-003 [Future] - Cảnh báo tồn kho vượt ngưỡng an toàn
+Là Quản lý kho, tôi muốn nhận thông báo khi tồn kho vượt ra ngoài ngưỡng an toàn, để kịp thời xử lý.
+Tác nhân
+Quản lý kho
+Ban lãnh đạo (nếu được phân quyền)
+Đầu vào & Trường dữ liệu:
+Dữ liệu cảnh báo
+Trường dữ liệu
+Mô tả
+Mã cảnh báo
+Sinh tự động
+Sản phẩm
+Sản phẩm phát sinh cảnh báo
+SKU
+Mã sản phẩm
+Kho
+Kho phát sinh cảnh báo
+Tồn hiện tại
+Số lượng tồn hiện tại
+Min Stock
+Ngưỡng tối thiểu
+Max Stock
+Ngưỡng tối đa
+Loại cảnh báo
+Tồn thấp / Vượt ngưỡng
+Thời gian phát sinh
+Thời điểm hệ thống tạo cảnh báo
+Trạng thái cảnh báo
+Đang hiệu lực / Đã xử lý / Đã tự đóng
+
+Bộ lọc tìm kiếm:
+Bộ lọc
+Mô tả
+Kho
+Lọc theo kho
+Sản phẩm
+Lọc theo sản phẩm
+Loại cảnh báo
+Tồn thấp / Vượt ngưỡng
+Khoảng thời gian
+Thời gian phát sinh cảnh báo
+Trạng thái cảnh báo
+Đang hiệu lực / Đã xử lý
+
+Quy tắc nghiệp vụ
+Mã
+Quy tắc
+BR-M6-014
+Khi tồn < Min Stock, hệ thống sinh cảnh báo tồn thấp
+BR-M6-015
+Khi tồn > Max Stock, hệ thống sinh cảnh báo vượt ngưỡng
+BR-M6-016
+Một sản phẩm không được tạo nhiều cảnh báo đang hiệu lực cùng loại tại cùng một kho
+BR-M6-017
+Khi tồn quay về ngưỡng an toàn, hệ thống tự động đóng cảnh báo
+BR-M6-018
+Cảnh báo có thể được sinh theo giao dịch phát sinh hoặc theo lịch quét dữ liệu
+BR-M6-019
+Người dùng không có quyền xem cảnh báo không được truy cập dữ liệu cảnh báo
+
+Tiêu chí nghiệm thu
+Hệ thống tự động tạo cảnh báo khi tồn kho vượt ra ngoài ngưỡng Min/Max đã cấu hình.
+Khi người dùng xem cảnh báo tồn kho, hệ thống hiển thị đầy đủ thông tin cần thiết để xác định sản phẩm và nguyên nhân cảnh báo.
+Khi tồn kho quay trở lại ngưỡng cho phép, hệ thống tự động gỡ cảnh báo tương ứng.
+Chỉ người dùng có quyền xem cảnh báo tồn kho mới được phép truy cập dữ liệu cảnh báo. 
+ 
+Epic M7 – LỊCH SỬ GIAO DỊCH
+US-M7-001 [Must]
+Là Quản lý kho, tôi muốn xem lịch sử biến động tồn kho, để truy vết nguyên nhân thay đổi số lượng tồn kho.
+Tác nhân: Quản lý kho
+Đầu vào & trường dữ liệu:
+Bộ lọc tìm kiếm:
+Trường
+Bắt buộc
+Mô tả
+Từ ngày
+Không
+Ngày bắt đầu khoảng thời gian tra cứu
+Đến ngày
+Không
+Ngày kết thúc khoảng thời gian tra cứu
+Kho
+Không
+Chọn kho cần xem lịch sử
+Sản phẩm
+Không
+Chọn sản phẩm cần tra cứu
+Loại giao dịch
+Không
+Nhập kho / Xuất kho / Điều chuyển xuất / Điều chuyển nhập
+Người thực hiện
+Không
+Lọc theo người thao tác
+Mã chứng từ
+Không
+Tìm theo mã phiếu nhập, xuất hoặc điều chuyển
+
+Danh sách lịch sử biến động tồn kho
+Trường
+Mô tả
+Thời gian giao dịch
+Thời điểm phát sinh biến động tồn kho
+Loại giao dịch
+Nhập kho, Xuất kho, Điều chuyển xuất kho nguồn, Điều chuyển nhập kho đích
+Mã chứng từ
+Mã phiếu liên quan
+Kho liên quan
+Kho phát sinh biến động
+Mã sản phẩm
+Mã sản phẩm
+Tên sản phẩm
+Tên sản phẩm
+Số lượng biến động
+Số lượng tăng hoặc giảm
+Đơn vị tính
+Đơn vị của sản phẩm
+Người thực hiện
+Người thao tác nghiệp vụ
+Ghi chú
+Thông tin bổ sung (nếu có)
+
+Màn hình chi tiết biến động
+Trường
+Mô tả
+Mã giao dịch
+Mã định danh bản ghi lịch sử
+Loại giao dịch
+Loại nghiệp vụ phát sinh
+Chứng từ nguồn
+Mã phiếu nhập/xuất/điều chuyển
+Thời gian giao dịch
+Thời điểm phát sinh
+Kho liên quan
+Kho phát sinh biến động
+Sản phẩm
+Sản phẩm bị ảnh hưởng
+Số lượng trước biến động
+Tồn kho trước giao dịch
+Số lượng biến động
+Giá trị tăng hoặc giảm
+Số lượng sau biến động
+Tồn kho sau giao dịch
+Người thực hiện
+Người thực hiện nghiệp vụ
+Ghi chú
+Nội dung bổ sung
+
+Tiêu chí nghiệm thu
+Hệ thống cho phép người dùng có quyền xem danh sách lịch sử biến động tồn kho.
+Khi người dùng tra cứu hoặc xem chi tiết một bản ghi, hệ thống hiển thị đầy đủ thông tin về giao dịch đã làm thay đổi tồn kho.
+Hệ thống chỉ ghi nhận lịch sử biến động đối với các nghiệp vụ đã thực sự phát sinh thay đổi tồn kho.
+Khi không có dữ liệu, hệ thống hiển thị trạng thái "Không có dữ liệu".
+Chỉ người dùng có quyền mới được phép xem lịch sử biến động tồn kho.
+US-M7-002 [Must]
+Là Quản lý kho, tôi muốn lọc lịch sử biến động tồn kho theo nhiều tiêu chí, để tra cứu dữ liệu nhanh hơn.
+Tác nhân: Quản lý kho
+Đầu vào & trường dữ liệu
+Bộ lọc tìm kiếm:
+Trường
+Bắt buộc
+Mô tả
+Khoảng thời gian
+Không
+Từ ngày – Đến ngày
+Kho
+Không
+Chọn kho cần tra cứu
+Sản phẩm
+Không
+Chọn sản phẩm
+Loại giao dịch
+Không
+Nhập kho, Xuất kho, Điều chuyển
+Người thực hiện
+Không
+Người tạo hoặc xử lý giao dịch
+Mã chứng từ
+Không
+Tìm kiếm theo mã chứng từ
+
+Kết quả lọc
+Trường
+Mô tả
+Thời gian giao dịch
+Ngày giờ phát sinh
+Loại giao dịch
+Loại biến động
+Mã chứng từ
+Chứng từ nguồn
+Kho liên quan
+Kho bị ảnh hưởng
+Sản phẩm
+Tên sản phẩm
+Số lượng biến động
+Tăng hoặc giảm
+Người thực hiện
+Người thao tác
+
+Tiêu chí nghiệm thu
+Hệ thống cho phép người dùng lọc lịch sử biến động tồn kho theo các tiêu chí được hỗ trợ.
+Hệ thống hỗ trợ kết hợp nhiều điều kiện lọc và chỉ hiển thị các bản ghi thỏa mãn đồng thời các điều kiện đã chọn.
+Khi không có dữ liệu phù hợp với điều kiện lọc, hệ thống hiển thị trạng thái "Không có dữ liệu phù hợp".
+Khi người dùng xóa toàn bộ điều kiện lọc, hệ thống hiển thị lại toàn bộ dữ liệu trong phạm vi được phép truy cập.
+Chỉ người dùng có quyền xem lịch sử biến động tồn kho mới được phép tra cứu và lọc dữ liệu.
+US-M7-003 [Should]
+Là Quản lý kho, tôi muốn xem chi tiết nguồn gốc của một biến động tồn kho, để phục vụ việc kiểm tra và đối soát.
+Tác nhân: Quản lý kho
+Đầu vào & trường dữ liệu
+Thông tin biến động
+Trường
+Mô tả
+Mã giao dịch
+Mã bản ghi lịch sử
+Loại giao dịch
+Nhập kho, Xuất kho, Điều chuyển
+Ngày giờ phát sinh
+Thời gian tạo biến động
+Người thực hiện
+Người thao tác
+Kho liên quan
+Kho phát sinh
+Sản phẩm
+Sản phẩm liên quan
+Số lượng biến động
+Tăng hoặc giảm
+
+Thông tin chứng từ nguồn
+Trường
+Mô tả
+Loại chứng từ
+Phiếu nhập kho / Phiếu xuất kho / Phiếu điều chuyển
+Mã chứng từ
+Mã phiếu nguồn
+Trạng thái chứng từ
+Hoàn tất, Đã hủy...
+Ngày chứng từ
+Ngày phát sinh
+Người tạo chứng từ
+Người tạo
+Người duyệt
+Người phê duyệt
+Ghi chú
+Nội dung bổ sung
+
+Điều hướng
+Chức năng
+Mô tả
+Xem chứng từ gốc
+Mở màn hình chi tiết chứng từ nguồn
+Quay lại lịch sử
+Trở về danh sách lịch sử giao dịch
+
+Tiêu chí nghiệm thu
+Khi người dùng xem chi tiết một bản ghi biến động tồn kho, hệ thống hiển thị thông tin nguồn gốc phát sinh biến động.
+Hệ thống hiển thị thông tin chứng từ liên quan tương ứng với loại giao dịch (nhập kho, xuất kho, điều chuyển kho,...).
+Khi chứng từ nguồn còn tồn tại trên hệ thống, người dùng có thể điều hướng đến màn hình chi tiết chứng từ.
+Khi chứng từ nguồn không còn khả dụng, hệ thống vẫn lưu và hiển thị thông tin biến động tồn kho đã được ghi nhận.
+Epic M8 – Báo cáo xuất nhập tồn(Quy tắc chi tiết xem ở phụ lục D)
+US-M8-001 [Must]
+Là Quản lý kho hoặc Ban lãnh đạo, tôi muốn xem báo cáo xuất nhập tồn, để đánh giá tình hình tồn kho và luân chuyển hàng hóa. 
+Tác nhân: Quản lý kho, Ban lãnh đạo
+Đầu vào & trường dữ liệu
+Bộ lọc báo cáo
+Trường
+Bắt buộc
+Mô tả
+Từ ngày
+Có
+Ngày bắt đầu kỳ báo cáo
+Đến ngày
+Có
+Ngày kết thúc kỳ báo cáo
+Kho
+Không
+Chọn một kho cụ thể hoặc để trống để xem tất cả
+Sản phẩm
+Không
+Lọc theo sản phẩm
+Nhóm sản phẩm
+Không
+Lọc theo nhóm sản phẩm
+Trạng thái sản phẩm
+Không
+Hoạt động / Ngừng hoạt động
+Tùy chọn xem
+Không
+Theo kho hoặc toàn hệ thống
+
+Dữ liệu hiển thị trên báo cáo
+Trường
+Mô tả
+Mã sản phẩm
+SKU hoặc mã sản phẩm
+Tên sản phẩm
+Tên sản phẩm
+Đơn vị tính
+Cái, hộp, kg...
+Tồn đầu kỳ
+Tồn tại thời điểm bắt đầu kỳ
+Nhập trong kỳ
+Tổng số lượng nhập kho hoàn tất
+Xuất trong kỳ
+Tổng số lượng xuất kho hoàn tất
+Tồn cuối kỳ
+Tồn đầu + Nhập − Xuất
+Chênh lệch tồn
+Nếu doanh nghiệp có sử dụng điều chỉnh tồn kho (giai đoạn sau)
+
+Quy tắc dữ liệu
+Từ ngày không được lớn hơn Đến ngày
+Chỉ tính các chứng từ đã hoàn tất nghiệp vụ kho
+Phiếu Nháp, Chờ duyệt, Đã hủy không được đưa vào báo cáo
+Điều chuyển giữa các kho không làm thay đổi tổng tồn toàn hệ thống
+Báo cáo được tính theo thời điểm truy vấn gần nhất
+Tiêu chí nghiệm thu
+Hệ thống cho phép người dùng có quyền xem báo cáo xuất nhập tồn theo các điều kiện lọc được hỗ trợ.
+Khi người dùng áp dụng bộ lọc, hệ thống tổng hợp và hiển thị dữ liệu tương ứng.
+Báo cáo hiển thị các chỉ tiêu tồn đầu kỳ, nhập trong kỳ, xuất trong kỳ và tồn cuối kỳ.
+Khi người dùng chọn một kho cụ thể, hệ thống chỉ hiển thị dữ liệu của kho đó; khi không chọn kho, hệ thống hiển thị dữ liệu toàn hệ thống theo phạm vi quyền truy cập.
+Khi không có dữ liệu phù hợp, hệ thống hiển thị trạng thái "Không có dữ liệu".
+Chỉ người dùng có quyền mới được phép xem báo cáo.
+US-M8-004 [Should]
+Là Quản lý kho hoặc Ban lãnh đạo, tôi muốn xuất báo cáo ra tệp, để lưu trữ và chia sẻ dữ liệu. 
+Tác nhân: Quản lý kho, Ban lãnh đạo
+Đầu vào & trường dữ liệu
+Thông tin xuất báo cáo
+Trường
+Bắt buộc
+Mô tả
+Định dạng xuất
+Có
+Excel hoặc PDF
+Tên tệp
+Không
+Hệ thống tự sinh nếu để trống
+Khoảng thời gian
+Có
+Theo bộ lọc báo cáo hiện tại
+Kho
+Không
+Theo bộ lọc đang áp dụng
+Nhóm sản phẩm
+Không
+Theo bộ lọc đang áp dụng
+Sản phẩm
+Không
+Theo bộ lọc đang áp dụng
+
+Thông tin tệp xuất
+Trường
+Mô tả
+Thời gian xuất
+Thời điểm tạo báo cáo
+Người xuất
+Người thực hiện
+Điều kiện lọc
+Các bộ lọc đã áp dụng
+Dữ liệu báo cáo
+Nội dung đúng như màn hình
+
+Quy tắc dữ liệu
+File Excel xuất theo dạng bảng dữ liệu
+File PDF xuất theo mẫu trình bày phù hợp để in
+Dữ liệu trong file phải khớp với dữ liệu đang hiển thị
+Không tạo file khi báo cáo không có dữ liệu
+Chỉ người có quyền xuất báo cáo mới được thực hiện chức năng
+Tiêu chí nghiệm thu
+Hệ thống cho phép xuất báo cáo xuất nhập tồn ra các định dạng được hỗ trợ.
+Dữ liệu trong tệp xuất phải khớp với dữ liệu đang hiển thị trên màn hình và các điều kiện lọc đã áp dụng.
+Hệ thống tạo tệp để người dùng tải xuống khi xuất thành công.
+Khi báo cáo không có dữ liệu, hệ thống hiển thị thông báo phù hợp và không tạo tệp.
+Chỉ người dùng có quyền mới được phép xuất báo cáo.
+
+8. Wireframe màn hình chính (bản nháp low-fi)
+Phạm vi: đây là mô tả low-fidelity (bố cục, vùng chức năng, trường dữ liệu, nút thao tác) cho các màn hình chính của Module 1, nhằm thống nhất ý tưởng giao diện với Dev/khách hàng trước khi dựng wireframe hi-fi. Bản hi-fi (Figma) sẽ được bổ sung sau khi nội dung này được duyệt. Mọi màn hình dùng chung khung layout: thanh điều hướng trái (menu module) – thanh tiêu đề trên (breadcrumb, ô tìm kiếm, tài khoản) – vùng nội dung chính.
+WF-01 – Danh sách & Cây kho đa tầng
+Mục đích: Quản lý hệ thống kho và cấu trúc kho cha – kho con.
+Bố cục chính:
+Bên trái: cây kho đa tầng (Kho tổng → Kho con → Kho con cấp dưới).
+Bên phải trên: thanh công cụ (tìm kiếm, lọc trạng thái, loại kho, nút “+ Thêm kho”).
+Bên phải giữa: danh sách kho hoặc chi tiết kho được chọn.
+Trường / thông tin hiển thị:
+Mã kho
+Tên kho
+Loại kho
+Kho cha
+Người phụ trách
+Địa chỉ
+Trạng thái
+Nút / thao tác chính:
+Thêm kho
+Sửa kho
+Ngừng hoạt động
+Kích hoạt lại
+Tìm kiếm & lọc
+Xem chi tiết
+Ghi chú: Liên quan US-M1-001..002, F1.1–F1.6.
+WF-02 – Tạo / Cập nhật Kho
+Mục đích: Thiết lập hoặc chỉnh sửa thông tin kho.
+Bố cục chính:
+Form nhập liệu dạng trang hoặc drawer bên phải.
+Khu vực thông tin cơ bản.
+Khu vực quan hệ kho cha – kho con.
+Trường / thông tin hiển thị:
+Mã kho
+Tên kho
+Loại kho
+Kho cha
+Địa chỉ
+Người phụ trách
+Trạng thái
+Ghi chú
+Nút / thao tác chính:
+Lưu
+Lưu & tạo mới
+Hủy
+Ghi chú: Liên quan F1.1–F1.4.
+WF-03 – Danh sách Phiếu nhập kho
+Mục đích: Quản lý và theo dõi toàn bộ phiếu nhập kho.
+Bố cục chính:
+Trên: tìm kiếm + bộ lọc (kho nhập, trạng thái, ngày nhập).
+Giữa: bảng danh sách phiếu nhập.
+Dưới: phân trang.
+Trường / thông tin hiển thị:
+Mã phiếu nhập
+Ngày nhập
+Kho nhập
+Nhà cung cấp
+Tổng số lượng
+Người tạo
+Trạng thái
+Nút / thao tác chính:
+Tạo phiếu nhập
+Xem chi tiết
+Gửi duyệt
+Duyệt
+Thực hiện nhập kho
+Hủy phiếu
+Ghi chú: Liên quan US-M2-001..004, F2.1–F2.7.
+WF-04 – Chi tiết / Tạo – Sửa Phiếu nhập kho
+Mục đích: Tạo mới hoặc cập nhật chứng từ nhập kho.
+Bố cục chính:
+Thông tin đầu phiếu.
+Bảng danh sách sản phẩm nhập.
+Khu vực tổng hợp số lượng và giá trị.
+Trường / thông tin hiển thị:
+Mã phiếu
+Ngày nhập
+Kho nhập
+Nhà cung cấp
+Ghi chú
+Danh sách sản phẩm
+Số lượng
+Đơn giá
+Thành tiền
+Trạng thái
+Nút / thao tác chính:
+Lưu nháp
+Gửi duyệt
+In phiếu
+Hủy
+Ghi chú: Liên quan F2.1–F2.6.
+WF-05 – Danh sách Phiếu xuất kho
+Mục đích: Quản lý và theo dõi chứng từ xuất kho.
+Bố cục chính:
+Thanh tìm kiếm và bộ lọc.
+Bảng danh sách phiếu xuất.
+Khu vực thao tác nhanh.
+Trường / thông tin hiển thị:
+Mã phiếu xuất
+Ngày xuất
+Kho xuất
+Tổng số lượng
+Người tạo
+Trạng thái
+Nút / thao tác chính:
+Tạo phiếu xuất
+Gửi duyệt
+Duyệt
+Thực hiện xuất kho
+Hủy phiếu
+Ghi chú: Liên quan US-M3-001..004, F3.1–F3.7.
+WF-06 – Chi tiết / Tạo – Sửa Phiếu xuất kho
+Mục đích: Ghi nhận nhu cầu xuất hàng khỏi kho.
+Bố cục chính:
+Thông tin đầu phiếu.
+Danh sách sản phẩm xuất.
+Hiển thị tồn kho khả dụng.
+Trường / thông tin hiển thị:
+Mã phiếu
+Ngày xuất
+Kho xuất
+Ghi chú
+Sản phẩm
+SKU
+Đơn vị tính
+Số lượng xuất
+Tồn khả dụng
+Nút / thao tác chính:
+Lưu nháp
+Gửi duyệt
+Kiểm tra tồn kho
+Hủy
+Ghi chú: Liên quan F3.1–F3.6.
+WF-07 – Danh sách & Chi tiết Điều chuyển kho
+Mục đích: Theo dõi và xử lý điều chuyển giữa các kho.
+Bố cục chính:
+Trên: bộ lọc theo kho nguồn, kho đích, trạng thái.
+Giữa: bảng danh sách điều chuyển.
+Chi tiết mở dạng trang hoặc drawer.
+Trường / thông tin hiển thị:
+Mã phiếu điều chuyển
+Kho nguồn
+Kho đích
+Ngày điều chuyển
+Tổng số lượng
+Trạng thái
+Người tạo
+Nút / thao tác chính:
+Tạo điều chuyển
+Gửi duyệt
+Phê duyệt
+Xuất điều chuyển
+Nhận hàng
+Trả lại điều chuyển
+Ghi chú: Liên quan US-M4-001..006, F4.1–F4.9.
+WF-08 – Màn hình Tồn kho
+Mục đích: Theo dõi tồn kho theo từng kho hoặc toàn hệ thống.
+Bố cục chính:
+Trên: bộ lọc (Kho, Sản phẩm, Nhóm sản phẩm).
+Giữa: bảng tồn kho.
+Bên phải: panel chi tiết sản phẩm.
+Trường / thông tin hiển thị:
+SKU
+Tên sản phẩm
+Kho
+Tồn thực tế
+Tồn khả dụng
+In Transit
+Min Stock
+Max Stock
+Trạng thái tồn kho
+Nút / thao tác chính:
+Tìm kiếm
+Lọc
+Xem lịch sử biến động
+Ghi chú: Liên quan US-M5-001, US-M5-003 ,F5.1–F6.3.
+WF-09 – Lịch sử biến động tồn kho (Stock Movement)
+Mục đích: Tra cứu và truy vết mọi thay đổi tồn kho.
+Bố cục chính:
+Trên: bộ lọc nâng cao.
+Giữa: bảng lịch sử biến động.
+Bên phải: chi tiết giao dịch.
+Trường / thông tin hiển thị:
+Thời gian giao dịch
+Loại giao dịch
+Kho liên quan
+Sản phẩm
+Số lượng thay đổi
+Chứng từ nguồn
+Người thực hiện
+Nút / thao tác chính:
+Lọc dữ liệu
+Ghi chú: Liên quan US-M7-001, F7.1–F7.5.
+WF-10 – Báo cáo Xuất – Nhập – Tồn
+Mục đích: Theo dõi tình hình vận hành kho và hỗ trợ ra quyết định.
+Bố cục chính:
+Trên: bộ lọc thời gian, kho, nhóm sản phẩm.
+Giữa: các thẻ KPI tổng quan.
+Dưới: bảng báo cáo và biểu đồ.
+Trường / thông tin hiển thị:
+Tồn đầu kỳ
+Tổng nhập
+Tổng xuất
+Điều chuyển
+Tồn cuối kỳ
+Giá trị tồn kho (nếu bật)
+Biểu đồ nhập/xuất theo thời gian
+Nút / thao tác chính:
+Xem báo cáo
+Ghi chú: Liên quan US-M8-001 , F8.1–F8.5.
+WF-11 – Audit Log kho (màn hình tra cứu dữ liệu từ Audit Service )
+Mục đích: Theo dõi toàn bộ thao tác người dùng trên Module Kho.
+Bố cục chính:
+Trên: bộ lọc người dùng, chức năng, thời gian.
+Giữa: bảng Audit Log.
+Bên phải: chi tiết thao tác.
+Trường / thông tin hiển thị:
+Thời gian
+Người thực hiện
+Chức năng
+Hành động
+Chứng từ liên quan
+Địa chỉ IP (nếu có)
+Nút / thao tác chính:
+Lọc
+Xem chi tiết
+Xuất dữ liệu
+Ghi chú: Liên quan F11.1–F11.3.
+
+9. Backlog (tổng hợp đưa vào sprint)
+Mã
+Epic
+User story (rút gọn)
+MoSCoW
+Giai đoạn
+Phụ thuộc
+Ước lượng
+Trạng thái
+US-M1-001
+M1
+Tạo kho
+Must
+GĐ1 (MVP)
+–
+M
+Chờ duyệt
+US-M1-002
+M1
+Cập nhật / ngừng hoạt động kho
+Must
+GĐ1 (MVP)
+US-M1-001
+S
+Chờ duyệt
+US-M1-003
+M1
+Thiết lập kho cha – kho con
+Must
+GĐ1 (MVP)
+US-M1-001
+M
+Chờ duyệt
+US-M1-004
+M1
+Xem danh sách & tìm kiếm kho
+Must
+GĐ1 (MVP)
+US-M1-001
+S
+Chờ duyệt
+US-M1-005
+M1
+Phân loại kho theo loại hình
+Should
+Sau MVP
+US-M1-001
+S
+Chờ duyệt
+US-M2-001
+M2
+Tạo phiếu nhập kho
+Must
+GĐ1 (MVP)
+US-M1-001
+M
+Chờ duyệt
+US-M2-002
+M2
+Cập nhật / hủy phiếu nhập kho
+Must
+GĐ1 (MVP)
+US-M2-001
+S
+Chờ duyệt
+US-M2-003
+M2
+Gửi duyệt phiếu nhập kho
+Must
+GĐ1 (MVP)
+US-M2-001
+S
+Chờ duyệt
+US-M2-004
+M2
+Phê duyệt phiếu nhập kho
+Must
+GĐ1 (MVP)
+US-M2-003
+M
+Chờ duyệt
+US-M2-005
+M2
+Thực hiện nhập kho và cập nhật tồn
+Must
+GĐ1 (MVP)
+US-M2-004
+L
+Chờ duyệt
+US-M3-001
+M3
+Tạo phiếu xuất kho
+Must
+GĐ1 (MVP)
+US-M1-001
+M
+Chờ duyệt
+US-M3-002
+M3
+Cập nhật / hủy phiếu xuất kho
+Must
+GĐ1 (MVP)
+US-M3-001
+S
+Chờ duyệt
+US-M3-003
+M3
+Gửi duyệt phiếu xuất kho
+Must
+GĐ1 (MVP)
+US-M3-001
+S
+Chờ duyệt
+US-M3-004
+M3
+Phê duyệt phiếu xuất kho
+Must
+GĐ1 (MVP)
+US-M3-003
+M
+Chờ duyệt
+US-M3-005
+M3
+Kiểm tra tồn khả dụng trước khi xuất
+Must
+GĐ1 (MVP)
+US-M3-004
+M
+Chờ duyệt
+US-M3-006
+M3
+Thực hiện xuất kho và cập nhật tồn
+Must
+GĐ1 (MVP)
+US-M3-005
+L
+Chờ duyệt
+US-M4-001
+M4
+Tạo phiếu điều chuyển kho
+Must
+GĐ1 (MVP)
+US-M1-001
+M
+Chờ duyệt
+US-M4-002
+M4
+Gửi duyệt điều chuyển kho
+Must
+GĐ1 (MVP)
+US-M4-001
+S
+Chờ duyệt
+US-M4-003
+M4
+Phê duyệt điều chuyển kho
+Must
+GĐ1 (MVP)
+US-M4-002
+S
+Chờ duyệt
+US-M4-004
+M4
+Xuất hàng điều chuyển từ kho nguồn
+Must
+GĐ1 (MVP)
+US-M4-003
+M
+Chờ duyệt
+US-M4-005
+M4
+Nhận hàng điều chuyển tại kho đích
+Must
+GĐ1 (MVP)
+US-M4-004
+M
+Chờ duyệt
+US-M4-006
+M4
+Theo dõi trạng thái điều chuyển
+Should
+Sau MVP
+US-M4-001
+S
+Chờ duyệt
+US-M5-001
+M5
+Xem tồn kho theo kho
+Must
+GĐ1 (MVP)
+US-M2-005, 
+US-M3-006, 
+US-M4-005
+M
+Chờ duyệt
+US-M5-002
+M5
+Xem tồn kho theo sản phẩm
+Must
+GĐ1 (MVP)
+US-M5-001
+S
+Chờ duyệt
+US-M5-003
+M5
+Xem tồn khả dụng (Available Stock)
+Must
+GĐ1 (MVP)
+US-M5-001
+S
+Chờ duyệt
+US-M6-001
+M6
+Cảnh báo tồn kho thấp (Min Stock)
+Should
+Sau MVP
+US-M5-001
+M
+Chờ duyệt
+US-M6-002
+M6
+Cảnh báo tồn kho vượt mức (Max Stock)
+Could
+Tương lai
+US-M5-001
+M
+Chờ duyệt
+US-M8-001
+M8
+Báo cáo xuất nhập tồn theo thời gian
+Must
+GĐ1 (MVP)
+US-M5-001
+L
+Chờ duyệt
+US-M8-002
+M8
+Lọc báo cáo theo kho
+Must
+GĐ1 (MVP)
+US-M8-001
+S
+Chờ duyệt
+US-M8-003
+M8
+Lọc báo cáo theo sản phẩm
+Must
+GĐ1 (MVP)
+US-M8-001
+S
+Chờ duyệt
+US-M8-004
+M8
+Xuất báo cáo Excel
+Should
+Sau MVP
+US-M8-001
+S
+Chờ duyệt
+US-M8-005
+M8
+Xuất báo cáo PDF
+Should
+Sau MVP
+US-M8-001
+S
+Chờ duyệt
+US-M7-001
+M7
+Theo dõi lịch sử biến động tồn kho
+Must
+GĐ1 (MVP)
+US-M2-005, 
+US-M3-006, 
+US-M4-005
+M
+Chờ duyệt
+US-M9-001
+M9
+Audit Log kho (tích hợp audit service)
+Must
+GĐ1 (MVP)
+–
+M
+Chờ duyệt
+US-M7-002
+M7
+Truy vết chứng từ nguồn từ giao dịch tồn kho
+Should
+Sau MVP
+US-M7-001
+M
+Chờ duyệt
+US-M7-003
+M7
+Tìm kiếm & lọc dữ liệu
+Must
+GĐ1 (MVP)
+–
+M
+Chờ duyệt
+US-M7-004
+M7
+Phân trang danh sách
+Must
+GĐ1 (MVP)
+–
+S
+Chờ duyệt
+US-M7-005
+M7
+Truy vết chứng từ nguồn từ giao dịch tồn kho
+Should
+Sau MVP
+US-M7-001
+M
+Chờ duyệt
+US-M8-006
+M8
+Xuất danh sách Excel
+Should
+Sau MVP
+US-M7-003
+S
+Chờ duyệt
+US-M8-007
+M8
+Dashboard KPI kho
+Could
+Tương lai
+US-M8-001
+L
+Chờ duyệt
+US-M8-008
+M8
+Biểu đồ phân tích tồn kho
+Could
+Tương lai
+US-M8-001
+L
+Chờ duyệt
+
+Tổng quan: 28 story Must (thuộc MVP / Giai đoạn 1), 8 story Should (bổ sung ngay sau MVP), 4 story Could (định hướng tương lai).
+Thứ tự ưu tiên triển khai gợi ý: Quản lý kho (A) → Nhập kho (B) → Xuất kho (C) → Điều chuyển kho (D) → Tồn kho (E) → Báo cáo kho (F) → Audit Log kho & Lịch sử giao dịch (G) → Tiện ích chung (H).
+Ngoài phạm vi MVP hiện tại (có thể bổ sung ở giai đoạn sau):
+Kiểm kê kho.
+Quản lý lô/serial.
+Quản lý vị trí lưu trữ (Bin Location).
+Barcode/QR Code.
+Trả hàng nhà cung cấp.
+Trả hàng khách hàng.
+ 
+
+
+10. Test case cho Race condition, Retry api, Intransit và Impodency. 
+1. Race Condition - Đồng thời xuất kho
+Mã
+TC-BC-01
+Mục tiêu
+Đảm bảo tồn kho không bị sai lệch khi nhiều giao dịch cùng thao tác trên một SKU tại cùng một kho.
+Tiền điều kiện
+SKU A tại Kho X có Available Stock = 100.
+Kịch bản
+Hai người dùng hoặc hai request cùng lúc thực hiện xuất kho 70 sản phẩm.
+Kết quả mong đợi
+Hệ thống chỉ cho phép các giao dịch hợp lệ theo cơ chế transaction lock. Tổng số lượng xuất thành công không được vượt quá Available Stock. Không phát sinh tồn kho âm.
+Business Rule liên quan
+F13.2 Transaction lock chống race condition, F13.3 Validate tồn kho trước xuất.
+
+2. Race Condition - Đồng thời điều chuyển và xuất kho
+Mã
+TC-BC-02
+Mục tiêu
+Đảm bảo dữ liệu tồn kho nhất quán khi nhiều nghiệp vụ cùng tác động lên một SKU.
+Tiền điều kiện
+SKU A tại Kho X có Available Stock = 100.
+Kịch bản
+Một giao dịch điều chuyển 80 sản phẩm và một giao dịch xuất kho 40 sản phẩm được thực hiện gần như đồng thời.
+Kết quả mong đợi
+Hệ thống khóa dữ liệu phù hợp, chỉ cho phép các giao dịch đáp ứng điều kiện tồn kho khả dụng. Không phát sinh sai lệch số liệu.
+
+3. Retry API - Ghi Audit Log
+Mã
+TC-BC-03
+Mục tiêu
+Đảm bảo việc ghi Audit Log không làm mất dữ liệu do lỗi tạm thời của dịch vụ bên ngoài.
+Tiền điều kiện
+Audit Service tạm thời không phản hồi hoặc xảy ra lỗi mạng.
+Kịch bản
+Module Kho gửi request ghi Audit Log nhưng không nhận được phản hồi thành công.
+Kết quả mong đợi
+Hệ thống thực hiện retry theo cơ chế kỹ thuật đã cấu hình. Không tạo trùng lặp dữ liệu audit khi request được xử lý thành công sau retry.
+
+4. Retry API - Đảm bảo tính idempotent
+Mã
+TC-BC-04
+Mục tiêu
+Đảm bảo một nghiệp vụ chỉ được ghi nhận một lần dù request được gửi lại.
+Tiền điều kiện
+Request trước đó đã được xử lý thành công nhưng phản hồi về client bị gián đoạn.
+Kịch bản
+Client hoặc hệ thống gửi lại cùng một request.
+Kết quả mong đợi
+Hệ thống nhận diện request đã xử lý và không cập nhật tồn kho hoặc tạo bản ghi nghiệp vụ trùng lặp.
+
+5. Retry API - Hết số lần thử
+Mã
+TC-BC-05
+Mục tiêu
+Xác định hành vi nghiệp vụ khi retry không thành công.
+Tiền điều kiện
+Dịch vụ tích hợp không khả dụng trong toàn bộ thời gian retry.
+Kịch bản
+Hệ thống retry nhiều lần nhưng vẫn thất bại.
+Kết quả mong đợi
+Hệ thống ghi nhận lỗi, lưu trạng thái phục vụ tra soát và không làm sai lệch dữ liệu tồn kho đã được commit. Người dùng hoặc hệ thống vận hành có thể xử lý theo quy trình nghiệp vụ tiếp theo.
+
+Business Test Scenario - In Transit & Idempotency
+6. In Transit - Hàng điều chuyển không được phép sử dụng
+Mã
+TC-BC-06
+Mục tiêu
+Đảm bảo hàng hóa ở trạng thái In Transit không được sử dụng cho các nghiệp vụ khác.
+Tiền điều kiện
+SKU A đang được điều chuyển từ Kho X sang Kho Y với số lượng 100 và đã chuyển sang trạng thái Đang vận chuyển.
+Kịch bản
+Người dùng tạo phiếu xuất kho hoặc phiếu điều chuyển mới sử dụng chính số lượng hàng đang In Transit.
+Kết quả mong đợi
+Hệ thống không tính số lượng In Transit vào Available Stock và từ chối nghiệp vụ nếu tồn khả dụng không đủ.
+
+7. In Transit - Nhận hàng thành công
+Mã
+TC-BC-07
+Mục tiêu
+Đảm bảo dữ liệu tồn kho được cập nhật đúng khi kết thúc điều chuyển.
+Tiền điều kiện
+Phiếu điều chuyển đang ở trạng thái Đang vận chuyển.
+Kịch bản
+Kho đích xác nhận đã nhận hàng.
+Kết quả mong đợi
+Hệ thống giảm In Transit, tăng tồn kho tại kho đích, cập nhật trạng thái phiếu thành Hoàn tất và ghi nhận Stock Movement.
+
+8. In Transit - Trả lại điều chuyển
+Mã
+TC-BC-08
+Mục tiêu
+Đảm bảo hàng hóa được hoàn trả đúng khi điều chuyển thất bại.
+Tiền điều kiện
+Phiếu điều chuyển đang ở trạng thái Đang vận chuyển.
+Kịch bản
+Kho đích từ chối nhận hàng hoặc phát sinh nghiệp vụ trả lại.
+Kết quả mong đợi
+Hệ thống giảm In Transit, hoàn tồn kho về kho nguồn và cập nhật trạng thái phiếu theo quy định nghiệp vụ.
+
+9. Idempotency - Thực hiện nhập kho nhiều lần
+Mã
+TC-BC-09
+Mục tiêu
+Đảm bảo một phiếu nhập chỉ được cập nhật tồn kho một lần.
+Tiền điều kiện
+Phiếu nhập đã được thực hiện thành công.
+Kịch bản
+Người dùng hoặc hệ thống gửi lại cùng request nhập kho.
+Kết quả mong đợi
+Hệ thống nhận diện giao dịch đã xử lý và không tăng tồn kho thêm lần nữa. Không tạo thêm Stock Movement trùng lặp.
+
+10. Idempotency - Thực hiện xuất kho nhiều lần
+Mã
+TC-BC-10
+Mục tiêu
+Đảm bảo một phiếu xuất chỉ làm giảm tồn kho một lần.
+Tiền điều kiện
+Phiếu xuất đã được thực hiện thành công.
+Kịch bản
+Request xuất kho được gửi lại do timeout hoặc lỗi mạng.
+Kết quả mong đợi
+Hệ thống không trừ tồn kho thêm lần nữa và không phát sinh bản ghi nghiệp vụ trùng lặp.
+
+11. Idempotency - Xác nhận nhận hàng điều chuyển nhiều lần
+Mã
+TC-BC-11
+Mục tiêu
+Đảm bảo nghiệp vụ nhận hàng điều chuyển chỉ được xử lý một lần.
+Tiền điều kiện
+Kho đích đã xác nhận nhận hàng thành công.
+Kịch bản
+Request xác nhận nhận hàng được gửi lại.
+Kết quả mong đợi
+Hệ thống không cộng thêm tồn kho đích và không giảm In Transit nhiều lần.
+
+12. Idempotency - Ghi Stock Movement và Audit
+Mã
+TC-BC-12
+Mục tiêu
+Đảm bảo lịch sử nghiệp vụ không bị trùng lặp khi request được retry.
+Tiền điều kiện
+Nghiệp vụ kho đã hoàn tất nhưng client không nhận được phản hồi.
+Kịch bản
+Client gửi lại cùng request.
+Kết quả mong đợi
+Hệ thống không tạo thêm Stock Movement hoặc Audit Log trùng lặp cho cùng một nghiệp vụ.
+
+ 
+
+
+Phụ lục A – Mô hình dữ liệu sơ bộ (thực thể & quan hệ)
+Thực thể
+Mô tả
+Trường tiêu biểu
+Quan hệ chính
+Ghi chú
+Kho
+Thông tin kho vật lý/logic (kho tổng, kho con)
+mã_kho; mã; tên; loại; kho_cha_id; trạng_thái
+Thuộc nhiều Tồn kho; tự tham chiếu cha–con giữa các kho; liên kết Đơn vị tổ chức
+Hỗ trợ cấu trúc cây kho tối đa 3 cấp
+Sản phẩm / SKU
+Danh mục sản phẩm, định danh duy nhất theo SKU
+sku_id; mã_sku; tên; đơn_vị_tính; danh_mục; có_serial
+Liên quan Tồn kho, Chi tiết phiếu, Tồn kho an toàn
+SKU là định danh toàn hệ thống
+Tồn kho
+Số lượng tồn theo cặp (kho, SKU), phân theo trạng thái
+tồn_kho_id; kho_id; sku_id; số_lượng_khả_dụng; số_lượng_đang_vận_chuyển
+Thuộc Kho và Sản phẩm; cập nhật bởi Biến động tồn kho
+Quản lý Available + In-Transit 
+Phiếu kho
+Chứng từ nghiệp vụ: nhập / xuất / điều chuyển / điều chỉnh
+phiếu_id; loại_phiếu; mã_phiếu; trạng_thái; kho_nguồn; kho_đích; người_tạo; thời_gian_duyệt;
+idempotency_key 
+Có nhiều Chi tiết phiếu; khi chốt sinh Biến động tồn kho
+Có state machine
+Chi tiết phiếu
+Dòng chi tiết hàng hóa trong phiếu kho
+dòng_id; phiếu_id; sku_id; số_lượng; đơn_giá
+Thuộc Phiếu kho; tham chiếu Sản phẩm
+Dùng để tính biến động và giá vốn
+Biến động tồn kho
+(Stock Movement)
+Lịch sử thay đổi tồn kho (log nghiệp vụ đã chốt)
+biến_động_id; phiếu_id; loại_biến_động; kho_id; sku_id; số_lượng; thời_gian; người_tạo
+Tham chiếu Phiếu kho gốc; ảnh hưởng Tồn kho
+Chỉ ghi khi phiếu ở trạng thái cuối
+Biến động tồn kho
+(Stock Movement) - bổ sung cho reversed
+Bổ sung trường cho tình huống đảo ngược biến động
+is_reversed, reversed_by_movement_id, reversal_reason, reversal_type 
+Thuộc Stock Movement 
+Đưa tồn kho về trạng thái trước biến động
+Bảng phân bổ tồn kho In Transit (Inventory Allocation Ledger)
+Hàng đang vận chuyển giữa kho gửi và kho nhận
+vận_chuyển_id; phiếu_id; sku_id; số_lượng; kho_gửi; kho_nhận; thời_gian_gửi; thời_gian_nhận; trạng_thái
+Liên kết Phiếu điều chuyển; computed từ phiếu điều chuyển chứ không tạo bảng riêng. Được ghi nhận theo cặp (kho nguồn → kho đích), không thuộc một kho đơn lẻ. 
+Hàng in-transit không được xuất tiếp. Không phải trạng thái nghiệp vụ, chỉ phản ánh phân bổ tồn kho tạm thời trong quá trình điều chuyển
+Tồn kho an toàn
+Cấu hình min/max tồn kho theo SKU
+cấu_hình_id; sku_id; tồn_tối_thiểu; tồn_tối_đa; hiệu_lực_từ
+Liên kết Sản phẩm; so sánh với tồn khả dụng
+Áp dụng toàn hệ thống
+Điều chỉnh tồn kho
+Điều chỉnh tồn (kiểm kê, hư hỏng, thiếu hụt)
+điều_chỉnh_id; sku_id; kho_id; số_lượng_điều_chỉnh; lý_do; người_tạo; trạng_thái
+Khi chốt tạo Biến động tồn kho
+Có thể nâng cấp từ non-MVP
+Báo cáo tổng hợp
+Bảng tổng hợp nhập–xuất–tồn theo kỳ
+báo_cáo_id; kho_id; sku_id; từ_ngày; đến_ngày; tồn_đầu; nhập; xuất; tồn_cuối
+Tổng hợp từ Biến động tồn kho và Tồn kho
+Tối ưu hiệu năng truy vấn báo cáo
+Người dùng
+Người dùng hệ thống
+user_id; tên_đăng_nhập; mã_nhân_sự; vai_trò; phạm_vi_kho
+Gắn quyền; tạo/duyệt phiếu; liên kết Nhật ký hệ thống
+Phân quyền theo kho
+Nhật ký hệ thống kho(Audit Log kho)
+Ghi nhận mọi thao tác trên hệ thống lên Audit Log tổng
+log_id; user_id; hành_động; đối_tượng; loại_đối_tượng; thời_gian; chi_tiết
+Liên kết Người dùng và các thực thể liên quan
+Tách biệt với biến động tồn kho
+
+ 
+
+Phụ lục B – Thuật ngữ (Glossary)
+
+Thuật ngữ
+Giải thích ngắn gọn
+Sản phẩm / SKU
+Định danh hàng hóa duy nhất trong hệ thống dùng để quản lý tồn kho.
+Phiếu nhập kho
+Chứng từ ghi nhận hàng hóa nhập vào kho.
+Phiếu xuất kho
+Chứng từ ghi nhận hàng hóa xuất ra khỏi kho.
+Phiếu điều chuyển kho
+Chứng từ dùng để chuyển hàng giữa các kho trong hệ thống.
+Chi tiết phiếu
+Danh sách các dòng sản phẩm và số lượng trong một phiếu kho.
+Tồn kho
+Số lượng hàng hóa hiện có tại một kho theo từng SKU.
+Tồn khả dụng
+Số lượng hàng có thể sử dụng để xuất kho (không bao gồm hàng đang bị giữ hoặc vận chuyển).
+In Transit
+Tồn kho riêng cho hàng hóa đang trong quá trình vận chuyển giữa kho nguồn và kho đích. Đây là khái niệm dùng để quản lý hàng đang được vận chuyển
+Tồn kho an toàn (Min/Max Stock)
+Ngưỡng tối thiểu và tối đa để cảnh báo tình trạng tồn kho không bình thường.
+Lịch sử biến động tồn kho (Stock Movement History)
+Lịch sử biến động tồn kho (bao gồm nhập, xuất, điều chuyển).
+Nháp
+Trạng thái phiếu mới tạo, có thể chưa hoàn tất các trường, chưa gửi duyệt hoặc chưa xử lý.
+Chờ duyệt
+Trạng thái phiếu đã gửi nhưng chưa được phê duyệt.
+Đã duyệt
+Phiếu đã được duyệt, hợp lệ và sẵn sàng thực hiện nghiệp vụ kho.
+Đã nhập kho
+Trạng thái hoàn tất nghiệp vụ nhập kho và đã cập nhật tồn kho.
+Đã xuất kho
+Trạng thái hoàn tất nghiệp vụ xuất kho và đã cập nhật tồn kho.
+Đang vận chuyển (Transfer Status) 
+Là một trạng thái của phiếu điều chuyển, thể hiện hàng của phiếu đang trên đường vận chuyển
+Hoàn tất (phiếu)
+Trạng thái kết thúc của phiếu điều chuyển sau khi kho đích nhận hàng.
+Hoàn tất (điều chuyển)
+Hàng đã vào kho nhận.
+Đã hủy
+Phiếu bị hủy bỏ, không còn hiệu lực và không ảnh hưởng tồn kho.
+Hủy phiếu
+Hành động loại bỏ một chứng từ của các nghiệp vụ cần thiết.
+Audit Log (Audit Log kho)
+Nhật ký ghi nhận các thao tác phát sinh liên quan đến nghiệp vụ kho (tạo, sửa, duyệt, hủy phiếu, ...). Hệ thống gửi yêu cầu tạo Audit Log đến hệ thống ghi nhận log dùng chung và sử dụng dữ liệu từ hệ thống này để tra cứu lịch sử thao tác. 
+Trạng thái tồn kho
+Kết quả đánh giá tồn kho: Bình thường / Sắp hết hàng / Vượt ngưỡng.
+Điều chỉnh tồn kho
+Nghiệp vụ cập nhật lại tồn kho do kiểm kê hoặc sai lệch thực tế.
+Reversed Stock (Hoàn tác biến động tồn kho) 
+Là nghiệp vụ đảo ngược một giao dịch tồn kho đã phát sinh trước đó (nhập/xuất/điều chuyển), nhằm đưa tồn kho về trạng thái trước giao dịch. 
+
+ 
+
+
+Phụ lục C – Đặc tả trường dữ liệu & quy tắc validate (5 đối tượng chính)
+Tất cả các trường Bắt buộc không được để trống. Các mã định danh (code/id) phải duy nhất toàn hệ thống. Các trường số lượng phải là số hợp lệ và ≥ 0 (hoặc > 0 tùy nghiệp vụ). Trạng thái chứng từ tuân theo state machine đã định nghĩa trong EPIC M2–M4. Các thao tác thay đổi tồn kho chỉ phát sinh từ chứng từ đã hoàn tất nghiệp vụ. Dữ liệu lịch sử và audit log là append-only (không chỉnh sửa).
+1. Kho (Warehouse)
+Trường
+Bắt buộc?
+Kiểu / định dạng
+Quy tắc validate
+Mã kho
+Bắt buộc
+Text
+Duy nhất toàn hệ thống; không trùng
+Tên kho
+Bắt buộc
+Text, ≤ 200 ký tự
+Không để trống
+Loại kho
+Bắt buộc
+Enum
+Kho tổng / Kho con 
+Kho cha
+Không
+Tham chiếu Kho
+Không được tạo vòng lặp quan hệ
+Địa chỉ
+Không
+Text
+Tùy chọn theo mô hình doanh nghiệp
+Người phụ trách
+Không
+Tham chiếu Nhân sự
+Phải tồn tại trong hệ thống
+Trạng thái
+Bắt buộc
+Enum
+Hoạt động / Ngừng hoạt động
+
+ 2. Sản phẩm / SKU
+Trường
+Bắt buộc?
+Kiểu / định dạng
+Quy tắc validate
+SKU / Mã sản phẩm
+Bắt buộc
+Text
+Duy nhất toàn hệ thống
+Tên sản phẩm
+Bắt buộc
+Text, ≤ 255 ký tự
+Không để trống
+Đơn vị tính
+Bắt buộc
+Text/Enum
+Cái, hộp, kg, lít…
+Nhóm sản phẩm
+Không
+Tham chiếu danh mục
+Có thể null
+Trạng thái
+Bắt buộc
+Enum
+Hoạt động / Ngừng hoạt động
+Có serial/lot
+Không
+Boolean
+Default = false
+
+ 3. Tồn kho (Stock Balance)
+Trường
+Bắt buộc?
+Kiểu / định dạng
+Quy tắc validate
+Kho
+Bắt buộc
+Tham chiếu Kho
+Kho phải hoạt động
+Sản phẩm
+Bắt buộc
+Tham chiếu SKU
+SKU phải tồn tại
+Số lượng khả dụng
+Hệ thống
+Number
+≥ 0; không cho tồn âm
+Số lượng In Transit
+Hệ thống
+Number
+≥ 0
+Số lượng đặt giữ
+Hệ thống
+Number
+≥ 0
+Thời gian cập nhật
+Hệ thống
+DateTime
+Tự động ghi nhận
+
+ 4. Phiếu kho (Stock Document – chung cho nhập / xuất / điều chuyển)
+Trường
+Bắt buộc?
+Kiểu / định dạng
+Quy tắc validate
+Mã phiếu
+Bắt buộc
+Text
+Duy nhất toàn hệ thống
+Loại phiếu
+Bắt buộc
+Enum
+Nhập / Xuất / Điều chuyển
+Ngày chứng từ
+Bắt buộc
+Date
+Không lớn hơn ngày hiện tại (trừ cấu hình đặc biệt)
+Kho nguồn
+Tùy loại
+Tham chiếu Kho
+Bắt buộc với Xuất/Điều chuyển
+Kho đích
+Tùy loại
+Tham chiếu Kho
+Bắt buộc với Nhập/Điều chuyển
+Kho nhập
+Cho nhập kho
+Tham chiếu Kho tổng
+Phải là kho tổng.
+Trạng thái
+Bắt buộc
+Enum
+Nháp / Chờ duyệt / Đã duyệt / Đã hoàn tất / Đã hủy
+Người tạo
+Hệ thống
+Tham chiếu User
+Tự động ghi nhận
+idempotency_key 
+Không 
+Text
+UUID từ client để chống xử lý lặp nên cần duy nhất
+request_id 
+Không 
+Text
+ID request hệ thống (log trace) nên cần duy nhất
+
+ 5. Chi tiết phiếu kho (Stock Document Line)
+Trường
+Bắt buộc?
+Kiểu / định dạng
+Quy tắc validate
+Phiếu kho
+Bắt buộc
+Tham chiếu Phiếu
+Phải tồn tại
+Sản phẩm
+Bắt buộc
+Tham chiếu SKU
+SKU phải hoạt động
+Số lượng
+Bắt buộc
+Number
+> 0
+Đơn giá
+Không
+Number
+≥ 0 nếu có
+Ghi chú dòng
+Không
+Text
+≤ 500 ký tự
+
+ 6. Biến động tồn kho (Stock Movement Ledger)
+Trường
+Bắt buộc?
+Kiểu / định dạng
+Quy tắc validate
+Mã giao dịch
+Bắt buộc
+Text
+Duy nhất
+Phiếu nguồn
+Bắt buộc
+Tham chiếu Phiếu
+Chỉ ghi khi phiếu hoàn tất
+Loại giao dịch
+Bắt buộc
+Enum
+Nhập / Xuất / Điều chuyển
+Kho
+Bắt buộc
+Tham chiếu Kho
+Kho liên quan giao dịch
+Sản phẩm
+Bắt buộc
+Tham chiếu SKU
+—
+Số lượng biến động
+Bắt buộc
+Number
+Có thể âm hoặc dương theo nghiệp vụ
+Thời gian
+Bắt buộc
+DateTime
+Tự động ghi nhận
+Người thực hiện
+Bắt buộc
+Tham chiếu User
+Tự động
+idempotency_key 
+Không 
+Text
+UUID từ client để chống xử lý lặp nên cần duy nhất
+
+ 7. Tồn kho an toàn (Min/Max Stock) (non MVP)
+Trường
+Bắt buộc?
+Kiểu / định dạng
+Quy tắc validate
+Sản phẩm
+Bắt buộc
+Tham chiếu SKU
+Duy nhất theo phạm vi cấu hình
+Kho áp dụng
+Không
+Tham chiếu Kho
+Null = áp dụng toàn hệ thống
+Min Stock
+Không
+Number
+≥ 0
+Max Stock
+Không
+Number
+≥ 0 và ≥ Min Stock
+Ngày cập nhật
+Hệ thống
+DateTime
+Tự động
+Người cập nhật
+Hệ thống
+User
+Tự động
+
+ 8. Điều chuyển kho (Transfer Document – mở rộng Phiếu kho)
+Trường
+Bắt buộc?
+Kiểu / định dạng
+Quy tắc validate
+Kho nguồn
+Bắt buộc
+Tham chiếu Kho
+Phải khác kho đích
+Kho đích
+Bắt buộc
+Tham chiếu Kho
+Phải hoạt động
+Trạng thái vận chuyển
+Hệ thống
+Enum
+Nháp → Chờ duyệt → Đã duyệt → Đang vận chuyển → Hoàn tất / Trả lại
+
+ 9. Người dùng 
+Trường
+Bắt buộc?
+Kiểu / định dạng
+Quy tắc validate
+User ID
+Bắt buộc
+Text
+Duy nhất
+Vai trò
+Bắt buộc
+Enum
+Nhân viên kho / Quản lý kho / Admin
+Phạm vi kho
+Bắt buộc
+Danh sách Kho
+Giới hạn quyền truy cập theo kho
+Trạng thái
+Bắt buộc
+Enum
+Hoạt động / Khóa
+
+ 10. Audit Log 
+
+Trường
+Bắt buộc?
+Kiểu / định dạng
+Quy tắc validate
+Log ID
+Bắt buộc
+Text
+Được sinh bởi hệ thống Audit Log, duy nhất
+Người thực hiện
+Bắt buộc
+User
+Lấy từ tài khoản đăng nhập
+Hành động
+Bắt buộc
+Enum
+CREATE / UPDATE / DELETE / APPROVE / CANCEL / POST
+Loại đối tượng
+Bắt buộc
+Enum/Text
+Phiếu nhập / Phiếu xuất / Kho / SKU / Kiểm kê
+Mã đối tượng
+Bắt buộc
+Text
+Mã định danh của đối tượng phát sinh
+Thời gian
+Bắt buộc
+DateTime
+Tự động ghi nhận
+Chi tiết thay đổi
+Không
+JSON/Text
+Lưu thông tin thay đổi trước–sau hoặc payload
+Nguồn phát sinh
+Không
+Text
+Mặc định: Warehouse Module
+
+ 
+Phụ lục D – Quy tắc nghiệp vụ (Business Rules)
+Tổng hợp các quy tắc nghiệp vụ đã được chốt trong quá trình phân tích hệ thống Quản lý kho (Inventory Management System). Các quy tắc này là ràng buộc bắt buộc trong thiết kế, phát triển và kiểm thử hệ thống. 
+
+Mã
+Quy tắc nghiệp vụ (đã chốt)
+Nguồn
+BR-01
+Hệ thống kho phải hỗ trợ cấu trúc đa tầng: Kho cha → Kho con (tối đa 3 cấp). Không có giới hạn logic cho số lượng kho con trong cùng cấp.
+M2
+BR-02
+Mỗi kho phải thuộc trạng thái: Hoạt động hoặc Ngừng hoạt động. Chỉ kho Hoạt động mới được phép tham gia nghiệp vụ nhập/xuất/điều chuyển.
+M2, M3, M4
+BR-03
+Mã kho là duy nhất toàn hệ thống và không được phép chỉnh sửa sau khi tạo.
+M2
+BR-04
+Tất cả chứng từ kho (Nhập / Xuất / Điều chuyển) phải có trạng thái vòng đời tối thiểu là: Nháp → Chờ duyệt → Đã duyệt → Hoàn tất / Hủy. Có thể khác tuỳ nghiệp vụ
+M2, M3, M4
+BR-05
+Chỉ chứng từ ở trạng thái “Hoàn tất nghiệp vụ” mới được ghi nhận vào tồn kho và lịch sử biến động.
+M5, M7
+BR-06
+Mọi thay đổi tồn kho phải được thực hiện trong cùng transaction với chứng từ nghiệp vụ để đảm bảo tính toàn vẹn dữ liệu.
+M5
+BR-07
+Hệ thống phải đảm bảo không phát sinh tồn kho âm trong mọi tình huống, bao gồm xử lý đồng thời (concurrency).
+M3, M5
+BR-08
+Khi nhiều giao dịch đồng thời hoặc retry xảy ra trên cùng SKU và kho, hệ thống phải đảm bảo: không vượt tồn, không tạo duplicate transaction, sử dụng cơ chế lock + idempotency key
+M3, M4, M5
+BR-09
+Phiếu nhập kho chỉ được thực hiện nhập thực tế khi trạng thái là “Đã duyệt”.
+M2
+BR-10
+Phiếu xuất kho chỉ được thực hiện xuất thực tế khi trạng thái là “Đã duyệt” và tồn kho khả dụng đáp ứng đủ số lượng.
+M3
+BR-11
+Khi điều chuyển, hàng hóa phải được ghi nhận vào In Transit bucket của tồn kho (không phải trạng thái phiếu). Hàng In Transit không được sử dụng cho nghiệp vụ khác.
+M4
+BR-12
+Tồn kho được chia tối thiểu 3 lớp logic: Tồn khả dụng (Available), Đang vận chuyển (In Transit), và (tùy mở rộng) Đặt giữ (Reserved).
+M5
+BR-13
+Tổng tồn toàn bộ hệ thống = tổng tồn khả dụng của tất cả kho + In Transit.
+M5
+BR-14
+Khi thực hiện Xuất kho điều chuyển thành công, hệ thống giảm Available Stock tại kho nguồn và tăng In Transit tương ứng
+M4, M5
+BR-15
+Khi thực hiện Nhập kho điều chuyển thành công, hệ thống: Giảm In Transit và tăng Available Stock tại kho đích.
+M4, M5
+BR-18
+Trả lại điều chuyển hoàn trả toàn bộ số lượng In Transit về kho nguồn và hủy luồng vận chuyển.
+M4
+BR-17
+Phiếu bị hủy trước khi phát sinh nghiệp vụ hoàn tất sẽ không tạo bất kỳ biến động tồn kho nào.
+M2, M3, M4
+BR-171
+Không cho Huỷ đối với phiếu đã làm thay đổi biến động tồn kho. Đối với việc Huỷ và reversed này sẽ triển khai trong giai đoạn sau.
+M2, M3, M4
+BR-18
+Min Stock / Max Stock được dùng để đánh giá trạng thái tồn kho: Sắp hết hàng / Bình thường / Vượt ngưỡng.
+M6
+BR-19
+Trạng thái tồn kho phải được tính realtime khi có biến động tồn kho hoặc thay đổi cấu hình Min/Max.
+M5, M6
+BR-20
+Mỗi SKU chỉ được phép có một cấu hình Min/Max tồn kho trong cùng phạm vi áp dụng (toàn hệ thống hoặc theo kho).
+M6
+BR-21
+Báo cáo xuất nhập tồn chỉ tính các chứng từ đã hoàn tất, không bao gồm Nháp, Chờ duyệt hoặc Đã hủy.
+M8
+BR-22
+Báo cáo tồn kho phải đảm bảo công thức: Tồn cuối = Tồn đầu + Nhập – Xuất (theo kỳ báo cáo).
+M8
+BR-23
+Lịch sử biến động tồn kho (Stock Movement) là append-only (không chỉnh sửa/xóa), dùng để truy vết hệ thống.
+M7
+BR-24
+Mỗi biến động tồn kho phải luôn gắn với một chứng từ nguồn hợp lệ (nhập/xuất/điều chuyển).
+M7
+BR-25
+Tồn kho an toàn và cảnh báo là hệ thống độc lập, không ảnh hưởng trực tiếp đến tính toán tồn khả dụng.
+M6
+BR-26
+Hệ thống phải cho phép tra cứu tồn kho theo kho hoặc toàn hệ thống tùy quyền người dùng.
+M5
+BR-27
+Người dùng không có quyền tương ứng sẽ bị chặn toàn bộ thao tác và không hiển thị dữ liệu liên quan (security-by-default).
+M2–M8
+BR-28
+Trạng thái phiếu Đang vận chuyển và trạng thái tồn kho (In Transit)  là hai hệ thống độc lập. Không được sử dụng cùng một thuật ngữ cho cả hai lớp logic.
+M4, M5
+BR-29
+Mọi API thực hiện nghiệp vụ kho (duyệt phiếu, xuất kho, nhập kho, điều chuyển, nhận hàng, hủy/trả lại) phải hỗ trợ idempotency key để đảm bảo gọi lại nhiều lần không tạo thêm biến động tồn kho hoặc thay đổi trạng thái lần nữa.
+M2-M5
+BR-30
+Một chứng từ ở trạng thái cuối (Hoàn tất / Đã hủy / Bị trả lại) không được phép xử lý lại kể cả khi request hợp lệ hoặc bị retry hệ thống. 
+M2-M5
+BR-311
+Các API nghiệp vụ phải đảm bảo idempotent theo (phiếu_id + loại nghiệp vụ). Nếu request đã xử lý thành công → hệ thống phải trả về kết quả cũ, không re-apply logic tồn kho.
+M2-M5
+BR-32
+Hệ thống phải áp dụng cơ chế khóa đồng thời (concurrency control) trên bản ghi tồn kho theo cặp (SKU, Kho) khi thực hiện các nghiệp vụ làm thay đổi tồn kho (nhập, xuất, điều chuyển). 
+M2-M5
+BR-33
+Khi thực hiện kiểm tra tồn kho khả dụng, hệ thống phải thực hiện trong cùng transaction với cơ chế lock để đảm bảo dữ liệu không thay đổi trong quá trình xử lý. Bản ghi tồn kho phải được khóa theo cơ chế row-level lock cho đến khi transaction kết thúc (commit/rollback). 
+M2-M5
+BR-34
+Available Stock = Tổng toàn bộ hệ thống − In Transit Stock 
+M2-M5
+BR-35
+Hiện tại trong phạm vi MVP, Phiếu nhập kho chỉ dùng cho nhập từ nhà cung cấp. 
+M2
+BR-36
+Nếu hủy chứng từ (ở trạng thái chưa cập nhật tồn kho) → chỉ gửi request ghi audit. 
+M2-M4
+
+
+Quy tắc nghiệp vụ bổ sung:
+Quy tắc về Luồng nghiệp vụ thay đổi tồn kho (nhập / xuất / điều chuyển):
+Cần tuân thủ pipeline sau:
+Validate quyền người dùng
+Validate trạng thái phiếu
+Acquire row-level lock theo (SKU + Kho)
+Check tồn kho khả dụng
+Thực hiện business logic: nhập / xuất / điều chuyển
+Ghi Stock Movement Ledger
+Commit transaction
+Release lock
+Trả response
+Không được update tồn kho ngoài pipeline này dưới mọi hình thức (API, job, retry) 
+Quy tắc lựa chọn kho điều chuyển 
+Kho nguồn và kho đích bắt buộc phải khác nhau.
+Kho nguồn và kho đích phải ở trạng thái Hoạt động.
+Hệ thống cho phép điều chuyển hàng hóa giữa bất kỳ hai kho nào trong cùng hệ thống.
+Quan hệ cha-con giữa các kho không phải là điều kiện bắt buộc để thực hiện điều chuyển.
+Người dùng chỉ được chọn các kho nằm trong phạm vi phân quyền được cấp.
+Quy định về luồng State machine:
+1. State Machine – Phiếu nhập kho
+Trạng thái
+Trạng thái tiếp theo
+Được sửa
+Ai được sửa
+Được hủy
+Ai được hủy
+Ghi chú
+Nháp
+Chờ duyệt
+Có
+Người tạo phiếu
+Có
+Người tạo phiếu
+Chưa phát sinh nghiệp vụ
+Chờ duyệt
+Đã duyệt
+Không
+Không áp dụng
+Có
+Người tạo phiếu
+Chưa ảnh hưởng tồn kho
+Đã duyệt
+Đã nhập kho
+Không
+Không áp dụng
+Có
+Quản lý kho
+Chưa ảnh hưởng tồn kho
+Đã nhập kho
+Kết thúc
+Không
+Không áp dụng
+Không
+Không áp dụng
+Đã tăng tồn kho
+Đã hủy
+Kết thúc
+Không
+Không áp dụng
+Không
+Không áp dụng
+Chứng từ kết thúc
+
+Luồng trạng thái: Nháp → Chờ duyệt → Đã duyệt → Đã nhập kho
+Quy tắc nghiệp vụ:
+Chỉ được hủy khi ở trạng thái Nháp, Chờ duyệt hoặc Đã duyệt.
+Chỉ cập nhật tồn kho khi chuyển sang trạng thái Đã nhập kho.
+Không cho phép sửa chứng từ sau khi đã duyệt.
+2. State Machine – Phiếu xuất kho
+Trạng thái
+Trạng thái tiếp theo
+Được sửa
+Ai được sửa
+Được hủy
+Ai được hủy
+Ghi chú
+Nháp
+Chờ duyệt
+Có
+Người tạo phiếu
+Có
+Người tạo phiếu
+Chưa phát sinh nghiệp vụ
+Chờ duyệt
+Đã duyệt
+Không
+Không áp dụng
+Có
+Người tạo phiếu
+Chưa ảnh hưởng tồn kho
+Đã duyệt
+Đã xuất kho
+Không
+Không áp dụng
+Có
+Quản lý kho
+Chưa ảnh hưởng tồn kho
+Đã xuất kho
+Kết thúc
+Không
+Không áp dụng
+Không
+Không áp dụng
+Đã giảm tồn kho
+Đã hủy
+Kết thúc
+Không
+Không áp dụng
+Không
+Không áp dụng
+Chứng từ kết thúc
+
+Luồng trạng thái: Nháp → Chờ duyệt → Đã duyệt → Đã xuất kho
+Quy tắc nghiệp vụ:
+Chỉ được hủy khi ở trạng thái Nháp, Chờ duyệt hoặc Đã duyệt.
+Chỉ cập nhật tồn kho khi chuyển sang trạng thái Đã xuất kho.
+Không cho phép xuất âm kho.
+3. State Machine – Phiếu điều chuyển
+Trạng thái
+Trạng thái tiếp theo
+Được sửa
+Ai được sửa
+Được hủy
+Ai được hủy
+Ghi chú
+Nháp
+Chờ duyệt
+Có
+Người tạo phiếu
+Có
+Người tạo phiếu
+Chưa phát sinh nghiệp vụ
+Chờ duyệt
+Đã duyệt
+Không
+Không áp dụng
+Có
+Người tạo phiếu
+Chưa ảnh hưởng tồn kho
+Đã duyệt
+Đang vận chuyển
+Không
+Không áp dụng
+Có
+Quản lý kho
+Chưa ảnh hưởng tồn kho
+Đang vận chuyển
+Hoàn tất điều chuyển
+Không
+Không áp dụng
+Không
+Không áp dụng
+Đã trừ tồn kho nguồn
+Hoàn tất điều chuyển
+Kết thúc
+Không
+Không áp dụng
+Khong
+Quản lý kho
+Đã ảnh hưởng tồn kho nhiều kho
+Đã hủy
+Kết thúc
+Không
+Không áp dụng
+Không
+Không áp dụng
+Chứng từ kết thúc
+
+Luồng chính: Nháp → Chờ duyệt → Đã duyệt → Đang vận chuyển → Hoàn tất điều chuyển
+Luồng ngoại lệ:
+Đang vận chuyển → Trả lại → Hoàn tất trả lại
+Nháp / Chờ duyệt / Đã duyệt → Đã hủy
+Quy tắc tồn kho:
+Đã duyệt → Không thay đổi tồn kho.
+Đang vận chuyển → Giảm tồn kho nguồn, tăng In Transit.
+Hoàn tất điều chuyển → Giảm In Transit, tăng tồn kho đích.
+Hoàn tất trả lại → Giảm In Transit, hoàn tồn kho nguồn.
+Nguyên tắc chung:
+Chứng từ chỉ được chuyển sang trạng thái kế tiếp theo luồng quy định.
+Không cho phép bỏ qua trạng thái trung gian.
+ Quy tắc về cách tính báo cáo:
+3.1. Báo cáo kho tổng
+Chỉ tiêu
+Công thức / Ý nghĩa
+Tồn đầu kỳ
+Số lượng tồn tại thời điểm đầu kỳ
+Nhập trong kỳ
+Hàng nhập từ nhà cung cấp hoặc sản xuất
+Điều chuyển ra
+Hàng chuyển từ kho tổng đến các kho con
+Tồn cuối kỳ
+Tồn đầu kỳ + Nhập trong kỳ - Điều chuyển ra
+
+3.2. Báo cáo kho chi nhánh / kho tỉnh
+Chỉ tiêu
+Công thức / Ý nghĩa
+Tồn đầu kỳ
+Số lượng tồn tại thời điểm đầu kỳ
+Điều chuyển vào
+Hàng nhận từ kho tổng hoặc kho khác
+Điều chuyển ra
+Hàng chuyển sang kho khác
+Xuất trong kỳ
+Hàng bán hoặc xuất sử dụng
+Tồn cuối kỳ
+Tồn đầu kỳ + Điều chuyển vào - Điều chuyển ra - Xuất trong kỳ
+
+3.3. Báo cáo tồn kho toàn hệ thống
+Chỉ tiêu
+Công thức / Ý nghĩa
+Tồn đầu kỳ
+Tổng tồn của tất cả kho tại đầu kỳ
+Nhập trong kỳ
+Tổng hàng nhập từ bên ngoài hệ thống
+Xuất trong kỳ
+Tổng hàng xuất ra bên ngoài hệ thống
+Tồn cuối kỳ
+Tồn đầu kỳ + Nhập trong kỳ - Xuất trong kỳ
+
+3.4. Quy tắc bổ sung cho tính báo cáo
+Quy tắc xác định tồn đầu kỳ
+Tồn đầu kỳ được xác định bằng tồn cuối kỳ liền trước.
+Nếu là kỳ đầu tiên chưa có dữ liệu lịch sử thì tồn đầu kỳ lấy từ số lượng tồn khởi tạo ban đầu của hệ thống.
+Tồn đầu kỳ được tính theo thời điểm bắt đầu kỳ báo cáo (00:00:00 của ngày bắt đầu).
+Quy tắc xác định dữ liệu phát sinh trong kỳ
+Chỉ tính các chứng từ ở trạng thái hoàn tất nghiệp vụ:
+Nhập kho: Đã nhập kho
+Xuất kho: Đã xuất kho
+Điều chuyển: Hoàn tất
+Phiếu Nháp, Chờ duyệt, Đã duyệt nhưng chưa thực hiện thực tế không được tính vào báo cáo.
+Phiếu Đã hủy không được tính vào báo cáo.
+Quy tắc đối với điều chuyển kho
+Điều chuyển nội bộ chỉ làm thay đổi tồn kho giữa các kho.
+Trạng thái Đang vận chuyển được ghi nhận vào tồn In Transit (nếu hệ thống quản lý In Transit), chưa tính tăng tồn cho kho đích cho đến khi xác nhận nhận hàng.
+Quy tắc đối với chứng từ backdate
+Chứng từ được phép có ngày phát sinh nhỏ hơn ngày hiện tại nếu người dùng có quyền.
+Không cho phép backdate vào kỳ đã khóa.
+Khi tạo hoặc cập nhật chứng từ backdate, hệ thống phải tính lại:
+Tồn kho từ thời điểm phát sinh đến hiện tại.
+Các giao dịch phát sinh liên quan sau thời điểm backdate.
+Báo cáo tồn kho liên quan.
+Hệ thống phải ghi nhận Audit Log bao gồm:
+o   Người thực hiện
+o   Thời gian thao tác
+o   Giá trị cũ → giá trị mới
+o   Lý do thay đổi (nếu có)
+Quy tắc thời gian báo cáo
+Báo cáo theo ngày: từ 00:00:00 đến 23:59:59.
+Báo cáo theo tháng: từ ngày đầu tháng đến ngày cuối tháng.
+Tất cả thời gian được lưu theo UTC và hiển thị theo múi giờ cấu hình hệ thống.
+Quy tắc cập nhật tồn kho
+Nghiệp vụ
+Điều kiện
+Tồn kho
+In Transit
+Nhập kho hoàn tất
+Phiếu nhập hoàn tất
++Qty
+Không đổi
+Xuất kho hoàn tất
+Phiếu xuất hoàn tất
+-Qty
+Không đổi
+Điều chuyển - Đang vận chuyển
+Xác nhận xuất kho nguồn
+-Qty kho nguồn
++Qty
+Điều chuyển - Hoàn tất
+Kho đích xác nhận nhận hàng
++Qty kho đích
+-Qty
+Điều chuyển - Trả lại
+Hủy điều chuyển khi đang vận chuyển
++Qty kho nguồn
+-Qty
+
+Quy định sửa/hủy phiếu:
+Phiếu ở trạng thái Nháp được phép sửa và hủy.
+Phiếu ở trạng thái Chờ duyệt không được sửa, chỉ được hủy hoặc từ chối duyệt.
+Phiếu đã hoàn tất và đã ảnh hưởng tồn kho không được sửa trực tiếp.
+Nếu phát sinh sai sót sau khi hoàn tất, người dùng phải tạo chứng từ điều chỉnh nghiệp vụ mới.
+Quản lý In Transit:
+In Transit là số lượng hàng đã rời kho nguồn nhưng chưa được xác nhận nhập kho đích.
+Chỉ phát sinh đối với nghiệp vụ điều chuyển kho.
+Khi kho đích xác nhận nhận hàng, hệ thống giảm In Transit và tăng tồn kho đích.
+MVP chỉ hỗ trợ nhận đủ và nhận thiếu số lượng điều chuyển. Trường hợp nhận thừa nằm ngoài phạm vi MVP.
+Phân biệt Stock Movement và Audit Log
+Tiêu chí
+Stock Movement
+Audit Log
+Mục đích
+Theo dõi biến động tồn kho
+Theo dõi thao tác người dùng
+Ghi nhận thay đổi số lượng tồn/ Điều chuyển hoàn tất
+Có
+Không
+Ghi nhận tạo/sửa/xóa chứng từ
+Không
+Có
+Dùng cho báo cáo tồn kho
+Có
+Không
+Dùng cho truy vết người thao tác
+Không
+Có
+
+Phân biệt Stock Movement và Audit Log
+1. Các khái niệm
+Available Stock: là số lượng tồn kho khả dụng được phép sử dụng cho các nghiệp vụ xuất kho và điều chuyển kho.
+Trong MVP: Available Stock = On-Hand Stock
+Do hệ thống chưa triển khai cơ chế giữ chỗ (Reserved Stock).
+In Transit Stock: là số lượng hàng đã xuất khỏi kho nguồn nhưng chưa được kho đích xác nhận nhận hàng.
+Hàng hóa ở trạng thái In Transit:
+Không được xuất kho.
+Không được điều chuyển tiếp.
+Không được tính vào Available Stock.
+2. Cập nhật tồn kho theo nghiệp vụ
+Nhập kho thành công → tăng Available Stock.
+Xuất kho thành công → giảm Available Stock.
+Xuất điều chuyển → giảm Available Stock tại kho nguồn, tăng In Transit Stock.
+Nhận điều chuyển → giảm In Transit Stock, tăng Available Stock tại kho đích.
+Trả lại điều chuyển → giảm In Transit Stock, hoàn Available Stock về kho nguồn.
+3. Kiểm tra tồn kho
+Hệ thống chỉ cho phép xuất kho hoặc điều chuyển khi: Available Stock ≥ Số lượng yêu cầu 
+Phụ lục E – Chi tiết Acceptance Criteria 
+Phần này bổ sung các tiêu chí nghiệm thu chi tiết cho một số User Story quan trọng trong phạm vi MVP, bao gồm các quy tắc về Validation, Permission, Business Rule và các điều kiện xử lý ngoại lệ nhằm hỗ trợ Dev và QA trong quá trình triển khai và kiểm thử. 
+A.1 Phiếu nhập kho
+US-M2-001 - Tạo phiếu nhập kho
+Quyền truy cập
+· Quản lý kho được phép tạo phiếu nhập kho
+· Nhân viên kho được phép tạo phiếu nhập kho
+· Người dùng không có quyền không được tạo phiếu
+Dữ liệu bắt buộc
+· Kho nhập là trường bắt buộc
+· Phiếu phải có ít nhất 01 sản phẩm
+· Số lượng phải lớn hơn 0
+Kết quả thành công
+· Hệ thống tạo phiếu ở trạng thái Nháp
+· Hệ thống sinh mã phiếu duy nhất
+· Hệ thống lưu người tạo và thời gian tạo
+Xử lý lỗi
+· Không cho phép lưu khi thiếu trường bắt buộc
+· Hiển thị thông báo lỗi phù hợp
+US-M2-002 - Gửi duyệt phiếu nhập
+Điều kiện thực hiện
+· Chỉ cho phép gửi duyệt khi trạng thái là Nháp
+· Phiếu phải có ít nhất một sản phẩm
+Kết quả thành công
+· Trạng thái chuyển sang Chờ duyệt
+· Ghi nhận người gửi duyệt
+· Ghi nhận thời gian gửi duyệt
+US-M2-003 - Duyệt phiếu nhập
+Điều kiện thực hiện
+· Chỉ Quản lý kho được phép duyệt
+· Chỉ phiếu ở trạng thái Chờ duyệt mới được duyệt
+Kết quả thành công
+· Trạng thái chuyển sang Đã duyệt
+· Ghi nhận người duyệt
+· Ghi nhận thời gian duyệt
+ 
+US-M2-004 - Thực hiện nhập kho
+Điều kiện thực hiện
+Chỉ phiếu ở trạng thái Đã duyệt mới được nhập kho
+Kết quả thành công
+· Tồn kho được cập nhật tăng tương ứng
+· Trạng thái chuyển sang Đã nhập kho
+· Ghi nhận người thực hiện nhập kho
+· Ghi nhận thời gian nhập kho
+A.2 Quy tắc chung áp dụng toàn hệ thống
+Audit Log
+· Hệ thống lưu người thực hiện thao tác.
+· Hệ thống lưu thời gian thực hiện thao tác.
+· Thông tin lịch sử không được phép chỉnh sửa.
+Validation số lượng
+· Số lượng phải lớn hơn 0.
+· Không cho phép nhập giá trị âm.
+· Không cho phép để trống trường số lượng.
+Phân quyền
+· Người dùng chỉ được thực hiện các chức năng được cấp quyền.
+· Người dùng không có quyền không được nhìn thấy hành động tương ứng.
+ A.3 Quy tắc phiếu điều chuyển
+US-M4-001
+Cho trước người dùng có quyền tạo phiếu điều chuyển, khi chọn kho nguồn và kho đích, thì hệ thống cho phép chọn bất kỳ kho nào đang hoạt động trong hệ thống.
+Cho trước người dùng tạo hoặc cập nhật phiếu điều chuyển, khi kho nguồn và kho đích là cùng một kho, thì hệ thống hiển thị thông báo lỗi và không cho phép lưu phiếu.
+Cho trước phiếu điều chuyển có dữ liệu hợp lệ, khi kho nguồn và kho đích khác nhau và đều đang hoạt động, thì hệ thống cho phép lưu hoặc gửi duyệt phiếu điều chuyển mà không phụ thuộc quan hệ cha–con giữa các kho.
+
+
+

@@ -1,0 +1,30 @@
+# ============================================================
+# config.properties.example
+# Sao chép file này thành config.properties và điền giá trị thật
+# KHÔNG commit file config.properties lên git
+# ============================================================
+
+base.url=https://your-app-url.com
+api.base.url=https://your-app-url.com/api/v1
+
+# Token xác thực (lấy từ API login hoặc hệ thống)
+auth.token=YOUR_JWT_TOKEN_HERE
+
+execution.type=API
+
+# Health check mock flags
+api.mock=false
+ui.mock=false
+
+# Browser config
+browser=chrome
+headless=false
+timeout.seconds=15
+
+# Tài khoản admin
+admin.username=YOUR_ADMIN_USERNAME
+admin.password=YOUR_ADMIN_PASSWORD
+
+# Tài khoản staff
+staff.username=YOUR_STAFF_USERNAME
+staff.password=YOUR_STAFF_PASSWORD

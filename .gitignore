@@ -1,0 +1,53 @@
+# ===========================
+# Maven Build Output
+# ===========================
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ===========================
+# IntelliJ IDEA
+# ===========================
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries
+.idea/shelf
+.idea/*.iws
+*.iml
+*.ipr
+out/
+
+# ===========================
+# Sensitive Config Files
+# ===========================
+src/test/resources/config.properties
+
+# ===========================
+# Test Reports & Logs
+# ===========================
+test-output/
+reports/
+logs/
+*.log
+extent-reports/
+
+# ===========================
+# OS Files
+# ===========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===========================
+# IDE / Editor
+# ===========================
+.vscode/
+*.swp
+*.swo
+
+# ===========================
+# Screenshots (nếu Selenium lưu)
+# ===========================
+screenshots/
