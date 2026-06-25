@@ -1,0 +1,69 @@
+name: CI — API Tests
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  api-tests:
+    name: Run API Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Create config.properties from example
+        run: cp src/test/resources/config.properties.example src/test/resources/config.properties
+
+      - name: Run API tests
+        run: |
+          mvn test --no-transfer-progress \
+            -Dexecution.type=API \
+            -Dapi.mock=false \
+            -Dui.mock=false \
+            -Dbase.url="${{ secrets.BASE_URL }}" \
+            -Dapi.base.url="${{ secrets.API_BASE_URL }}" \
+            -Dauth.token="${{ secrets.AUTH_TOKEN }}" \
+            -Dadmin.username="${{ secrets.ADMIN_USERNAME }}" \
+            -Dadmin.password="${{ secrets.ADMIN_PASSWORD }}" \
+            -Dstaff.username="${{ secrets.STAFF_USERNAME }}" \
+            -Dstaff.password="${{ secrets.STAFF_PASSWORD }}"
+
+      - name: Print Surefire failure details
+        if: failure()
+        run: |
+          echo "===== SUREFIRE FAILURE REPORTS ====="
+          find target/surefire-reports -name '*.txt' | xargs cat || true
+
+      - name: Upload Surefire Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports-api
+          path: target/surefire-reports/
+          retention-days: 7
+
+      - name: Upload Extent Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-reports-api
+          path: target/extent-reports/
+          retention-days: 7
