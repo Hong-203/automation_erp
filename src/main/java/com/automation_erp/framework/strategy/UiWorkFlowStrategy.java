@@ -73,13 +73,78 @@ public class UiWorkFlowStrategy implements WorkFlowStrategy {
 
     @Override
     public String executeOutboundFlow(Map<String, Object> testData) {
-        System.out.println("[UI Strategy] Đang thực hiện luồng Xuất kho qua UI...");
+        System.out.println("[UI Strategy] Bắt đầu luồng Xuất kho qua UI (Selenium)...");
+
+        boolean isMock = Boolean.parseBoolean(ConfigReader.getProperty("ui.mock"));
+        if (isMock) {
+            System.out.println("[UI Strategy] [MOCK] Giả lập luồng Xuất kho qua UI thành công.");
+            if (DriverManager.getDriver() != null) DriverManager.getDriver().get("about:blank");
+            return "outbound-ui-mock-123";
+        }
+
+        WebDriver driver = DriverManager.getDriver();
+        LoginPage loginPage = new LoginPage(driver);
+
+        // Step 1: Đăng nhập nhân viên kho
+        loginPage.navigateToLoginPage();
+        loginPage.login(ConfigReader.getProperty("staff.username"), ConfigReader.getProperty("staff.password"));
+
+        // TODO: Implement OutboundPage và các bước UI tương ứng:
+        // outboundPage.clickCreateOutbound();
+        // outboundPage.selectWarehouse((String) testData.get("warehouseCode"));
+        // outboundPage.addProductLine((String) testData.get("sku"), (int) testData.get("quantity"));
+        // outboundPage.saveDraft();
+        // outboundPage.submitForApproval();
+
+        // Step 2: Đăng nhập quản lý duyệt
+        // loginPage.navigateToLoginPage();
+        // loginPage.login(ConfigReader.getProperty("admin.username"), ConfigReader.getProperty("admin.password"));
+        // outboundPage.approveOutbound();
+
+        // Step 3: Nhân viên xác nhận xuất kho
+        // loginPage.navigateToLoginPage();
+        // loginPage.login(ConfigReader.getProperty("staff.username"), ConfigReader.getProperty("staff.password"));
+        // outboundPage.confirmIssue();
+
+        System.out.println("[UI Strategy] TODO: OutboundPage chưa được implement.");
         return "outbound-ui-id";
     }
 
     @Override
     public String executeTransferFlow(Map<String, Object> testData) {
-        System.out.println("[UI Strategy] Đang thực hiện luồng Điều chuyển qua UI...");
+        System.out.println("[UI Strategy] Bắt đầu luồng Điều chuyển kho qua UI (Selenium)...");
+
+        boolean isMock = Boolean.parseBoolean(ConfigReader.getProperty("ui.mock"));
+        if (isMock) {
+            System.out.println("[UI Strategy] [MOCK] Giả lập luồng Điều chuyển qua UI thành công.");
+            if (DriverManager.getDriver() != null) DriverManager.getDriver().get("about:blank");
+            return "transfer-ui-mock-123";
+        }
+
+        WebDriver driver = DriverManager.getDriver();
+        LoginPage loginPage = new LoginPage(driver);
+
+        // Step 1: Đăng nhập nhân viên kho
+        loginPage.navigateToLoginPage();
+        loginPage.login(ConfigReader.getProperty("staff.username"), ConfigReader.getProperty("staff.password"));
+
+        // TODO: Implement TransferPage và các bước UI tương ứng:
+        // transferPage.clickCreateTransfer();
+        // transferPage.selectSourceWarehouse((String) testData.get("sourceWarehouseCode"));
+        // transferPage.selectTargetWarehouse((String) testData.get("targetWarehouseCode"));
+        // transferPage.addProductLine((String) testData.get("sku"), (int) testData.get("quantity"));
+        // transferPage.saveDraft();
+        // transferPage.submitForApproval();
+
+        // Step 2: Đăng nhập quản lý duyệt và dispatch
+        // loginPage.login(ConfigReader.getProperty("admin.username"), ConfigReader.getProperty("admin.password"));
+        // transferPage.approveTransfer();
+        // transferPage.dispatchTransfer(); // Xuất kho nguồn, hàng vào In-Transit
+
+        // Step 3: Nhận hàng tại kho đích
+        // transferPage.receiveTransfer(); // Hoàn tất
+
+        System.out.println("[UI Strategy] TODO: TransferPage chưa được implement.");
         return "transfer-ui-id";
     }
 }

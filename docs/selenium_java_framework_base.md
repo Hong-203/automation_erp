@@ -1,326 +1,692 @@
 # Kiến Trúc Framework Kiểm Thử Tự Động Hóa (Selenium + RestAssured + Java)
-## Thiết kế theo Strategy Pattern cho Đa Module và Đa Phương Thức (UI/API)
+## Thiết kế theo Strategy Pattern — Sẵn sàng mở rộng đa Module và đa Phương Thức (UI/API)
 
-Tài liệu này trình bày chi tiết kiến trúc, mô hình thiết kế, cấu trúc thư mục và cách thức vận hành của Framework kiểm thử tự động hóa được xây dựng bằng **Java**, tích hợp **Selenium WebDriver** (cho UI) và **RestAssured** (cho API). 
-
-Framework này được tối ưu hóa theo mô hình **Strategy Pattern** giúp tái sử dụng kịch bản kiểm thử (Test Cases), dễ dàng mở rộng thêm nhiều Module nghiệp vụ mới, và cho phép chuyển đổi linh hoạt giữa kiểm thử giao diện (UI) và kiểm thử backend (API) thông qua cấu hình hệ thống.
+Tài liệu này mô tả kiến trúc **hiện tại** của framework kiểm thử tự động hóa, bao gồm cách vận hành, cách sử dụng từng thành phần và hướng dẫn chi tiết để triển khai tính năng mới mà **không cần sửa code lõi (core framework)**.
 
 ---
 
-## 1. Các Nguyên Tắc Thiết Kế Cốt Lõi (Core Design Principles)
+## 1. Nguyên Tắc Thiết Kế Cốt Lõi
 
-*   **Strategy Pattern (Linh hoạt phương thức chạy):** Định nghĩa một Interface chung đại diện cho các luồng nghiệp vụ. Kịch bản test chỉ gọi Interface này. Việc luồng test chạy qua UI (Selenium) hay qua API (RestAssured) sẽ được quyết định động thông qua cấu hình (`config.properties` hoặc Command Line Parameter).
-*   **Factory Pattern (Khởi tạo đối tượng):** Sử dụng `DriverFactory` để quản lý khởi tạo trình duyệt (Chrome, Firefox, Edge, Headless Mode) và `StrategyFactory` để khởi tạo chiến lược kiểm thử tương ứng.
-*   **ThreadLocal (Hỗ trợ chạy song song - Parallel Execution):** WebDriver và API Session được đóng gói trong `ThreadLocal` để đảm bảo an toàn luồng (Thread-safe) khi chạy song song nhiều test cases cùng lúc trên CI/CD.
-*   **Page Object Model (POM - UI Testing):** Tách biệt mã kiểm thử và mã giao diện. Tất cả các tương tác với UI đều được bao bọc trong các Class Page.
-*   **Singleton Pattern (Quản lý cấu hình toàn cục):** Đọc file cấu hình một lần duy nhất trong suốt vòng đời của Test Suite.
-*   **Common Wrappers (Ngăn ngừa code trùng lặp):** Lớp `BasePage` chứa toàn bộ các hàm Selenium wrapper (chờ đợi thông minh, click, sendKeys, scroll, handle alert) để tránh việc viết đi viết lại mã Selenium thuần.
-
----
-
-## 2. Mô hình Strategy Pattern hoạt động như thế nào?
-
-Thay vì viết hai kịch bản test riêng biệt cho giao diện và API, chúng ta định nghĩa một giao diện nghiệp vụ chung:
-
-```mermaid
-classDiagram
-    class WorkFlowStrategy {
-        <<interface>>
-        +executeInboundFlow(testData)
-        +executeOutboundFlow(testData)
-        +executeTransferFlow(testData)
-    }
-    class ApiWorkFlowStrategy {
-        +executeInboundFlow(testData)
-        +executeOutboundFlow(testData)
-        +executeTransferFlow(testData)
-    }
-    class UiWorkFlowStrategy {
-        +executeInboundFlow(testData)
-        +executeOutboundFlow(testData)
-        +executeTransferFlow(testData)
-    }
-    class StrategyFactory {
-        +getStrategy() WorkFlowStrategy
-    }
-    class InboundWorkflowTest {
-        +testInboundDocument()
-    }
-    
-    WorkFlowStrategy <|.. ApiWorkFlowStrategy : Implements
-    WorkFlowStrategy <|.. UiWorkFlowStrategy : Implements
-    StrategyFactory --> WorkFlowStrategy : Generates
-    InboundWorkflowTest --> StrategyFactory : Requests Strategy
-```
-
-Khi chạy test:
-1.  Test class `InboundWorkflowTest` gọi `StrategyFactory.getStrategy()`.
-2.  `StrategyFactory` đọc cấu hình `execution.type` (giá trị là `API` hoặc `UI`).
-3.  Nếu là `API`, nó trả về instance của `ApiWorkFlowStrategy` (RestAssured thực thi).
-4.  Nếu là `UI`, nó trả về instance của `UiWorkFlowStrategy` (Selenium thực thi).
-5.  Test class chỉ cần gọi phương thức nghiệp vụ: `strategy.executeInboundFlow(testData)`. Kịch bản kiểm thử cực kỳ sạch và không chứa mã điều khiển Driver hay HTTP Request.
+| Pattern | Mục đích |
+|---|---|
+| **Strategy Pattern** | Test class không biết đang chạy UI hay API. `StrategyFactory` quyết định dựa vào `execution.type` trong config. |
+| **Factory Pattern** | `DriverFactory` khởi tạo browser. `StrategyFactory` khởi tạo strategy tương ứng. |
+| **ThreadLocal** | `DriverManager` + `ExtentReportManager` đảm bảo an toàn khi chạy song song (parallel-safe). |
+| **Page Object Model (POM)** | Tất cả tương tác UI bọc trong Page class. Test class không chứa locator hay Selenium code trực tiếp. |
+| **Singleton** | `ConfigReader` và `ExtentReportManager` đọc/khởi tạo một lần duy nhất. |
+| **Builder (Lombok)** | Tất cả Request model dùng `@Builder` → code test ngắn gọn, type-safe, có auto-complete. |
 
 ---
 
-## 3. Cây Thư Mục Đầy Đủ Của Dự Án (Maven Standard Directory Layout)
-
-Dưới đây là cấu trúc chi tiết, đầy đủ của toàn bộ mã nguồn framework. Các module nghiệp vụ mới (ví dụ: Module Bán hàng, Module Kế toán) chỉ cần cắm thêm vào các package `pages`, `strategy`, và `tests` theo mẫu sẵn có mà không cần sửa đổi phần nhân framework (core engine).
+## 2. Cấu Trúc Thư Mục Đầy Đủ (Hiện Tại)
 
 ```text
-auto/
-├── pom.xml                                  # Cấu hình Maven dependencies (Selenium, RestAssured, TestNG)
-├── testng.xml                               # Quản lý và cấu hình suite chạy kiểm thử
+automation_erp/
+├── pom.xml                              # Maven: Selenium, RestAssured, TestNG, Lombok, ExtentReports
+├── docs/                                # Tài liệu dự án
+│
 └── src/
-    ├── main/
-    │   └── java/
-    │       └── com/
-    │           └── auto/
-    │               └── framework/
-    │                   ├── config/          # Quản lý cấu hình hệ thống
-    │                   │   └── ConfigReader.java
-    │                   │
-    │                   ├── driver/          # Quản lý WebDriver (Thread-safe)
-    │                   │   ├── DriverFactory.java
-    │                   │   └── DriverManager.java
-    │                   │
-    │                   ├── api/             # Lớp tiện ích gọi API (RestAssured helper)
-    │                   │   └── ApiClient.java
-    │                   │
-    │                   ├── pages/           # Page Object Models (UI Testing)
-    │                   │   ├── BasePage.java
-    │                   │   ├── LoginPage.java
-    │                   │   └── InboundPage.java
-    │                   │
-    │                   └── strategy/        # Thiết kế Strategy Pattern
-    │                       ├── WorkFlowStrategy.java
-    │                       ├── ApiWorkFlowStrategy.java
-    │                       ├── UiWorkFlowStrategy.java
-    │                       └── StrategyFactory.java
+    ├── main/java/com/automation_erp/framework/
+    │   │
+    │   ├── config/
+    │   │   └── ConfigReader.java        # Đọc config.properties (Singleton, override bằng -D param)
+    │   │
+    │   ├── constants/                   # Hằng số toàn dự án - KHÔNG hardcode string trong code
+    │   │   ├── ApiEndpoints.java        # Toàn bộ URL path + helper path(template, args...)
+    │   │   ├── HttpStatus.java          # 200, 201, 400, 401, 403, 422...
+    │   │   ├── DocumentStatus.java      # "Nháp", "Chờ duyệt", "Đã duyệt", "Hoàn tất"...
+    │   │   └── WarehouseType.java       # "main", "branch", "sub", STATUS_ACTIVE/INACTIVE
+    │   │
+    │   ├── utils/                       # Tiện ích dùng chung
+    │   │   ├── DataGenerator.java       # Sinh mã kho/SKU/UUID ngẫu nhiên theo timestamp
+    │   │   ├── JsonUtils.java           # Đọc file JSON, serialize/deserialize object
+    │   │   ├── DateUtils.java           # Format datetime, tính khoảng thời gian cho filter params
+    │   │   └── AssertionUtils.java      # Bọc TestNG Assert với message log rõ ràng
+    │   │
+    │   ├── driver/
+    │   │   ├── DriverFactory.java       # Tạo WebDriver (Chrome/Firefox/Edge, headless mode)
+    │   │   └── DriverManager.java       # ThreadLocal<WebDriver> — parallel-safe
+    │   │
+    │   ├── api/
+    │   │   ├── ApiClient.java           # HTTP wrapper: GET/POST/PUT/PATCH/DELETE + login()
+    │   │   └── clients/                 # Client theo nhóm endpoint (1 class per nhóm)
+    │   │       ├── WarehouseClient.java # CRUD + enable/disable kho
+    │   │       ├── InboundClient.java   # Nhập kho: create/submit/approve/post-receipt/reject/cancel
+    │   │       ├── OutboundClient.java  # Xuất kho: create/submit/approve/post-issue/reject/cancel
+    │   │       ├── TransferClient.java  # Điều chuyển: create/submit/approve/dispatch/receive/return/cancel
+    │   │       └── InventoryClient.java # Tồn kho, In-Transit, Stock Movements, Reports
+    │   │
+    │   ├── models/                      # Request body POJO — Lombok @Builder @Data
+    │   │   ├── WarehouseRequest.java
+    │   │   ├── ItemDetail.java          # Dòng sản phẩm dùng chung cho Inbound/Outbound/Transfer
+    │   │   ├── InboundRequest.java
+    │   │   ├── OutboundRequest.java
+    │   │   └── TransferRequest.java
+    │   │
+    │   ├── pages/                       # Page Object Models — UI Testing
+    │   │   ├── BasePage.java            # Wrapper đầy đủ: wait, click, input, dropdown, scroll, alert...
+    │   │   ├── LoginPage.java
+    │   │   └── InboundPage.java
+    │   │
+    │   ├── strategy/
+    │   │   ├── WorkFlowStrategy.java    # Interface: executeInboundFlow / executeOutboundFlow / executeTransferFlow
+    │   │   ├── ApiWorkFlowStrategy.java # Implement qua RestAssured
+    │   │   ├── UiWorkFlowStrategy.java  # Implement qua Selenium
+    │   │   └── StrategyFactory.java     # Đọc config → trả về đúng Strategy
+    │   │
+    │   ├── listeners/
+    │   │   └── TestListener.java        # ITestListener: log pass/fail/skip + thời gian chạy
+    │   │
+    │   └── reporters/
+    │       └── ExtentReportManager.java # ExtentReports v5: Singleton + ThreadLocal, dark theme HTML
     │
     └── test/
-        ├── java/
-        │   └── com/
-        │       └── auto/
-        │           └── tests/
-        │               ├── BaseTest.java    # Khởi chạy driver, session, dọn dẹp dữ liệu chung
-        │               └── m2/              # Các bài test cho Module 2
-        │                   └── InboundWorkflowTest.java
+        ├── java/com/automation_erp/tests/
+        │   ├── BaseTest.java            # @BeforeMethod/@AfterMethod: khởi tạo driver, teardown
+        │   ├── fixtures/                # Test Data Isolation
+        │   │   ├── WarehouseFixture.java # Tạo kho test + tự động cleanup
+        │   │   └── ProductFixture.java  # Quản lý SKU test
+        │   ├── m1/
+        │   │   └── WarehouseTest.java
+        │   └── m2/
+        │       └── InboundWorkflowTest.java
         │
         └── resources/
-            ├── config.properties            # File cấu hình môi trường, tài khoản, chế độ chạy (UI/API)
-            └── log4j2.xml                   # Cấu hình Log cho hệ thống
+            ├── config.properties        # ⚠️ KHÔNG commit — copy từ config.properties.example
+            ├── config.properties.example
+            ├── testng.xml               # Suite config: parallel, listener registration
+            └── log4j2.xml
 ```
 
 ---
 
-## 4. Chi tiết triển khai mã nguồn các file cốt lõi
+## 3. Cách Chạy
 
-### 4.1. File cấu hình dự án (`pom.xml`)
-Cấu hình tất cả các thư viện cần thiết như Selenium, RestAssured, TestNG, Lombok (giảm thiểu boilerplate code), và ExtentReports (báo cáo trực quan).
+### 3.1. Chuẩn bị lần đầu
 
-[pom.xml](file:///d:/auto/pom.xml)
+```bash
+# Bước 1: Copy file cấu hình mẫu
+copy src\test\resources\config.properties.example src\test\resources\config.properties
 
-### 4.2. Quản lý cấu hình (`ConfigReader.java` & `config.properties`)
-Giúp đọc các cấu hình như URL, trình duyệt, tài khoản, loại thực thi (UI/API) một lần duy nhất.
+# Bước 2: Điền thông tin thật vào config.properties
+# Xem mục 3.2 bên dưới
+```
 
-[config.properties](file:///d:/auto/src/test/resources/config.properties) | [ConfigReader.java](file:///d:/auto/src/main/java/com/auto/framework/config/ConfigReader.java)
+### 3.2. Nội dung `config.properties`
 
-### 4.3. Quản lý Driver song song (`DriverFactory.java` & `DriverManager.java`)
-Đảm bảo mỗi Thread chạy test sở hữu một phiên trình duyệt WebDriver riêng biệt mà không bị xung đột tài nguyên.
+```properties
+# URL hệ thống
+base.url=https://your-erp-url.com
+api.base.url=https://your-erp-url.com/api/v1
 
-[DriverFactory.java](file:///d:/auto/src/main/java/com/auto/framework/driver/DriverFactory.java) | [DriverManager.java](file:///d:/auto/src/main/java/com/auto/framework/driver/DriverManager.java)
+# Chế độ chạy
+execution.type=API      # API hoặc UI
+api.mock=false          # true = giả lập, không gọi API thật
+ui.mock=false
 
-### 4.4. API Client Wrapper (`ApiClient.java`)
-Gói gọn thư viện RestAssured giúp gửi các yêu cầu GET/POST/PUT/DELETE ngắn gọn, tự động đính kèm `Header`, `Token` và `Idempotency-Key`.
+# Browser (chỉ dùng khi execution.type=UI)
+browser=chrome
+headless=false
+timeout.seconds=15
 
-[ApiClient.java](file:///d:/auto/src/main/java/com/auto/framework/api/ApiClient.java)
+# Tài khoản test
+admin.username=admin@company.com
+admin.password=your_password
+staff.username=staff@company.com
+staff.password=your_password
 
-### 4.5. Page Object Base và các Page cụ thể (`BasePage.java`, `LoginPage.java`, `InboundPage.java`)
-Cung cấp các hàm tương tác với trình duyệt an toàn (chờ cho tới khi element hiển thị rồi mới click/send key).
+# Token tĩnh (tùy chọn — nếu có thể dùng thay vì gọi login)
+auth.token=
+```
 
-[BasePage.java](file:///d:/auto/src/main/java/com/auto/framework/pages/BasePage.java) | [LoginPage.java](file:///d:/auto/src/main/java/com/auto/framework/pages/LoginPage.java) | [InboundPage.java](file:///d:/auto/src/main/java/com/auto/framework/pages/InboundPage.java)
+### 3.3. Lệnh chạy
 
-### 4.6. Lớp mẫu cho Strategy Pattern (`WorkFlowStrategy.java`, `ApiWorkFlowStrategy.java`, `UiWorkFlowStrategy.java`, `StrategyFactory.java`)
-Phần quan quan trọng nhất của kiến trúc giúp phân tách chiến lược chạy kiểm thử UI và API.
+```bash
+# Chạy toàn bộ suite (theo testng.xml)
+mvn clean test
 
-[WorkFlowStrategy.java](file:///d:/auto/src/main/java/com/auto/framework/strategy/WorkFlowStrategy.java) | [ApiWorkFlowStrategy.java](file:///d:/auto/src/main/java/com/auto/framework/strategy/ApiWorkFlowStrategy.java) | [UiWorkFlowStrategy.java](file:///d:/auto/src/main/java/com/auto/framework/strategy/UiWorkFlowStrategy.java) | [StrategyFactory.java](file:///d:/auto/src/main/java/com/auto/framework/strategy/StrategyFactory.java)
+# Chạy theo chế độ
+mvn clean test -Dexecution.type=API
+mvn clean test -Dexecution.type=UI
+mvn clean test -Dexecution.type=UI -Dheadless=true
 
-### 4.7. Base Test và Test Case cụ thể (`BaseTest.java` & `InboundWorkflowTest.java`)
-Lớp BaseTest quản lý toàn bộ vòng đời của suite test (khởi tạo trình duyệt, API session, teardown dọn dẹp dữ liệu rác). Các Test Class nghiệp vụ kế thừa lớp này sẽ vô cùng ngắn gọn và tập trung hoàn toàn vào luồng nghiệp vụ.
+# Chạy song song với N thread
+mvn clean test -Dparallel=methods -DthreadCount=4
 
-[BaseTest.java](file:///d:/auto/src/test/java/com/auto/tests/BaseTest.java) | [InboundWorkflowTest.java](file:///d:/auto/src/test/java/com/auto/tests/m2/InboundWorkflowTest.java)
+# Chạy một test class cụ thể
+mvn clean test -Dtest=WarehouseTest
+
+# Xóa kết quả cũ trước khi chạy
+mvn clean
+```
+
+### 3.4. Xem kết quả
+
+| Loại báo cáo | Đường dẫn |
+|---|---|
+| **ExtentReport HTML** (khuyên dùng) | `target/extent-reports/ExtentReport.html` |
+| **TestNG HTML Report** | `target/surefire-reports/index.html` |
+| **Emailable Report** | `target/surefire-reports/emailable-report.html` |
+| **Plain Text Log** | `target/surefire-reports/<TestClassName>.txt` |
 
 ---
 
-## 5. Hướng Dẫn Mở Rộng Module Mới (Plugin New Module)
+## 4. Cách Thêm Tính Năng Mới (Plugin New Feature)
 
-Khi phát triển thêm module mới (ví dụ: `Module 3 - Bán hàng (Outbound/Sales)`):
+> Quy tắc vàng: **Không sửa code lõi** (`driver/`, `config/`, `listeners/`, `reporters/`).
+> Chỉ thêm file vào `models/`, `api/clients/`, `pages/`, `strategy/`, `tests/`.
 
-1.  **Bước 1:** Định nghĩa một Interface Strategy mới: `SalesWorkFlowStrategy`
-    ```java
-    public interface SalesWorkFlowStrategy {
-        void executeSalesFlow(Map<String, Object> testData);
-    }
-    ```
-2.  **Bước 2:** Viết các Class thực hiện Strategy đó:
-    *   `ApiSalesStrategy` implements `SalesWorkFlowStrategy` (sử dụng `ApiClient` gọi endpoint bán hàng).
-    *   `UiSalesStrategy` implements `SalesWorkFlowStrategy` (sử dụng các Page của module Bán hàng để click chọn sản phẩm, thanh toán).
-3.  **Bước 3:** Tạo các Page Object cho UI (nếu có): `SalesPage`, `InvoicePage` kế thừa `BasePage`.
-4.  **Bước 4:** Tạo Test Class: `SalesWorkflowTest` kế thừa `BaseTest`
-    *   Gọi Factory để lấy Strategy.
-    *   Truyền dữ liệu và gọi phương thức thực thi luồng.
-    *   *Không cần viết lại Driver, Logger hay cấu hình cấu trúc framework.*
+### Checklist triển khai tính năng mới
 
-## 6. Hướng Dẫn chạy source code
-*   `mvn clean test`
-*   `mvn clean (để xoá log cũ)`
-*   `mvn clean test -Dexecution.type=API`
-*   `mvn clean test -Dexecution.type=UI`
-*   `mvn clean test -Dexecution.type=UI -Dheadless=true`
-*   `mvn clean test -DsuiteXmlFile=src/test/resources/testng.xml`
-*   `mvn clean test -Dparallel=methods -DthreadCount=3`
-
-## 7. Hướng Dẫn Thêm API Mới và Quản Lý Dữ Liệu Đầu Vào (Test Data)
-
-### 7.1. Thêm API Mới
-Khi muốn thêm các API mới vào luồng kiểm thử:
-1. **Thao tác trực tiếp trên Strategy Class:** 
-   * Mở class triển khai API Strategy tương ứng (ví dụ: [ApiWorkFlowStrategy.java](file:///d:/auto/src/main/java/com/auto/framework/strategy/ApiWorkFlowStrategy.java)).
-   * Gọi các phương thức HTTP static từ [ApiClient.java](file:///d:/auto/src/main/java/com/auto/framework/api/ApiClient.java) như `ApiClient.post(...)`, `ApiClient.get(...)`, `ApiClient.put(...)` với URL path tương ứng.
-2. **Thêm hàm Helper vào ApiClient (Nếu cần):**
-   * Nếu có các logic API đặc thù cần xử lý trước/sau khi gửi hoặc tái sử dụng ở nhiều nơi (ví dụ: login lấy token, reset dữ liệu test), mở [ApiClient.java](file:///d:/auto/src/main/java/com/auto/framework/api/ApiClient.java) và khai báo thêm phương thức static mới tại đây.
-
-### 7.2. Quản Lý Dữ Liệu Đầu Vào (Test Data)
-Framework hỗ trợ 3 cách định nghĩa và quản lý dữ liệu đầu vào:
-
-#### Cách 1: Sử dụng `Map<String, Object>` (Linh hoạt nhưng dễ sai chính tả)
-Cấu trúc Key - Value thích hợp để khởi tạo nhanh dữ liệu test trong lòng test case.
-```java
-Map<String, Object> testData = new HashMap<>();
-testData.put("warehouseCode", "WH-MAIN");
-testData.put("sku", "SKU-IPHONE15");
-testData.put("quantity", 50);
-testData.put("price", 1200.0);
-testData.put("idempotencyKey", UUID.randomUUID().toString());
+```
+[ ] Bước 1: Thêm endpoint vào ApiEndpoints.java (nếu chưa có)
+[ ] Bước 2: Tạo Model (nếu có request body)
+[ ] Bước 3: Tạo API Client
+[ ] Bước 4: Tạo Page Object (nếu cần test UI)
+[ ] Bước 5: Viết Test Class
+[ ] Bước 6: Đăng ký vào testng.xml
 ```
 
-#### Cách 2: Sử dụng Class Model / POJO (Khuyên dùng - Đảm bảo chặt chẽ và Auto-complete)
-Định nghĩa một lớp Java Model đại diện cho bộ dữ liệu test của nghiệp vụ (ví dụ đặt trong package `com.auto.framework.models`):
-```java
-package com.auto.framework.models;
+---
 
-import lombok.Data;
+### Bước 1 — Thêm endpoint (nếu chưa có trong `ApiEndpoints.java`)
+
+```java
+// Ví dụ: thêm endpoint cho Module Bán hàng
+public static final String SALES_ORDERS         = "/sales-orders";
+public static final String SALES_ORDER_BY_ID    = "/sales-orders/%s";
+public static final String SALES_ORDER_CONFIRM  = "/sales-orders/%s/confirm";
+public static final String SALES_ORDER_CANCEL   = "/sales-orders/%s/cancel";
+```
+
+---
+
+### Bước 2 — Tạo Model Request (nếu có request body)
+
+Đặt tại: `src/main/java/com/automation_erp/framework/models/`
+
+```java
+package com.automation_erp.framework.models;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
 @Builder
-public class InboundTestData {
+@NoArgsConstructor
+@AllArgsConstructor
+public class SalesOrderRequest {
+
+    @JsonProperty("customer_id")
+    private Integer customerId;
+
+    @JsonProperty("warehouse_code")
     private String warehouseCode;
-    private String sku;
-    private int quantity;
-    private double price;
-    private String idempotencyKey;
+
+    private List<ItemDetail> items;   // Dùng lại ItemDetail có sẵn
+
+    private String notes;
 }
 ```
-Khi viết test case, khởi tạo thông qua Builder Pattern:
+
+**Cách dùng trong test:**
 ```java
-InboundTestData input = InboundTestData.builder()
+SalesOrderRequest req = SalesOrderRequest.builder()
+    .customerId(101)
     .warehouseCode("WH-MAIN")
-    .sku("SKU-IPHONE15")
-    .quantity(50)
-    .price(1200.0)
+    .items(List.of(
+        ItemDetail.builder().sku("SKU-IPHONE15").quantity(2).build()
+    ))
+    .notes("Test đơn hàng tự động")
     .build();
 ```
 
-#### Cách 3: Định dạng File JSON ngoài (Khi chạy Data-driven Testing)
-Tạo file `.json` ngoài (ví dụ lưu tại `src/test/resources/data/inbound_data.json`) để phân tách hoàn toàn mã nguồn kiểm thử và dữ liệu:
-```json
-{
-  "warehouseCode": "WH-MAIN",
-  "sku": "SKU-IPHONE15",
-  "quantity": 50,
-  "price": 1200.0,
-  "idempotencyKey": "4c3b123d-0d67-4e08-9d2d-209f87cd8741"
+---
+
+### Bước 3 — Tạo API Client
+
+Đặt tại: `src/main/java/com/automation_erp/framework/api/clients/`
+
+```java
+package com.automation_erp.framework.api.clients;
+
+import com.automation_erp.framework.api.ApiClient;
+import com.automation_erp.framework.constants.ApiEndpoints;
+import com.automation_erp.framework.models.SalesOrderRequest;
+import io.restassured.response.Response;
+import java.util.Map;
+
+public class SalesOrderClient {
+
+    private SalesOrderClient() {}
+
+    public static Response createOrder(String token, SalesOrderRequest payload) {
+        return ApiClient.post(ApiEndpoints.SALES_ORDERS, token, payload);
+    }
+
+    public static Response getOrderById(String token, String id) {
+        return ApiClient.get(ApiEndpoints.path(ApiEndpoints.SALES_ORDER_BY_ID, id), token, null);
+    }
+
+    public static Response getOrders(String token, Map<String, Object> queryParams) {
+        return ApiClient.get(ApiEndpoints.SALES_ORDERS, token, queryParams);
+    }
+
+    public static Response confirmOrder(String token, String id) {
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.SALES_ORDER_CONFIRM, id), token, null);
+    }
+
+    public static Response cancelOrder(String token, String id) {
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.SALES_ORDER_CANCEL, id), token, null);
+    }
 }
 ```
-Sử dụng thư viện **Jackson** để deserialize file JSON trên thành Java Object:
+
+---
+
+### Bước 4 — Tạo Page Object (nếu có test UI)
+
+Đặt tại: `src/main/java/com/automation_erp/framework/pages/`
+
 ```java
-ObjectMapper mapper = new ObjectMapper();
-InboundTestData input = mapper.readValue(new File("src/test/resources/data/inbound_data.json"), InboundTestData.class);
+package com.automation_erp.framework.pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class SalesOrderPage extends BasePage {   // Kế thừa BasePage
+
+    // Locators — đặt private final, tên rõ ràng
+    private final By createOrderBtn    = By.id("btn-create-order");
+    private final By customerInput     = By.id("input-customer");
+    private final By warehouseSelect   = By.id("select-warehouse");
+    private final By addItemBtn        = By.id("btn-add-item");
+    private final By skuInput          = By.cssSelector(".input-sku");
+    private final By qtyInput          = By.cssSelector(".input-qty");
+    private final By saveBtn           = By.id("btn-save-order");
+    private final By confirmBtn        = By.id("btn-confirm-order");
+    private final By statusBadge       = By.id("order-status-badge");
+
+    public SalesOrderPage(WebDriver driver) {
+        super(driver);   // BasePage tự tạo WebDriverWait
+    }
+
+    public void clickCreateOrder() {
+        click(createOrderBtn);
+    }
+
+    public void selectWarehouse(String code) {
+        // Dùng hàm từ BasePage — đã có sẵn
+        selectByVisibleText(warehouseSelect, code);
+    }
+
+    public void addItem(String sku, int qty) {
+        click(addItemBtn);
+        writeText(skuInput, sku);
+        writeText(qtyInput, String.valueOf(qty));
+    }
+
+    public void saveOrder() {
+        click(saveBtn);
+    }
+
+    public void confirmOrder() {
+        click(confirmBtn);
+    }
+
+    public String getOrderStatus() {
+        return readText(statusBadge);
+    }
+}
 ```
 
-#### Cách 4: Cấu hình môi trường toàn cục (Global Config)
-Các cấu hình tĩnh, thông tin hệ thống (URLs, Browsers, Default credentials, Timeout, Mode chạy) được lưu trong [config.properties](file:///d:/auto/src/test/resources/config.properties) và truy vấn qua [ConfigReader.java](file:///d:/auto/src/main/java/com/auto/framework/config/ConfigReader.java).
+---
 
-## 8. Hướng Dẫn Viết Assertions (Kiểm tra kết quả) cho cả UI và API
+### Bước 5 — Viết Test Class
 
-Khi chạy cùng một kịch bản kiểm thử trên cả hai môi trường UI và API, việc kiểm tra kết quả (Assertions) cần được thiết kế khéo léo để đảm bảo tính trung lập và sạch sẽ của Test Class. Có hai cách tiếp cận chính:
+Đặt tại: `src/test/java/com/automation_erp/tests/m3/` (module mới thì tạo folder mới)
 
-### Cách 1: Assertions đặt trực tiếp trong từng Strategy Class (Khuyên dùng cho dữ liệu phản hồi đặc thù)
-Cách này giúp tách biệt hoàn toàn kiểm thử dữ liệu backend (HTTP status, cấu trúc JSON) và giao diện frontend (Text hiển thị trên trình duyệt).
+```java
+package com.automation_erp.tests.m3;
 
-*   **Trong API Strategy (ví dụ [ApiWorkFlowStrategy.java](file:///d:/auto/src/main/java/com/auto/framework/strategy/ApiWorkFlowStrategy.java)):**
-    ```java
-    // Hứng response và kiểm tra HTTP Status Code
-    Response createRes = ApiClient.post("/inbound-documents", staffToken, inboundPayload);
-    Assert.assertEquals(createRes.getStatusCode(), 201, "API tạo phiếu nhập thất bại!");
-    
-    // Kiểm tra cấu trúc JSON hoặc trường dữ liệu trả về
-    String status = createRes.jsonPath().getString("status");
-    Assert.assertEquals(status, "Nháp", "Trạng thái phiếu mới tạo phải là Nháp!");
-    ```
-*   **Trong UI Strategy (ví dụ [UiWorkFlowStrategy.java](file:///d:/auto/src/main/java/com/auto/framework/strategy/UiWorkFlowStrategy.java)):**
-    ```java
-    // Đọc trạng thái hiển thị trên trình duyệt
-    String statusText = inboundPage.getInboundStatus();
-    Assert.assertEquals(statusText, "Đã nhập kho", "Trạng thái hiển thị trên giao diện bị sai!");
-    ```
+import com.automation_erp.framework.api.ApiClient;
+import com.automation_erp.framework.api.clients.SalesOrderClient;
+import com.automation_erp.framework.config.ConfigReader;
+import com.automation_erp.framework.constants.DocumentStatus;
+import com.automation_erp.framework.constants.HttpStatus;
+import com.automation_erp.framework.models.ItemDetail;
+import com.automation_erp.framework.models.SalesOrderRequest;
+import com.automation_erp.framework.utils.AssertionUtils;
+import com.automation_erp.framework.utils.DataGenerator;
+import com.automation_erp.tests.BaseTest;
+import io.restassured.response.Response;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-### Cách 2: Thiết kế hàm hứng trạng thái nghiệp vụ (State Verification - Tập trung Assert ở Test Class)
-Thích hợp khi cậu muốn Test Class đóng vai trò kiểm soát chính và viết các câu lệnh Assert tập trung tại một nơi.
+import java.util.List;
+import java.util.UUID;
 
-1. **Bước 1:** Bổ sung phương thức truy vấn trạng thái vào interface [WorkFlowStrategy.java](file:///d:/auto/src/main/java/com/auto/framework/strategy/WorkFlowStrategy.java):
-   ```java
-   public interface WorkFlowStrategy {
-       String executeInboundFlow(Map<String, Object> testData);
-       String getDocumentStatus(String documentId); // Hàm lấy trạng thái nghiệp vụ chung
-   }
-   ```
-2. **Bước 2:** Cài đặt hàm này ở mỗi Strategy cụ thể:
-   *   **Trong API Strategy:** Gửi API `GET /inbound-documents/{id}` và parse JSON để lấy trạng thái trả về.
-   *   **Trong UI Strategy:** Dùng Selenium mở trang chi tiết phiếu và crawl text hiển thị trạng thái.
-3. **Bước 3:** Viết Assert tập trung trong Test Class (ví dụ [InboundWorkflowTest.java](file:///d:/auto/src/test/java/com/auto/tests/m2/InboundWorkflowTest.java)):
-   ```java
-   String inboundId = strategy.executeInboundFlow(testData);
-   
-   // Gọi strategy lấy trạng thái (dưới API hay UI sẽ do strategy tự quyết định)
-   String finalStatus = strategy.getDocumentStatus(inboundId);
-   
-   // Viết Assert tập trung tại Test Class
-   Assert.assertEquals(finalStatus, "Đã nhập kho", "Nghiệp vụ hoàn tất nhưng trạng thái bị sai!");
-   ```
+public class SalesOrderTest extends BaseTest {
 
-## 9. Hướng Dẫn Xem Báo Cáo và Nhật Ký Kiểm Thử (Logs & Test Reports)
+    private String adminToken;
+    private String staffToken;
 
-Sau khi chạy xong kiểm thử (bằng lệnh `mvn test` hoặc qua IDE), toàn bộ báo cáo và log chi tiết sẽ được tự động lưu trữ tại thư mục [target/surefire-reports/](file:///d:/auto/target/surefire-reports/). Dưới đây là cách truy cập và xem từng loại báo cáo:
+    @BeforeClass
+    public void setupTokens() {
+        adminToken = ApiClient.login(ConfigReader.getProperty("admin.username"),
+                                     ConfigReader.getProperty("admin.password"));
+        staffToken = ApiClient.login(ConfigReader.getProperty("staff.username"),
+                                     ConfigReader.getProperty("staff.password"));
+    }
 
-### 9.1. Báo cáo HTML trực quan trên Trình duyệt (Khuyên dùng)
-*   **Báo cáo chính (TestNG Suite Report):** Mở file [index.html](file:///d:/auto/target/surefire-reports/index.html) bằng trình duyệt (Chrome, Edge, Firefox).
-    *   Để xem log in ra của từng bài test (như payload request, response body, các bước UI), click chọn **Reporter output** ở menu bên trái.
-    *   Chọn **Times** để xem biểu đồ thời gian thực thi của từng test case.
-*   **Báo cáo tóm tắt (Emailable Report):** Mở file [emailable-report.html](file:///d:/auto/target/surefire-reports/emailable-report.html). File này được thiết kế tối giản, hiển thị dưới dạng bảng tổng hợp Pass/Fail cực kỳ thích hợp để đính kèm gửi báo cáo nhanh.
+    @Test(description = "TC-SALES-01: Tạo đơn hàng mới ở trạng thái Nháp")
+    public void testCreateSalesOrderSuccess() {
+        // Dùng DataGenerator sinh SKU test ngẫu nhiên
+        String sku = DataGenerator.generateSkuCode("MACBOOK");
 
-### 9.2. Xem Nhật ký chạy dạng Text thuần (Plain Text Log)
-Mỗi Test Class khi chạy sẽ được Surefire lưu toàn bộ log in ra màn hình Console (Console Output) vào một file `.txt` tương ứng trong thư mục báo cáo.
-*   *Ví dụ:* File log của bài test kho là [com.auto.tests.m1.WarehouseTest.txt](file:///d:/auto/target/surefire-reports/com.auto.tests.m1.WarehouseTest.txt). Đây là nơi nhanh nhất để đọc các đoạn text log debug mà không cần mở giao diện HTML.
+        SalesOrderRequest req = SalesOrderRequest.builder()
+            .customerId(101)
+            .warehouseCode("WH-MAIN")
+            .items(List.of(ItemDetail.builder().sku(sku).quantity(1).build()))
+            .notes("Test TC-SALES-01 tự động")
+            .build();
 
-### 9.3. Nhật ký định dạng XML cho CI/CD
-Nếu dự án được tích hợp chạy tự động trên Jenkins, GitLab CI, hoặc GitHub Actions:
-*   File [TEST-com.auto.tests.m1.WarehouseTest.xml](file:///d:/auto/target/surefire-reports/TEST-com.auto.tests.m1.WarehouseTest.xml) sẽ lưu trữ log console bên trong khối CDATA của thẻ `<system-out>`.
-*   File [testng-results.xml](file:///d:/auto/target/surefire-reports/testng-results.xml) chứa kết quả tổng hợp của toàn bộ suite để các server CI/CD đọc, phân tích và tự động vẽ biểu đồ trực quan lịch sử chạy test.
+        Response response = SalesOrderClient.createOrder(staffToken, req);
 
-### 9.4. Dọn dẹp báo cáo và log cũ (Clear logs)
-Trước khi chạy một lượt test mới, cậu nên chạy lệnh sau để xóa toàn bộ các tệp tin log và kết quả chạy cũ, tránh nhầm lẫn dữ liệu:
+        // Dùng AssertionUtils thay vì Assert.assertEquals trực tiếp
+        AssertionUtils.assertStatusCode(response, HttpStatus.CREATED);
+        AssertionUtils.assertFieldNotNull(response, "data.id");
+        AssertionUtils.assertStringFieldEquals(response, "data.status", DocumentStatus.DRAFT);
+    }
+
+    @Test(description = "TC-SALES-02: Tạo và xác nhận đơn hàng thành công")
+    public void testCreateAndConfirmOrderFlow() {
+        String sku = DataGenerator.generateSkuCode("IPHONE");
+        String idempotencyKey = UUID.randomUUID().toString();
+
+        SalesOrderRequest req = SalesOrderRequest.builder()
+            .customerId(101)
+            .warehouseCode("WH-MAIN")
+            .items(List.of(ItemDetail.builder().sku(sku).quantity(5).build()))
+            .build();
+
+        // Step 1: Tạo đơn hàng
+        Response createRes = SalesOrderClient.createOrder(staffToken, req);
+        AssertionUtils.assertStatusCode(createRes, HttpStatus.CREATED);
+        String orderId = createRes.jsonPath().getString("data.id");
+
+        // Step 2: Xác nhận đơn hàng
+        Response confirmRes = SalesOrderClient.confirmOrder(adminToken, orderId);
+        AssertionUtils.assertStatusCode(confirmRes, HttpStatus.OK);
+        AssertionUtils.assertStringFieldEquals(confirmRes, "data.status", DocumentStatus.COMPLETED);
+    }
+
+    @Test(description = "TC-SALES-03 (Negative): Nhân viên không được xác nhận đơn hàng → 403")
+    public void testStaffCannotConfirmOrder() {
+        SalesOrderRequest req = SalesOrderRequest.builder()
+            .customerId(101)
+            .warehouseCode("WH-MAIN")
+            .items(List.of(ItemDetail.builder().sku("SKU-TEST").quantity(1).build()))
+            .build();
+
+        Response createRes = SalesOrderClient.createOrder(staffToken, req);
+        String orderId = createRes.jsonPath().getString("data.id");
+
+        // Staff gọi confirm → expect 403 Forbidden
+        Response confirmRes = SalesOrderClient.confirmOrder(staffToken, orderId);
+        AssertionUtils.assertStatusCode(confirmRes, HttpStatus.FORBIDDEN);
+    }
+}
+```
+
+---
+
+### Bước 6 — Đăng ký vào `testng.xml`
+
+```xml
+<suite name="Warehouse Automation Test Suite" parallel="methods" thread-count="4">
+
+    <listeners>
+        <listener class-name="com.automation_erp.framework.listeners.TestListener"/>
+    </listeners>
+
+    <test name="Module 2 - Warehouse">
+        <classes>
+            <class name="com.automation_erp.tests.m1.WarehouseTest"/>
+            <class name="com.automation_erp.tests.m2.InboundWorkflowTest"/>
+        </classes>
+    </test>
+
+    <!-- Thêm module mới vào đây -->
+    <test name="Module 3 - Sales">
+        <classes>
+            <class name="com.automation_erp.tests.m3.SalesOrderTest"/>
+        </classes>
+    </test>
+
+</suite>
+```
+
+---
+
+## 5. Cách Dùng Các Utility Classes
+
+### 5.1. `DataGenerator` — Sinh dữ liệu test ngẫu nhiên
+
+```java
+// Sinh mã kho test duy nhất (tránh xung đột khi chạy song song)
+String warehouseCode = DataGenerator.generateWarehouseCode();
+// → "WH-TEST-20240701143022"
+
+String branchCode = DataGenerator.generateWarehouseCode("BRANCH");
+// → "WH-BRANCH-20240701143022"
+
+// Sinh SKU test
+String sku = DataGenerator.generateSkuCode("IPHONE15");
+// → "SKU-IPHONE15-20240701143022"
+
+// UUID cho Idempotency-Key
+String idempotencyKey = DataGenerator.generateUUID();
+
+// Số lượng ngẫu nhiên [10, 100]
+int qty = DataGenerator.randomQuantity(10, 100);
+```
+
+### 5.2. `AssertionUtils` — Kiểm tra kết quả API
+
+```java
+// Kiểm tra HTTP status code (có log body nếu fail)
+AssertionUtils.assertStatusCode(response, HttpStatus.CREATED);
+
+// Kiểm tra field không null
+AssertionUtils.assertFieldNotNull(response, "data.id");
+
+// Kiểm tra giá trị field
+AssertionUtils.assertStringFieldEquals(response, "data.status", DocumentStatus.DRAFT);
+AssertionUtils.assertFieldEquals(response, "data.quantity", 50);
+
+// Kiểm tra body chứa chuỗi nhất định
+AssertionUtils.assertBodyContains(response, "Không đủ tồn kho");
+```
+
+### 5.3. `DateUtils` — Thời gian cho filter params
+
+```java
+// Lấy khoảng thời gian 30 ngày gần nhất (cho filter báo cáo)
+Map<String, Object> params = new HashMap<>();
+params.put("from_date", DateUtils.startDateOfLastNDays(30));  // "2024-06-01"
+params.put("to_date",   DateUtils.endDateToday());            // "2024-07-01"
+
+Response reportRes = InventoryClient.getInventoryXntReport(adminToken, params);
+```
+
+### 5.4. `JsonUtils` — Data-driven testing từ file JSON
+
+```java
+// Đọc test data từ file JSON (data-driven testing)
+// File: src/test/resources/data/inbound_data.json
+InboundRequest req = JsonUtils.readFromFile(
+    "src/test/resources/data/inbound_data.json",
+    InboundRequest.class
+);
+
+// Serialize object thành JSON string để log
+System.out.println(JsonUtils.toJsonString(req));
+```
+
+### 5.5. Fixtures — Test Data Isolation
+
+```java
+public class SomeTest extends BaseTest {
+
+    private WarehouseFixture warehouseFixture;
+    private String testWarehouseCode;
+
+    @BeforeMethod
+    public void setupTestData() {
+        // Mỗi test method có kho riêng, không xung đột nhau
+        warehouseFixture = new WarehouseFixture(adminToken);
+        int warehouseId   = warehouseFixture.createAndGetId();
+        testWarehouseCode = warehouseFixture.getCode();
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void cleanupTestData() {
+        // Luôn cleanup dù test pass hay fail
+        warehouseFixture.teardown();
+    }
+
+    @Test
+    public void testSomething() {
+        // Dùng testWarehouseCode trong test — được đảm bảo là kho sạch
+    }
+}
+```
+
+---
+
+## 6. Cách Dùng `ApiEndpoints` — Không Hardcode URL
+
+```java
+// ❌ Sai — hardcode URL rải rác trong code
+ApiClient.post("/inbound-documents/" + id + "/post-receipt", token, null);
+
+// ✅ Đúng — dùng constant + helper path()
+ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_POST_RECEIPT, id), token, null);
+
+// Ví dụ khác
+String url = ApiEndpoints.path(ApiEndpoints.WAREHOUSE_BY_ID, 123);
+// → "/warehouses/123"
+
+String url2 = ApiEndpoints.path(ApiEndpoints.TRANSFER_DISPATCH, "abc-xyz");
+// → "/transfer-orders/abc-xyz/dispatch"
+```
+
+---
+
+## 7. Cách Viết Assertions cho cả UI và API
+
+### API — Kiểm tra response
+
+```java
+// Trong test method (API mode)
+Response createRes = InboundClient.createInbound(staffToken, payload);
+
+// Dùng AssertionUtils (khuyên dùng)
+AssertionUtils.assertStatusCode(createRes, HttpStatus.CREATED);
+AssertionUtils.assertStringFieldEquals(createRes, "data.status", DocumentStatus.DRAFT);
+
+// Hoặc dùng RestAssured jsonPath() trực tiếp cho case phức tạp
+String documentNo = createRes.jsonPath().getString("data.document_no");
+Assert.assertNotNull(documentNo, "Số phiếu phải được sinh tự động");
+```
+
+### UI — Kiểm tra hiển thị trên trình duyệt
+
+```java
+// Trong Page class (UI mode)
+public String getOrderStatus() {
+    return readText(statusBadge);  // BasePage.readText()
+}
+
+// Trong test method
+String status = salesOrderPage.getOrderStatus();
+Assert.assertEquals(status, DocumentStatus.COMPLETED, "Trạng thái hiển thị trên UI không đúng!");
+```
+
+---
+
+## 8. Cách Dùng `ExtentReportManager` để Log Bước Test
+
+```java
+import com.automation_erp.framework.reporters.ExtentReportManager;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+
+@Test
+public void testCreateWarehouse() {
+    ExtentTest test = ExtentReportManager.getTest();  // Lấy test của thread hiện tại
+
+    test.log(Status.INFO, "Bước 1: Chuẩn bị request tạo kho");
+    WarehouseRequest req = WarehouseRequest.builder()...build();
+
+    test.log(Status.INFO, "Bước 2: Gửi POST /warehouses");
+    Response res = WarehouseClient.createWarehouse(adminToken, req);
+
+    test.log(Status.INFO, "Bước 3: Kiểm tra response HTTP 201");
+    AssertionUtils.assertStatusCode(res, HttpStatus.CREATED);
+
+    test.pass("✅ Tạo kho thành công! ID: " + res.jsonPath().get("data.id"));
+}
+```
+
+---
+
+## 9. Hướng Dẫn Chạy và Xem Log
+
+### 9.1. Báo cáo HTML trực quan (ExtentReports — Khuyên dùng)
+
+Sau khi chạy test, mở file `target/extent-reports/ExtentReport.html` bằng trình duyệt:
+- Dashboard tổng hợp Pass/Fail/Skip theo màu
+- Chi tiết từng bước test case có thể expand/collapse
+- Thống kê thời gian chạy từng test
+
+### 9.2. Báo cáo TestNG
+
+- `target/surefire-reports/index.html` — Suite report đầy đủ
+- `target/surefire-reports/emailable-report.html` — Bảng tóm tắt, tiện gửi email
+
+### 9.3. Dọn dẹp trước khi chạy mới
+
 ```bash
-mvn clean
+mvn clean   # Xóa toàn bộ target/ để báo cáo không bị lẫn lộn với lần chạy trước
 ```
+
+---
+
+## 10. Tóm Tắt — Khi Có Tính Năng Mới
+
+```
+Tính năng mới
+    │
+    ├─ Có endpoint mới?     → Thêm vào ApiEndpoints.java
+    │
+    ├─ Có request body?     → Tạo XxxRequest.java trong models/ (@Builder @Data)
+    │
+    ├─ Cần gọi API?         → Tạo XxxClient.java trong api/clients/
+    │                           (extends ApiClient methods, dùng ApiEndpoints constants)
+    │
+    ├─ Cần test UI?         → Tạo XxxPage.java trong pages/ (extends BasePage)
+    │                           (chỉ chứa locators và wrapper methods)
+    │
+    └─ Viết test?           → Tạo XxxTest.java trong tests/mX/
+                                (extends BaseTest, dùng Clients + Models + AssertionUtils)
+                                Đăng ký vào testng.xml
+```
+
+> **Không cần sửa** `config/`, `driver/`, `listeners/`, `reporters/`, `strategy/WorkFlowStrategy.java`.
+> Core framework đóng lại với phần mở rộng, mở ra với tính năng mới.
