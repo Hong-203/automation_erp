@@ -57,7 +57,6 @@ jobs:
             -Dbrowser=${{ inputs.browser || 'chrome' }} \
             -Dbase.url="${{ secrets.BASE_URL }}" \
             -Dapi.base.url="${{ secrets.API_BASE_URL }}" \
-            -Dauth.token="${{ secrets.AUTH_TOKEN }}" \
             -Dadmin.username="${{ secrets.ADMIN_USERNAME }}" \
             -Dadmin.password="${{ secrets.ADMIN_PASSWORD }}" \
             -Dstaff.username="${{ secrets.STAFF_USERNAME }}" \
