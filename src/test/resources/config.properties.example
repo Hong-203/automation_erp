@@ -7,8 +7,8 @@
 base.url=https://your-app-url.com
 api.base.url=https://your-app-url.com/api/v1
 
-# Token xác thực (lấy từ API login hoặc hệ thống)
-auth.token=YOUR_JWT_TOKEN_HERE
+# Token tĩnh (tùy chọn — hiện tại framework dùng AuthManager nên có thể bỏ trống)
+auth.token=
 
 execution.type=API
 
