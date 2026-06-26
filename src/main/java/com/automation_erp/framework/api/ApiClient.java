@@ -69,11 +69,12 @@ public class ApiClient {
         
         Response response = RestAssured.given()
                 .contentType("application/json")
-                .body(Map.of("username", username, "password", password))
+                .body(Map.of("email", username, "password", password))
                 .post("/auth/login");
         
         if (response.getStatusCode() == 200) {
-            return response.jsonPath().getString("token");
+            String token = response.jsonPath().getString("data.access_token");
+            return (token != null) ? token : response.jsonPath().getString("token");
         }
         
         return "mocked-token-for-" + username;
