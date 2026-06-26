@@ -1,6 +1,7 @@
 package com.automation_erp.tests.m1;
 
 import com.automation_erp.framework.api.ApiClient;
+import com.automation_erp.framework.api.AuthManager;
 import com.automation_erp.framework.api.clients.WarehouseClient;
 import com.automation_erp.framework.config.ConfigReader;
 import com.automation_erp.framework.constants.HttpStatus;
@@ -22,11 +23,8 @@ public class WarehouseTest extends BaseTest {
 
     @BeforeMethod
     public void setupTest() {
-        adminToken = ConfigReader.getProperty("auth.token");
-        if (adminToken == null || adminToken.isEmpty() || adminToken.startsWith("mock")) {
-            adminToken = ApiClient.login(ConfigReader.getProperty("admin.username"),
-                    ConfigReader.getProperty("admin.password"));
-        }
+        adminToken = AuthManager.getToken(ConfigReader.getProperty("admin.username"),
+                                          ConfigReader.getProperty("admin.password"));
         warehouseFixture = new WarehouseFixture(adminToken);
     }
 

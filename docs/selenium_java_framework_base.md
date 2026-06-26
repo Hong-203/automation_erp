@@ -48,7 +48,8 @@ automation_erp/
     │   │   └── DriverManager.java       # ThreadLocal<WebDriver> — parallel-safe
     │   │
     │   ├── api/
-    │   │   ├── ApiClient.java           # HTTP wrapper: GET/POST/PUT/PATCH/DELETE + login()
+    │   │   ├── ApiClient.java           # HTTP wrapper: GET/POST/PUT/PATCH/DELETE
+    │   │   ├── AuthManager.java         # Quản lý Token Cache, tự động login và gia hạn token
     │   │   └── clients/                 # Client theo nhóm endpoint (1 class per nhóm)
     │   │       ├── WarehouseClient.java # CRUD + enable/disable kho
     │   │       ├── InboundClient.java   # Nhập kho: create/submit/approve/post-receipt/reject/cancel
@@ -135,7 +136,7 @@ admin.password=your_password
 staff.username=staff@company.com
 staff.password=your_password
 
-# Token tĩnh (tùy chọn — nếu có thể dùng thay vì gọi login)
+# Token tĩnh (tùy chọn — hiện tại framework dùng AuthManager tự động xin token nên có thể bỏ trống)
 auth.token=
 ```
 
@@ -354,6 +355,7 @@ public class SalesOrderPage extends BasePage {   // Kế thừa BasePage
 package com.automation_erp.tests.m3;
 
 import com.automation_erp.framework.api.ApiClient;
+import com.automation_erp.framework.api.AuthManager;
 import com.automation_erp.framework.api.clients.SalesOrderClient;
 import com.automation_erp.framework.config.ConfigReader;
 import com.automation_erp.framework.constants.DocumentStatus;
@@ -377,10 +379,11 @@ public class SalesOrderTest extends BaseTest {
 
     @BeforeClass
     public void setupTokens() {
-        adminToken = ApiClient.login(ConfigReader.getProperty("admin.username"),
-                                     ConfigReader.getProperty("admin.password"));
-        staffToken = ApiClient.login(ConfigReader.getProperty("staff.username"),
-                                     ConfigReader.getProperty("staff.password"));
+        // Dùng AuthManager để Cache Token (chỉ gọi login 1 lần nếu chưa có/hết hạn)
+        adminToken = AuthManager.getToken(ConfigReader.getProperty("admin.username"),
+                                          ConfigReader.getProperty("admin.password"));
+        staffToken = AuthManager.getToken(ConfigReader.getProperty("staff.username"),
+                                          ConfigReader.getProperty("staff.password"));
     }
 
     @Test(description = "TC-SALES-01: Tạo đơn hàng mới ở trạng thái Nháp")
@@ -524,7 +527,20 @@ params.put("to_date",   DateUtils.endDateToday());            // "2024-07-01"
 Response reportRes = InventoryClient.getInventoryXntReport(adminToken, params);
 ```
 
-### 5.4. `JsonUtils` — Data-driven testing từ file JSON
+### 5.4. `AuthManager` — Quản lý và Cache Token (Mới)
+
+Giúp framework gọi API `/auth/login` **đúng 1 lần duy nhất** cho mỗi user trong suốt quá trình chạy Test Suite, hoặc tự động lấy lại khi token hết hạn.
+```java
+// Trong các class Test, gọi AuthManager thay vì ApiClient.login()
+String token = AuthManager.getToken("admin@erp.vn", "12345678");
+// Lần 1: Gọi API thực tế, lưu token vào RAM (cache) cùng thời điểm hết hạn
+// Lần 2: Lấy thẳng từ RAM trả về (cực nhanh, không request API)
+
+// Nếu cần force lấy lại token mới (Ví dụ test case đổi pass)
+AuthManager.clearToken("admin@erp.vn");
+```
+
+### 5.5. `JsonUtils` — Data-driven testing từ file JSON
 
 ```java
 // Đọc test data từ file JSON (data-driven testing)
