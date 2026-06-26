@@ -2,7 +2,9 @@ name: CI — Full Suite (Push to main)
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, prod]
+  repository_dispatch:
+    types: [run-all-tests]
 
 jobs:
   api-tests:

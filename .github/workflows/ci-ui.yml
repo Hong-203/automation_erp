@@ -1,6 +1,10 @@
 name: CI — UI Tests (Headless)
 
 on:
+  push:
+    branches: [main, prod]
+  repository_dispatch:
+    types: [run-ui-tests]
   workflow_dispatch:
     inputs:
       browser:
