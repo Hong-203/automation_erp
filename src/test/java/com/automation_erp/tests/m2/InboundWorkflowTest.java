@@ -43,7 +43,7 @@ public class InboundWorkflowTest extends BaseTest {
     public void test1_CreateDraftInbound() {
         happyPathQtyPlanned = 100;
         InboundRequest req = InboundRequest.builder()
-                .docNo("NK-" + System.currentTimeMillis())
+                .docNo("NK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase())
                 .docDate(DateUtils.todayAsIso())
                 .dstWarehouseId(1)
                 .supplierId(1)
@@ -113,12 +113,13 @@ public class InboundWorkflowTest extends BaseTest {
     @Test(description = "TC-INBOUND-06: Luồng Từ chối duyệt (Reject Flow)")
     public void testRejectInboundFlow() {
         InboundRequest req = InboundRequest.builder()
-                .docNo("NK-" + System.currentTimeMillis())
+                .docNo("NK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase())
                 .docDate(DateUtils.todayAsIso())
                 .dstWarehouseId(1)
                 .lines(List.of(ItemDetail.builder().productId(3).qtyPlanned(10).unitCost(100.0).build()))
                 .build();
         Response createRes = InboundClient.createInbound(adminToken, req);
+        AssertionUtils.assertStatusCode(createRes, HttpStatus.CREATED);
         String inboundId = createRes.jsonPath().getString("data.id");
 
         InboundClient.submitInbound(adminToken, inboundId);
@@ -135,12 +136,13 @@ public class InboundWorkflowTest extends BaseTest {
     @Test(description = "TC-INBOUND-07: Luồng Hủy phiếu (Cancel Flow)")
     public void testCancelInboundFlow() {
         InboundRequest req = InboundRequest.builder()
-                .docNo("NK-" + System.currentTimeMillis())
+                .docNo("NK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase())
                 .docDate(DateUtils.todayAsIso())
                 .dstWarehouseId(1)
                 .lines(List.of(ItemDetail.builder().productId(3).qtyPlanned(5).unitCost(50.0).build()))
                 .build();
         Response createRes = InboundClient.createInbound(adminToken, req);
+        AssertionUtils.assertStatusCode(createRes, HttpStatus.CREATED);
         String inboundId = createRes.jsonPath().getString("data.id");
 
         Response cancelRes = InboundClient.cancelInbound(adminToken, inboundId, Map.of("reason", "Hủy phiếu"));
