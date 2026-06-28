@@ -10,6 +10,7 @@
     <test name="Module 2 - Multi Warehouse API &amp; UI Tests">
         <classes>
             <class name="com.automation_erp.tests.m1.WarehouseTest"/>
+            <class name="com.automation_erp.tests.m2.InboundWorkflowTest"/>
         </classes>
     </test>
 </suite>
