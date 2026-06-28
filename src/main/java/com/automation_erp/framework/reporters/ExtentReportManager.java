@@ -9,11 +9,11 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
  * Quản lý ExtentReports v5 theo Singleton pattern.
  *
  * Cách dùng trong TestListener:
- *   ExtentTest test = ExtentReportManager.createTest("Tên test case");
- *   test.pass("Bước 1 thành công");
- *   test.fail("Bước 2 thất bại: " + message);
- *   // Gọi flush() khi kết thúc toàn bộ suite
- *   ExtentReportManager.flush();
+ * ExtentTest test = ExtentReportManager.createTest("Tên test case");
+ * test.pass("Bước 1 thành công");
+ * test.fail("Bước 2 thất bại: " + message);
+ * // Gọi flush() khi kết thúc toàn bộ suite
+ * ExtentReportManager.flush();
  *
  * Output: target/extent-reports/ExtentReport.html
  */
@@ -24,7 +24,8 @@ public class ExtentReportManager {
     // ThreadLocal để mỗi thread test có ExtentTest riêng (parallel-safe)
     private static final ThreadLocal<ExtentTest> extentTestThreadLocal = new ThreadLocal<>();
 
-    private ExtentReportManager() {}
+    private ExtentReportManager() {
+    }
 
     // =====================================================================
     // Khởi tạo ExtentReports (gọi 1 lần khi suite bắt đầu)
@@ -40,6 +41,16 @@ public class ExtentReportManager {
             sparkReporter.config().setTheme(Theme.DARK);
             sparkReporter.config().setEncoding("UTF-8");
             sparkReporter.config().setTimeStampFormat("HH:mm:ss dd/MM/yyyy");
+
+            String customCss = "body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif !important; background: linear-gradient(135deg, #1e1e2f 0%, #252542 100%) !important; }"
+                    + ".header { background-color: rgba(30, 30, 47, 0.9) !important; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }"
+                    + ".card { background: rgba(40, 40, 60, 0.6) !important; border-radius: 16px !important; border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); backdrop-filter: blur(8px); }"
+                    + ".badge-success { background: linear-gradient(135deg, #11998e, #38ef7d) !important; box-shadow: 0 4px 15px rgba(56, 239, 125, 0.3); }"
+                    + ".badge-danger { background: linear-gradient(135deg, #ff416c, #ff4b2b) !important; box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3); }"
+                    + ".test-name { font-weight: 600 !important; letter-spacing: 0.5px; }"
+                    + ".nav-wrapper { background: transparent !important; }"
+                    + ".brand-logo { display: none !important; }";
+            sparkReporter.config().setCss(customCss);
 
             extentReports = new ExtentReports();
             extentReports.attachReporter(sparkReporter);

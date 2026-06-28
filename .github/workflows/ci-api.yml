@@ -8,6 +8,11 @@ on:
   repository_dispatch:
     types: [run-api-tests]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   api-tests:
     name: Run API Tests
@@ -68,3 +73,26 @@ jobs:
           name: extent-reports-api
           path: target/extent-reports/
           retention-days: 7
+
+  deploy-pages:
+    name: Deploy Reports to GitHub Pages
+    needs: api-tests
+    if: github.ref == 'refs/heads/main' && always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Extent Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: extent-reports-api
+          path: public
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
