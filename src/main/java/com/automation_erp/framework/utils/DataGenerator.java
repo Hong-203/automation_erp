@@ -34,15 +34,15 @@ public final class DataGenerator {
      * VD: "WH-TEST-20240701143022"
      */
     public static String generateWarehouseCode() {
-        return "WH-TEST-" + LocalDateTime.now().format(TIMESTAMP_FMT);
+        return "WH-TEST-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
 
     /**
      * Sinh mã kho test với prefix tùy chỉnh.
-     * VD: generateWarehouseCode("BRANCH") → "WH-BRANCH-20240701143022"
+     * VD: generateWarehouseCode("BRANCH") → "WH-BRANCH-A1B2C3D4"
      */
     public static String generateWarehouseCode(String suffix) {
-        return "WH-" + suffix.toUpperCase() + "-" + LocalDateTime.now().format(TIMESTAMP_FMT);
+        return "WH-" + suffix.toUpperCase() + "-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
 
     // =====================================================================
@@ -50,20 +50,20 @@ public final class DataGenerator {
     // =====================================================================
 
     /**
-     * Sinh mã SKU test duy nhất theo timestamp.
-     * VD: "SKU-TEST-20240701143022"
+     * Sinh mã SKU test duy nhất.
+     * VD: "SKU-TEST-A1B2C3D4"
      */
     public static String generateSkuCode() {
-        return "SKU-TEST-" + LocalDateTime.now().format(TIMESTAMP_FMT);
+        return "SKU-TEST-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
 
     /**
      * Sinh mã SKU test với tên sản phẩm.
-     * VD: generateSkuCode("IPHONE15") → "SKU-IPHONE15-20240701143022"
+     * VD: generateSkuCode("IPHONE15") → "SKU-IPHONE15-A1B2C3D4"
      */
     public static String generateSkuCode(String productName) {
         return "SKU-" + productName.toUpperCase().replace(" ", "_")
-               + "-" + LocalDateTime.now().format(TIMESTAMP_FMT);
+               + "-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
     }
 
     // =====================================================================

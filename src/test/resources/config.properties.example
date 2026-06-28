@@ -18,7 +18,7 @@ ui.mock=false
 
 # Browser config
 browser=chrome
-headless=false
+headless=true
 timeout.seconds=15
 
 # Tài khoản admin
