@@ -46,6 +46,11 @@ public class InboundClient {
         return getInboundList(token, null);
     }
 
+    /** PATCH /inbound-documents/{id} — Cập nhật thông tin phiếu nháp */
+    public static Response updateInbound(String token, String id, Object payload) {
+        return ApiClient.patch(ApiEndpoints.path(ApiEndpoints.INBOUND_BY_ID, id), token, payload);
+    }
+
     /** GET /inbound-documents/{id} — Lấy chi tiết phiếu nhập */
     public static Response getInboundById(String token, String id) {
         return ApiClient.get(ApiEndpoints.path(ApiEndpoints.INBOUND_BY_ID, id), token, null);
@@ -83,10 +88,19 @@ public class InboundClient {
     public static Response postReceipt(String token, String id) {
         return postReceipt(token, id, null);
     }
-
     /** POST /inbound-documents/{id}/record-loss — Ghi nhận hao hụt khi nhập kho */
     public static Response recordLoss(String token, String id, Object payload) {
         return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_RECORD_LOSS, id), token, payload);
+    }
+
+    /** POST /inbound-documents/{id}/post-receipt — Thực tế nhập kho */
+    public static Response postReceipt(String token, String id, String idempotencyKey, Object payload) {
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_POST_RECEIPT, id), token, payload, idempotencyKey);
+    }
+
+    /** POST /inbound-documents/{id}/post-receipt — Không dùng idempotency key */
+    public static Response postReceipt(String token, String id, Object payload) {
+        return postReceipt(token, id, null, payload);
     }
 
     /** POST /inbound-documents/{id}/reject — Từ chối phiếu nhập */
@@ -95,7 +109,7 @@ public class InboundClient {
     }
 
     /** POST /inbound-documents/{id}/cancel — Hủy phiếu nhập (chỉ được hủy khi chưa hoàn tất) */
-    public static Response cancelInbound(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_CANCEL, id), token, null);
+    public static Response cancelInbound(String token, String id, Object payload) {
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_CANCEL, id), token, payload);
     }
 }

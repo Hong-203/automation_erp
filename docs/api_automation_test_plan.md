@@ -19,7 +19,7 @@ Dựa trên tài liệu đặc tả [doc.txt](file:///d:/auto/doc.txt), các API
 
 | Nhóm API | Các Endpoint tiêu biểu | Mức độ ưu tiên | Loại kiểm thử trọng tâm |
 | :--- | :--- | :---: | :--- |
-| **Nhóm 1: Nghiệp vụ Chứng từ & Thay đổi Tồn kho (Core Transactions)** | `/inbound-documents` (submit, approve, post-receipt, reject, cancel)<br>`/outbound-documents` (submit, approve, post-issue, reject, cancel)<br>`/transfer-orders` (submit, approve, dispatch, receive, return, reject, cancel) | **Tier 1 (Critical - 100%)** | Functional, Business Flow, Race Condition, Idempotency, Validation |
+| **Nhóm 1: Nghiệp vụ Chứng từ & Thay đổi Tồn kho (Core Transactions)** | `/inbound-documents` (GET, POST, GET {id}, submit, approve, post-receipt, reject, cancel)<br>`/outbound-documents` (GET, POST, GET {id}, submit, approve, post-issue, reject, cancel)<br>`/transfer-orders` (GET, POST, GET {id}, submit, approve, dispatch, receive, return, reject, cancel) | **Tier 1 (Critical - 100%)** | Functional, Business Flow, Race Condition, Idempotency, Validation |
 | **Nhóm 2: Thiết lập Master Data (Warehouses & Scopes)** | `/warehouses`<br>`/warehouses/{id}`<br>`/warehouses/{id}/enable`<br>`/warehouses/{id}/disable`<br>`/warehouse-scopes` | **Tier 2 (High - 90%)** | Functional, Security, Boundary, Data Relationship (Cây kho) |
 | **Nhóm 3: Truy vấn & Báo cáo (Query & Reporting)** | `/inventory/balances`<br>`/in-transit-ledger`<br>`/stock-movements`<br>`/reports/inventory-xnt`<br>`/document-status-history` | **Tier 3 (Medium - 70%)** | Query performance, Filter & Search verification, Data reconciliation |
 | **Nhóm 4: Tính năng ngoài MVP (Non-MVP)** | `/safe-stock-configs`<br>`/stock-requests`<br>`/inventory-snapshots` | **Tier 4 (Low - Tùy chọn)** | Chờ triển khai ở giai đoạn sau (Sau MVP) |
@@ -111,12 +111,18 @@ Sử dụng các công cụ kiểm thử hiệu năng/tải để gửi đồng 
 6.  **TC-API-IN-06 (Positive):** Thực hiện nhập kho thực tế cho phiếu đã duyệt $\rightarrow$ Trạng thái chuyển sang `Đã nhập kho`, tồn kho khả dụng (Available Stock) của sản phẩm tăng tương ứng, tạo 01 bản ghi Stock Movement với loại giao dịch là "Nhập kho".
 7.  **TC-API-IN-07 (Idempotency):** Gửi lại request thực hiện nhập kho của phiếu trên $\rightarrow$ Hệ thống trả về kết quả cũ, không tăng thêm tồn kho.
 8.  **TC-API-IN-08 (State Machine):** Thực hiện hủy phiếu nhập kho đã ở trạng thái `Đã nhập kho` $\rightarrow$ Hệ thống chặn và báo lỗi (Không được hủy phiếu đã hoàn tất).
+9.  **TC-API-IN-09 (Reject Flow):** Tạo phiếu $\rightarrow$ Gửi duyệt $\rightarrow$ Quản lý gọi API từ chối (`reject`) $\rightarrow$ Phiếu chuyển trạng thái `Từ chối`. Gọi tiếp API duyệt hoặc nhập kho sẽ bị chặn (HTTP 409).
+10. **TC-API-IN-10 (Cancel Flow):** Tạo phiếu $\rightarrow$ Gọi API hủy phiếu (`cancel`) $\rightarrow$ Phiếu chuyển trạng thái `Đã hủy`.
+11. **TC-API-IN-11 (Data Verification):** Gọi API `GET /inbound-documents/{id}` sau khi thay đổi trạng thái $\rightarrow$ Kiểm tra `status` trả về khớp với hành động vừa thực hiện.
 
 ### 4.2. Kịch bản cho luồng Xuất kho (Outbound Process)
 1.  **TC-API-OUT-01 (Boundary):** Tạo phiếu xuất kho với số lượng xuất vượt quá tồn kho khả dụng hiện tại $\rightarrow$ Gửi duyệt $\rightarrow$ Duyệt phiếu xuất $\rightarrow$ Hệ thống validate tồn kho thất bại và trả về lỗi không đủ tồn kho khả dụng.
 2.  **TC-API-OUT-02 (Positive Flow):** Tạo phiếu xuất kho với số lượng nhỏ hơn tồn khả dụng $\rightarrow$ Gửi duyệt $\rightarrow$ Phê duyệt $\rightarrow$ Thực hiện xuất kho thực tế $\rightarrow$ Trạng thái chuyển sang `Đã xuất kho`, tồn kho khả dụng giảm, ghi nhận Stock Movement loại "Xuất kho".
 3.  **TC-API-OUT-03 (Idempotency):** Gọi lại API thực hiện xuất kho lần 2 $\rightarrow$ Hệ thống báo lỗi hoặc trả về kết quả cũ, không trừ tồn kho thêm.
 4.  **TC-API-OUT-04 (Data Scope):** Thực hiện xuất kho từ Kho X nhưng kho này đã bị `Disable` (Ngừng hoạt động) $\rightarrow$ Hệ thống báo lỗi và chặn nghiệp vụ xuất.
+5.  **TC-API-OUT-05 (Reject Flow):** Tạo phiếu xuất $\rightarrow$ Gửi duyệt $\rightarrow$ Quản lý gọi API từ chối (`reject`) $\rightarrow$ Trạng thái chuyển `Từ chối`. Các API duyệt/xuất tiếp theo bị chặn.
+6.  **TC-API-OUT-06 (Cancel Flow):** Tạo phiếu xuất $\rightarrow$ Ở trạng thái Nháp hoặc Chờ duyệt, gọi API hủy (`cancel`) $\rightarrow$ Trạng thái chuyển `Đã hủy`. Tồn kho (nếu bị giữ chỗ) được giải phóng.
+7.  **TC-API-OUT-07 (Data Verification):** Gọi API `GET /outbound-documents/{id}` $\rightarrow$ Xác thực các thay đổi trạng thái được cập nhật chính xác trên response JSON.
 
 ### 4.3. Kịch bản cho luồng Điều chuyển kho (Transfer Process)
 1.  **TC-API-TR-01 (Constraint):** Tạo phiếu điều chuyển giữa Kho A và Kho A (kho nguồn trùng kho đích) $\rightarrow$ API báo lỗi HTTP 400.
@@ -139,6 +145,9 @@ Sử dụng các công cụ kiểm thử hiệu năng/tải để gửi đồng 
     *   Tạo luồng điều chuyển mới, xuất kho nguồn thành công (hàng đang In Transit).
     *   Gọi API trả lại điều chuyển (`return`) do kho đích từ chối nhận $\rightarrow$ Trạng thái phiếu chuyển sang `Bị trả lại` hoặc `Hoàn tất trả lại`.
     *   Kiểm tra tồn kho: Hàng In Transit giảm về 0, tồn khả dụng hoàn lại về kho nguồn ban đầu.
+6.  **TC-API-TR-06 (Reject Flow):** Tạo phiếu điều chuyển $\rightarrow$ Gửi duyệt $\rightarrow$ Quản lý gọi API từ chối (`reject`) $\rightarrow$ Trạng thái chuyển `Từ chối`.
+7.  **TC-API-TR-07 (Cancel Flow):** Tạo phiếu điều chuyển $\rightarrow$ Gọi API hủy (`cancel`) khi chưa xuất kho $\rightarrow$ Trạng thái chuyển `Đã hủy`.
+8.  **TC-API-TR-08 (Data Verification):** Gọi API `GET /transfer-orders/{id}` $\rightarrow$ Kiểm tra thông tin trạng thái và dữ liệu điều chuyển phản ánh chính xác các thao tác trước đó.
 
 ---
 

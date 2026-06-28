@@ -26,6 +26,12 @@ public class AuthManager {
      * @return Auth Token
      */
     public static synchronized String getToken(String email, String password) {
+        // Ưu tiên đọc token tĩnh từ config (nếu có)
+        String staticToken = com.automation_erp.framework.config.ConfigReader.getProperty("auth.token");
+        if (staticToken != null && !staticToken.trim().isEmpty()) {
+            return staticToken;
+        }
+
         TokenInfo info = tokenCache.get(email);
         long currentTime = System.currentTimeMillis();
 
