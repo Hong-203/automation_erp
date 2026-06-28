@@ -37,15 +37,17 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
 
         // Build request dùng Model thay vì Map
         ItemDetail item = ItemDetail.builder()
-                .sku((String) testData.get("sku"))
-                .quantity((Integer) testData.get("quantity"))
-                .price((Double) testData.get("price"))
+                .productId(3) // mock productId thay cho sku
+                .qtyPlanned((Integer) testData.get("quantity"))
+                .unitCost(testData.containsKey("price") ? (Double) testData.get("price") : 50000.0)
                 .build();
 
         InboundRequest inboundPayload = InboundRequest.builder()
-                .warehouseCode((String) testData.get("warehouseCode"))
-                .items(List.of(item))
-                .notes("API Automation Inbound Test")
+                .docNo("NK-" + System.currentTimeMillis())
+                .docDate("2026-06-29")
+                .dstWarehouseId(1)
+                .lines(List.of(item))
+                .note("API Automation Inbound Test")
                 .build();
 
         // Step 1: Tạo nháp
@@ -63,7 +65,8 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
 
         // Step 4: Nhập kho thực tế (với idempotency key)
         String idempotencyKey = (String) testData.get("idempotencyKey");
-        Response receiptRes = InboundClient.postReceipt(staffToken, inboundId, idempotencyKey);
+        Object payload = Map.of("lines", List.of(Map.of("id", 1))); // Mock line id for stub
+        Response receiptRes = InboundClient.postReceipt(staffToken, inboundId, idempotencyKey, payload);
         System.out.println("[API Strategy] Nhập kho hoàn tất: Status=" + receiptRes.getStatusCode());
 
         return inboundId;
@@ -90,8 +93,8 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
 
         // Build request
         ItemDetail item = ItemDetail.builder()
-                .sku((String) testData.get("sku"))
-                .quantity((Integer) testData.get("quantity"))
+                .productId(3)
+                .qtyPlanned((Integer) testData.get("quantity"))
                 .build();
 
         OutboundRequest outboundPayload = OutboundRequest.builder()
@@ -143,8 +146,8 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
 
         // Build request
         ItemDetail item = ItemDetail.builder()
-                .sku((String) testData.get("sku"))
-                .quantity((Integer) testData.get("quantity"))
+                .productId(3)
+                .qtyPlanned((Integer) testData.get("quantity"))
                 .build();
 
         TransferRequest transferPayload = TransferRequest.builder()

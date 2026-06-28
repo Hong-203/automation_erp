@@ -1,41 +1,35 @@
 package com.automation_erp.framework.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Dòng chi tiết sản phẩm dùng chung cho Inbound, Outbound và Transfer request.
- *
- * Dùng @Builder để tạo instance:
- *   ItemDetail item = ItemDetail.builder()
- *       .sku("SKU-IPHONE15")
- *       .quantity(50)
- *       .price(1200.0)
- *       .build();
- */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ItemDetail {
 
-    /** Mã sản phẩm (SKU) - bắt buộc */
-    private String sku;
+    // ID của dòng, dùng khi update phiếu
+    private Integer id;
 
-    /** Số lượng - bắt buộc, phải > 0 */
-    private Integer quantity;
+    // ID của dòng, dùng riêng cho API post-receipt/dispatch
+    @JsonProperty("line_id")
+    private Integer lineId;
 
-    /**
-     * Đơn giá nhập - chỉ dùng cho Inbound.
-     * MVP: lưu để phục vụ mở rộng sau, không ảnh hưởng tồn kho.
-     * Có thể null cho Outbound và Transfer.
-     */
-    private Double price;
+    @JsonProperty("product_id")
+    private Integer productId;
 
-    /** Ghi chú cho dòng sản phẩm (tùy chọn) */
-    @JsonProperty("line_note")
-    private String lineNote;
+    @JsonProperty("qty_planned")
+    private Integer qtyPlanned;
+
+    @JsonProperty("qty_actual")
+    private Integer qtyActual;
+
+    @JsonProperty("unit_cost")
+    private Double unitCost;
 }
