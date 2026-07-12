@@ -26,3 +26,15 @@ admin.password=StagingSecure123!
 default.warehouse.id=1
 default.supplier.id=1
 default.product.id=3
+
+# Bật/tắt tự động chụp ảnh màn hình khi UI test thất bại
+ui.screenshot.on.failure=true
+
+# Cấu hình Remote WebDriver chạy song song/phân tán (Mặc định tắt)
+remote.web.driver=false
+selenium.grid.url=http://localhost:4444/wd/hub
+browserstack.username=YOUR_BROWSERSTACK_USERNAME
+browserstack.key=YOUR_BROWSERSTACK_ACCESS_KEY
+
+# Bật/tắt chạy các test case Demo (DataDrivenTest / AssertJ Demo)
+run.demo.tests=false

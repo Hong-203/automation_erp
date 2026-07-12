@@ -13,6 +13,8 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.File;
+import java.io.ByteArrayInputStream;
+import io.qameta.allure.Allure;
 
 /**
  * TestNG Listener kết nối kết quả test với ExtentReports.
@@ -140,6 +142,14 @@ public class TestListener implements ITestListener {
      */
     private void captureAndAttachScreenshot(ExtentTest test, String testName) {
         try {
+            // Kiểm tra cấu hình bật/tắt chụp màn hình từ config
+            String screenshotOnFailureStr = ConfigReader.getProperty("ui.screenshot.on.failure");
+            boolean isScreenshotEnabled = screenshotOnFailureStr == null || Boolean.parseBoolean(screenshotOnFailureStr.trim());
+            if (!isScreenshotEnabled) {
+                System.out.println("[TestListener] Bỏ qua chụp ảnh màn hình do ui.screenshot.on.failure = false");
+                return;
+            }
+
             String executionType = ConfigReader.getExecutionType();
             if (!"UI".equalsIgnoreCase(executionType)) {
                 return; // Chỉ chụp ảnh khi chạy UI test
@@ -171,6 +181,9 @@ public class TestListener implements ITestListener {
             String base64 = java.util.Base64.getEncoder().encodeToString(screenshotBytes);
             test.fail("📸 Screenshot lúc thất bại:",
                 MediaEntityBuilder.createScreenCaptureFromBase64String(base64, testName).build());
+
+            // Đính kèm ảnh vào Allure Report
+            Allure.addAttachment("Screenshot lúc thất bại - " + testName, new ByteArrayInputStream(screenshotBytes));
 
         } catch (Exception e) {
             System.err.printf("[TestListener] Không thể chụp ảnh màn hình cho test '%s': %s%n",

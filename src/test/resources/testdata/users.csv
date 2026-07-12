@@ -1,0 +1,4 @@
+username,password,role
+admin@erb.vn,12345678,admin
+staff_wh_01@erb.vn,StaffSecure123!,staff
+guest@erb.vn,GuestPass123!,guest

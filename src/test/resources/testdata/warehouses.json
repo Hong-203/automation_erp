@@ -1,0 +1,12 @@
+[
+  {
+    "code": "WH-DEV-01",
+    "name": "Kho phát triển số 1",
+    "type": "distribution"
+  },
+  {
+    "code": "WH-STG-02",
+    "name": "Kho Staging số 2",
+    "type": "fulfillment"
+  }
+]

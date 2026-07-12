@@ -26,3 +26,15 @@ admin.password=ProdSuperSecureSecretKey123!
 default.warehouse.id=10
 default.supplier.id=5
 default.product.id=12
+
+# Bật/tắt tự động chụp ảnh màn hình khi UI test thất bại (production thường tắt để tăng performance)
+ui.screenshot.on.failure=false
+
+# Cấu hình Remote WebDriver chạy song song/phân tán (Mặc định tắt)
+remote.web.driver=false
+selenium.grid.url=http://localhost:4444/wd/hub
+browserstack.username=YOUR_BROWSERSTACK_USERNAME
+browserstack.key=YOUR_BROWSERSTACK_ACCESS_KEY
+
+# Bật/tắt chạy các test case Demo (DataDrivenTest / AssertJ Demo)
+run.demo.tests=false

@@ -7,9 +7,6 @@
 base.url=https://your-app-url.com
 api.base.url=https://your-app-url.com/api/v1
 
-# Token tĩnh (tùy chọn — hiện tại framework dùng AuthManager nên có thể bỏ trống)
-auth.token=
-
 execution.type=API
 
 # Health check mock flags
@@ -33,3 +30,15 @@ admin.password=YOUR_ADMIN_PASSWORD
 default.warehouse.id=1
 default.supplier.id=1
 default.product.id=3
+
+# Bật/tắt tự động chụp ảnh màn hình khi UI test thất bại
+ui.screenshot.on.failure=true
+
+# Cấu hình Remote WebDriver chạy song song/phân tán (Mặc định tắt)
+remote.web.driver=false
+selenium.grid.url=http://localhost:4444/wd/hub
+browserstack.username=YOUR_BROWSERSTACK_USERNAME
+browserstack.key=YOUR_BROWSERSTACK_ACCESS_KEY
+
+# Bật/tắt chạy các test case Demo (DataDrivenTest / AssertJ Demo)
+run.demo.tests=true
