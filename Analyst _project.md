@@ -1,7 +1,6 @@
 # Báo cáo Phân tích Kiến trúc Framework Kiểm thử: `automation_erp`
 
 **Repo:** https://github.com/Hong-203/automation_erp
-**Người đánh giá:** Principal Automation Test Architect (10+ năm kinh nghiệm API/UI framework cho hệ thống ERP/Web/Mobile)
 **Stack công nghệ:** Java 17 · Maven · TestNG 7.9 · RestAssured 5.4 · Selenium 4.18 · WebDriverManager 5.7 · ExtentReports 5.1 · Allure 2.26 · AssertJ 3.25 · Lombok · Log4j2
 
 ---
