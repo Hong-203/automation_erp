@@ -106,8 +106,7 @@ public class UiWorkFlowStrategy implements WorkFlowStrategy {
         // loginPage.login(ConfigReader.getProperty("admin.username"), ConfigReader.getProperty("admin.password"));
         // outboundPage.confirmIssue();
 
-        System.out.println("[UI Strategy] TODO: OutboundPage chưa được implement.");
-        return "outbound-ui-id";
+        throw new UnsupportedOperationException("Outbound flow qua UI chưa được phát triển thực tế.");
     }
 
     @Override
@@ -144,7 +143,6 @@ public class UiWorkFlowStrategy implements WorkFlowStrategy {
         // Step 3: Nhận hàng tại kho đích
         // transferPage.receiveTransfer(); // Hoàn tất
 
-        System.out.println("[UI Strategy] TODO: TransferPage chưa được implement.");
-        return "transfer-ui-id";
+        throw new UnsupportedOperationException("Transfer flow qua UI chưa được phát triển thực tế.");
     }
 }

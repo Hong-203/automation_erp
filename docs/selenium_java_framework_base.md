@@ -39,17 +39,19 @@ automation_erp/
     │   │
     │   ├── utils/                       # Tiện ích dùng chung
     │   │   ├── DataGenerator.java       # Sinh mã kho/SKU/UUID ngẫu nhiên theo timestamp
-    │   │   ├── JsonUtils.java           # Đọc file JSON, serialize/deserialize object
+    │   │   ├── JsonUtils.java           # Serialization/Deserialization JSON
+    │   │   ├── CsvUtils.java            # Đọc dữ liệu test từ tệp CSV (Hỗ trợ regex nâng cao & classpath)
+    │   │   ├── JsonReader.java          # Đọc dữ liệu test từ tệp JSON qua classpath
     │   │   ├── DateUtils.java           # Format datetime, tính khoảng thời gian cho filter params
     │   │   └── AssertionUtils.java      # Bọc TestNG Assert với message log rõ ràng
     │   │
     │   ├── driver/
-    │   │   ├── DriverFactory.java       # Tạo WebDriver (Chrome/Firefox/Edge, headless mode)
+    │   │   ├── DriverFactory.java       # Tạo WebDriver (Hỗ trợ Local & Remote WebDriver Selenium Grid/BrowserStack)
     │   │   └── DriverManager.java       # ThreadLocal<WebDriver> — parallel-safe
     │   │
     │   ├── api/
-    │   │   ├── ApiClient.java           # HTTP wrapper: GET/POST/PUT/PATCH/DELETE
-    │   │   ├── AuthManager.java         # Quản lý Token Cache, tự động login và gia hạn token
+    │   │   ├── ApiClient.java           # HTTP wrapper: GET/POST/PUT/PATCH/DELETE (Tích hợp Auto Logging)
+    │   │   ├── AuthManager.java         # Quản lý Token Cache (An toàn đa luồng bằng ConcurrentHashMap.compute)
     │   │   └── clients/                 # Client theo nhóm endpoint (1 class per nhóm)
     │   │       ├── WarehouseClient.java # CRUD + enable/disable kho
     │   │       ├── InboundClient.java   # Nhập kho: create/submit/approve/post-receipt/reject/cancel
@@ -65,18 +67,23 @@ automation_erp/
     │   │   └── TransferRequest.java
     │   │
     │   ├── pages/                       # Page Object Models — UI Testing
-    │   │   ├── BasePage.java            # Wrapper đầy đủ: wait, click, input, dropdown, scroll, alert...
+    │   │   ├── BasePage.java            # Wrapper đầy đủ: wait, click, input, dropdown, scroll, alert, screenshot...
     │   │   ├── LoginPage.java
     │   │   └── InboundPage.java
     │   │
     │   ├── strategy/
-    │   │   ├── WorkFlowStrategy.java    # Interface: executeInboundFlow / executeOutboundFlow / executeTransferFlow
-    │   │   ├── ApiWorkFlowStrategy.java # Implement qua RestAssured
-    │   │   ├── UiWorkFlowStrategy.java  # Implement qua Selenium
-    │   │   └── StrategyFactory.java     # Đọc config → trả về đúng Strategy
+    │   │   ├── InboundStrategy.java     # Interface nghiệp vụ Nhập kho
+    │   │   ├── OutboundStrategy.java    # Interface nghiệp vụ Xuất kho
+    │   │   ├── TransferStrategy.java    # Interface nghiệp vụ Điều chuyển kho
+    │   │   ├── WorkFlowStrategy.java    # Interface chung kế thừa 3 interface nghiệp vụ
+    │   │   ├── ApiWorkFlowStrategy.java # Chạy test qua RestAssured
+    │   │   ├── UiWorkFlowStrategy.java  # Chạy test qua Selenium (Ném Exception nếu chưa code UI)
+    │   │   └── StrategyFactory.java     # Cung cấp strategy theo từng nghiệp vụ chuyên biệt
     │   │
     │   ├── listeners/
-    │   │   └── TestListener.java        # ITestListener: log pass/fail/skip + thời gian chạy
+    │   │   ├── TestListener.java        # ITestListener: log pass/fail/skip + tự động chụp ảnh đính kèm báo cáo
+    │   │   ├── RetryAnalyzer.java       # Tự động chạy lại test case lỗi (Flaky tests)
+    │   │   └── AnnotationTransformer.java # Tự động gắn bộ RetryAnalyzer cho toàn bộ annotation @Test
     │   │
     │   └── reporters/
     │       └── ExtentReportManager.java # ExtentReports v5: Singleton + ThreadLocal, dark theme HTML
@@ -84,17 +91,22 @@ automation_erp/
     └── test/
         ├── java/com/automation_erp/tests/
         │   ├── BaseTest.java            # @BeforeMethod/@AfterMethod: khởi tạo driver, teardown
+        │   ├── demo/
+        │   │   └── DataDrivenTest.java  # Demo nạp dữ liệu từ CSV/JSON & Fluent assertions bằng AssertJ
         │   ├── fixtures/                # Test Data Isolation
         │   │   ├── WarehouseFixture.java # Tạo kho test + tự động cleanup
         │   │   └── ProductFixture.java  # Quản lý SKU test
-        │   ├── m1/
-        │   │   └── WarehouseTest.java
-        │   └── m2/
-        │       └── InboundWorkflowTest.java
+        │   ├── warehouse/
+        │   │   └── WarehouseTest.java   # Kiểm thử module Quản lý kho
+        │   └── inbound/
+        │       └── InboundWorkflowTest.java # Kiểm thử luồng nghiệp vụ Nhập kho
         │
         └── resources/
+            ├── testdata/                # Thư mục lưu dữ liệu test tĩnh ngoài (users.csv, warehouses.json)
             ├── config.properties        # ⚠️ KHÔNG commit — copy từ config.properties.example
             ├── config.properties.example
+            ├── config-staging.properties.example
+            ├── config-prod.properties.example
             ├── testng.xml               # Suite config: parallel, listener registration
             └── log4j2.xml
 ```

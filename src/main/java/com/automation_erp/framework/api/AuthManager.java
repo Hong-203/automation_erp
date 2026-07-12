@@ -25,29 +25,29 @@ public class AuthManager {
      * @param password Mật khẩu
      * @return Auth Token
      */
-    public static synchronized String getToken(String email, String password) {
+    public static String getToken(String email, String password) {
         // Ưu tiên đọc token tĩnh từ config (nếu có)
         String staticToken = com.automation_erp.framework.config.ConfigReader.getProperty("auth.token");
         if (staticToken != null && !staticToken.trim().isEmpty()) {
             return staticToken;
         }
 
-        TokenInfo info = tokenCache.get(email);
-        long currentTime = System.currentTimeMillis();
+        TokenInfo info = tokenCache.compute(email, (key, existing) -> {
+            long currentTime = System.currentTimeMillis();
+            // Kiểm tra xem token có tồn tại và còn hạn hay không
+            if (existing != null && currentTime < existing.getExpiryTime()) {
+                return existing; // Token còn hợp lệ, lấy từ cache
+            }
 
-        // Kiểm tra xem token có tồn tại và còn hạn hay không
-        if (info != null && currentTime < info.getExpiryTime()) {
-            return info.getToken(); // Token còn hợp lệ, lấy từ cache
-        }
+            // Nếu chưa có, hoặc đã hết hạn -> Gọi API lấy token mới
+            System.out.println("[AuthManager] Đang gọi API lấy token mới cho user: " + key);
+            String newToken = ApiClient.login(key, password);
 
-        // Nếu chưa có, hoặc đã hết hạn -> Gọi API lấy token mới
-        System.out.println("[AuthManager] Đang gọi API lấy token mới cho user: " + email);
-        String newToken = ApiClient.login(email, password);
+            // Trả về đối tượng TokenInfo mới để lưu lại vào cache
+            return new TokenInfo(newToken, currentTime + TOKEN_LIFETIME_MS);
+        });
 
-        // Lưu vào cache kèm theo timestamp hết hạn
-        tokenCache.put(email, new TokenInfo(newToken, currentTime + TOKEN_LIFETIME_MS));
-
-        return newToken;
+        return info.getToken();
     }
 
     /**
