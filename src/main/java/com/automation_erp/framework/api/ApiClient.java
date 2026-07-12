@@ -10,6 +10,13 @@ public class ApiClient {
 
     static {
         RestAssured.baseURI = ConfigReader.getApiBaseUrl();
+        boolean logAll = Boolean.parseBoolean(ConfigReader.getProperty("api.log.all"));
+        if (logAll) {
+            RestAssured.filters(
+                new io.restassured.filter.log.RequestLoggingFilter(),
+                new io.restassured.filter.log.ResponseLoggingFilter()
+            );
+        }
     }
 
     private static RequestSpecification getRequestSpec() {
