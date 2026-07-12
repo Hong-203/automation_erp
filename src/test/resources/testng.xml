@@ -12,6 +12,7 @@
         <classes>
             <class name="com.automation_erp.tests.m1.WarehouseTest"/>
             <class name="com.automation_erp.tests.m2.InboundWorkflowTest"/>
+            <class name="com.automation_erp.tests.demo.DataDrivenTest"/>
         </classes>
     </test>
 </suite>
