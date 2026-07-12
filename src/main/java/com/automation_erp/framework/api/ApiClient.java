@@ -66,17 +66,23 @@ public class ApiClient {
     }
 
     public static String login(String username, String password) {
-        
         Response response = RestAssured.given()
                 .contentType("application/json")
                 .body(Map.of("email", username, "password", password))
                 .post("/auth/login");
-        
+
         if (response.getStatusCode() == 200) {
             String token = response.jsonPath().getString("data.access_token");
-            return (token != null) ? token : response.jsonPath().getString("token");
+            if (token != null && !token.trim().isEmpty()) {
+                return token;
+            }
+            throw new RuntimeException(
+                    String.format("[ApiClient] Login thành công (200) nhưng không tìm thấy token trong response." +
+                            " Body: %s", response.asPrettyString()));
         }
-        
-        return "mocked-token-for-" + username;
+
+        throw new RuntimeException(
+                String.format("[ApiClient] Đăng nhập thất bại cho user '%s'. HTTP Status: %d | Body: %s",
+                        username, response.getStatusCode(), response.asPrettyString()));
     }
 }

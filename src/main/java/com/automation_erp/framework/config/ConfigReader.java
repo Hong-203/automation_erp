@@ -50,4 +50,35 @@ public class ConfigReader {
     public static int getTimeout() {
         return Integer.parseInt(getProperty("timeout.seconds"));
     }
+
+    // =====================================================================
+    // Default Entity IDs (Master Data)
+    // =====================================================================
+
+    /** ID kho mặc định dùng trong test (cấu hình tại default.warehouse.id) */
+    public static int getDefaultWarehouseId() {
+        String val = getProperty("default.warehouse.id");
+        if (val == null || val.trim().isEmpty()) {
+            throw new RuntimeException("[ConfigReader] Thiếu key 'default.warehouse.id' trong config.properties");
+        }
+        return Integer.parseInt(val.trim());
+    }
+
+    /** ID nhà cung cấp mặc định dùng trong test (cấu hình tại default.supplier.id) */
+    public static int getDefaultSupplierId() {
+        String val = getProperty("default.supplier.id");
+        if (val == null || val.trim().isEmpty()) {
+            throw new RuntimeException("[ConfigReader] Thiếu key 'default.supplier.id' trong config.properties");
+        }
+        return Integer.parseInt(val.trim());
+    }
+
+    /** ID sản phẩm mặc định dùng trong test (cấu hình tại default.product.id) */
+    public static int getDefaultProductId() {
+        String val = getProperty("default.product.id");
+        if (val == null || val.trim().isEmpty()) {
+            throw new RuntimeException("[ConfigReader] Thiếu key 'default.product.id' trong config.properties");
+        }
+        return Integer.parseInt(val.trim());
+    }
 }

@@ -18,7 +18,7 @@ public class UiWorkFlowStrategy implements WorkFlowStrategy {
         if (isMock) {
             System.out.println("[UI Strategy] [MOCK MODE] Đang giả lập luồng UI Nhập kho qua trình duyệt...");
             System.out.println("[UI Strategy] [MOCK MODE] Step 1: Điều hướng tới trang đăng nhập.");
-            System.out.println("[UI Strategy] [MOCK MODE] Step 2: Đăng nhập bằng tài khoản Staff thành công.");
+            System.out.println("[UI Strategy] [MOCK MODE] Step 2: Đăng nhập bằng tài khoản Admin thành công.");
             System.out.println("[UI Strategy] [MOCK MODE] Step 3: Tạo phiếu nháp nhập kho thành công.");
             System.out.println("[UI Strategy] [MOCK MODE] Step 4: Gửi duyệt phiếu nhập kho thành công.");
             System.out.println("[UI Strategy] [MOCK MODE] Step 5: Quản lý đăng nhập và duyệt phiếu thành công.");
@@ -37,7 +37,7 @@ public class UiWorkFlowStrategy implements WorkFlowStrategy {
 
         
         loginPage.navigateToLoginPage();
-        loginPage.login(ConfigReader.getProperty("staff.username"), ConfigReader.getProperty("staff.password"));
+        loginPage.login(ConfigReader.getProperty("admin.username"), ConfigReader.getProperty("admin.password"));
 
         
         inboundPage.clickCreateInbound();
@@ -64,7 +64,7 @@ public class UiWorkFlowStrategy implements WorkFlowStrategy {
 
         
         loginPage.navigateToLoginPage();
-        loginPage.login(ConfigReader.getProperty("staff.username"), ConfigReader.getProperty("staff.password"));
+        loginPage.login(ConfigReader.getProperty("admin.username"), ConfigReader.getProperty("admin.password"));
         inboundPage.confirmReceipt();
         System.out.println("[UI Strategy] Nhân viên xác nhận hoàn tất nhập kho.");
 
@@ -87,7 +87,7 @@ public class UiWorkFlowStrategy implements WorkFlowStrategy {
 
         // Step 1: Đăng nhập nhân viên kho
         loginPage.navigateToLoginPage();
-        loginPage.login(ConfigReader.getProperty("staff.username"), ConfigReader.getProperty("staff.password"));
+        loginPage.login(ConfigReader.getProperty("admin.username"), ConfigReader.getProperty("admin.password"));
 
         // TODO: Implement OutboundPage và các bước UI tương ứng:
         // outboundPage.clickCreateOutbound();
@@ -103,7 +103,7 @@ public class UiWorkFlowStrategy implements WorkFlowStrategy {
 
         // Step 3: Nhân viên xác nhận xuất kho
         // loginPage.navigateToLoginPage();
-        // loginPage.login(ConfigReader.getProperty("staff.username"), ConfigReader.getProperty("staff.password"));
+        // loginPage.login(ConfigReader.getProperty("admin.username"), ConfigReader.getProperty("admin.password"));
         // outboundPage.confirmIssue();
 
         System.out.println("[UI Strategy] TODO: OutboundPage chưa được implement.");
@@ -126,7 +126,7 @@ public class UiWorkFlowStrategy implements WorkFlowStrategy {
 
         // Step 1: Đăng nhập nhân viên kho
         loginPage.navigateToLoginPage();
-        loginPage.login(ConfigReader.getProperty("staff.username"), ConfigReader.getProperty("staff.password"));
+        loginPage.login(ConfigReader.getProperty("admin.username"), ConfigReader.getProperty("admin.password"));
 
         // TODO: Implement TransferPage và các bước UI tương ứng:
         // transferPage.clickCreateTransfer();

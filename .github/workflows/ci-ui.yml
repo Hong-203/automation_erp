@@ -62,9 +62,7 @@ jobs:
             -Dbase.url="${{ secrets.BASE_URL }}" \
             -Dapi.base.url="${{ secrets.API_BASE_URL }}" \
             -Dadmin.username="${{ secrets.ADMIN_USERNAME }}" \
-            -Dadmin.password="${{ secrets.ADMIN_PASSWORD }}" \
-            -Dstaff.username="${{ secrets.STAFF_USERNAME }}" \
-            -Dstaff.password="${{ secrets.STAFF_PASSWORD }}"
+            -Dadmin.password="${{ secrets.ADMIN_PASSWORD }}"
 
       - name: Print Surefire failure details
         if: failure()

@@ -6,6 +6,7 @@ import com.automation_erp.framework.models.OutboundRequest;
 import io.restassured.response.Response;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * API Client cho nhóm Outbound Document endpoints:
@@ -29,13 +30,18 @@ public class OutboundClient {
 
     private OutboundClient() {}
 
+    /** Sinh một Idempotency-Key UUID ngẫu nhiên */
+    private static String newKey() {
+        return UUID.randomUUID().toString();
+    }
+
     // =====================================================================
     // CRUD
     // =====================================================================
 
-    /** POST /outbound-documents — Tạo phiếu xuất kho (trạng thái Nháp) */
+    /** POST /outbound-documents — Tạo phiếu xuất kho (trạng thái Nháp). Tự động sinh Idempotency-Key. */
     public static Response createOutbound(String token, OutboundRequest payload) {
-        return ApiClient.post(ApiEndpoints.OUTBOUND_DOCUMENTS, token, payload);
+        return ApiClient.post(ApiEndpoints.OUTBOUND_DOCUMENTS, token, payload, newKey());
     }
 
     /** GET /outbound-documents — Lấy danh sách phiếu xuất kho */
@@ -59,7 +65,7 @@ public class OutboundClient {
 
     /** POST /outbound-documents/{id}/submit — Gửi phiếu chờ duyệt */
     public static Response submitOutbound(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.OUTBOUND_SUBMIT, id), token, null);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.OUTBOUND_SUBMIT, id), token, null, newKey());
     }
 
     /**
@@ -67,7 +73,7 @@ public class OutboundClient {
      * Hệ thống validate available stock tại bước này.
      */
     public static Response approveOutbound(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.OUTBOUND_APPROVE, id), token, null);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.OUTBOUND_APPROVE, id), token, null, newKey());
     }
 
     /**
@@ -84,23 +90,23 @@ public class OutboundClient {
         );
     }
 
-    /** POST /outbound-documents/{id}/post-issue — Không dùng idempotency key */
+    /** POST /outbound-documents/{id}/post-issue — Tự động sinh idempotency key */
     public static Response postIssue(String token, String id) {
-        return postIssue(token, id, null);
+        return postIssue(token, id, newKey());
     }
 
     /** POST /outbound-documents/{id}/record-loss — Ghi nhận hao hụt khi xuất */
     public static Response recordLoss(String token, String id, Object payload) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.OUTBOUND_RECORD_LOSS, id), token, payload);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.OUTBOUND_RECORD_LOSS, id), token, payload, newKey());
     }
 
     /** POST /outbound-documents/{id}/reject — Từ chối phiếu xuất */
     public static Response rejectOutbound(String token, String id, Object payload) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.OUTBOUND_REJECT, id), token, payload);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.OUTBOUND_REJECT, id), token, payload, newKey());
     }
 
     /** POST /outbound-documents/{id}/cancel — Hủy phiếu xuất */
     public static Response cancelOutbound(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.OUTBOUND_CANCEL, id), token, null);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.OUTBOUND_CANCEL, id), token, null, newKey());
     }
 }
