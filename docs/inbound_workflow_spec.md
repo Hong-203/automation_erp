@@ -8,7 +8,7 @@ Tài liệu này mô tả chi tiết logic, cấu trúc dữ liệu, và các lu
   1. `draft` (Nháp): Trạng thái khởi tạo. Có thể cập nhật (`PATCH`), gửi duyệt (`submit`), hủy (`cancel`).
   2. `pending` (Chờ duyệt): Chuyển từ `draft`. Có thể phê duyệt (`approve`) hoặc từ chối (`reject`).
   3. `approved` (Đã duyệt): Chuyển từ `pending`. Có thể thực hiện nhập kho thực tế (`post-receipt`).
-  4. `completed` (Hoàn thành): Chuyển từ `approved` sau khi `post-receipt` thành công.
+  4. `received` (Đã nhập kho): Chuyển từ `approved` sau khi `post-receipt` thành công.
   5. `rejected` (Từ chối): Chuyển từ `pending`. Trạng thái cuối.
   6. `cancelled` (Đã hủy): Chuyển từ `draft`. Trạng thái cuối.
 - **Xác thực:** Yêu cầu Admin Token (`adminToken`) đối với toàn bộ các bước.
@@ -37,7 +37,7 @@ Tài liệu này mô tả chi tiết logic, cấu trúc dữ liệu, và các lu
 - `completion_type` (String): Đánh dấu trạng thái nhập (Dùng riêng cho `post-receipt`). Ví dụ: `"full"`.
 
 ## 3. Chi tiết các luồng kiểm thử (Test Cases)
-Toàn bộ mã nguồn nằm ở lớp `com.automation_erp.tests.m2.InboundWorkflowTest`. Sử dụng `DateUtils.todayAsIso()` cho tất cả các trường `doc_date`.
+Toàn bộ mã nguồn nằm ở lớp `com.automation_erp.tests.inbound.InboundWorkflowTest`. Sử dụng `DateUtils.todayAsIso()` cho tất cả các trường `doc_date`.
 
 ### Luồng 1: Happy Path - Luồng Nhập kho thành công
 Bao gồm 5 Test Cases liên tiếp (`dependsOnMethods`). Cần sử dụng các biến toàn cục (Global Variables) để truyền dữ liệu giữa các Test:
@@ -94,7 +94,7 @@ Bao gồm 5 Test Cases liên tiếp (`dependsOnMethods`). Cần sử dụng các
   ```
 - **Assertion:** 
   - Status Code = `200 OK`.
-  - `data.status` == `"completed"`.
+  - `data.status` == `"received"`.
   - Kiểm tra `data.stock_movements` Not Null (Chứng minh tồn kho đã biến động).
 
 ---

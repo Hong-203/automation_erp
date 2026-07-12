@@ -51,3 +51,10 @@ desktop.ini
 # Screenshots (nếu Selenium lưu)
 # ===========================
 screenshots/
+
+# ===========================
+# Allure Reports
+# ===========================
+allure-results/
+allure-report/
+.allure/
