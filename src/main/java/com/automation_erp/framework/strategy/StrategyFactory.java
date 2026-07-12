@@ -16,4 +16,19 @@ public class StrategyFactory {
                 throw new IllegalArgumentException("Unsupported execution type in config: " + executionType);
         }
     }
+
+    /** Lấy strategy chuyên biệt cho nghiệp vụ Nhập kho (Inbound) */
+    public static InboundStrategy getInboundStrategy() {
+        return getStrategy();
+    }
+
+    /** Lấy strategy chuyên biệt cho nghiệp vụ Xuất kho (Outbound) */
+    public static OutboundStrategy getOutboundStrategy() {
+        return getStrategy();
+    }
+
+    /** Lấy strategy chuyên biệt cho nghiệp vụ Điều chuyển kho (Transfer) */
+    public static TransferStrategy getTransferStrategy() {
+        return getStrategy();
+    }
 }

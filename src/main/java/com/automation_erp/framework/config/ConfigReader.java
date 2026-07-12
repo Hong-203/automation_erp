@@ -8,13 +8,29 @@ public class ConfigReader {
     private static Properties properties;
 
     static {
-        try {
-            properties = new Properties();
-            FileInputStream input = new FileInputStream("src/test/resources/config.properties");
+        properties = new Properties();
+        String env = System.getProperty("env");
+        String fileName = "config.properties";
+        if (env != null && !env.trim().isEmpty()) {
+            fileName = "config-" + env.trim().toLowerCase() + ".properties";
+        }
+        
+        String path = "src/test/resources/" + fileName;
+        System.out.println("[ConfigReader] Đang tải cấu hình môi trường từ: " + path);
+        
+        try (FileInputStream input = new FileInputStream(path)) {
             properties.load(input);
-            input.close();
         } catch (IOException e) {
-            throw new RuntimeException("Could not load config.properties file", e);
+            if (!"config.properties".equals(fileName)) {
+                System.err.println("[ConfigReader] [Cảnh báo] Không thể tải " + path + ". Đang fallback tải config.properties...");
+                try (FileInputStream fallbackInput = new FileInputStream("src/test/resources/config.properties")) {
+                    properties.load(fallbackInput);
+                } catch (IOException ex) {
+                    throw new RuntimeException("Không thể load file config.properties mặc định", ex);
+                }
+            } else {
+                throw new RuntimeException("Không thể load file config.properties mặc định", e);
+            }
         }
     }
 

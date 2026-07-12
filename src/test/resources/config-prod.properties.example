@@ -1,0 +1,28 @@
+# ============================================================
+# config-prod.properties.example
+# Sao chép file này thành config-prod.properties và điền giá trị thật
+# ============================================================
+
+base.url=https://prod-app-url.com
+api.base.url=https://prod-app-url.com/api/v1
+
+execution.type=API
+
+# Health check mock flags
+api.mock=false
+ui.mock=false
+api.log.all=false
+
+# Browser config
+browser=chrome
+headless=true
+timeout.seconds=30
+
+# Tài khoản admin
+admin.username=prod_admin@erb.vn
+admin.password=ProdSuperSecureSecretKey123!
+
+# Default Entity IDs (Master Data trên môi trường Production)
+default.warehouse.id=10
+default.supplier.id=5
+default.product.id=12
