@@ -6,6 +6,7 @@ import com.automation_erp.framework.models.TransferRequest;
 import io.restassured.response.Response;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * API Client cho nhóm Transfer Order endpoints:
@@ -32,13 +33,18 @@ public class TransferClient {
 
     private TransferClient() {}
 
+    /** Sinh một Idempotency-Key UUID ngẫu nhiên */
+    private static String newKey() {
+        return UUID.randomUUID().toString();
+    }
+
     // =====================================================================
     // CRUD
     // =====================================================================
 
-    /** POST /transfer-orders — Tạo phiếu điều chuyển kho (trạng thái Nháp) */
+    /** POST /transfer-orders — Tạo phiếu điều chuyển kho (trạng thái Nháp). Tự động sinh Idempotency-Key. */
     public static Response createTransfer(String token, TransferRequest payload) {
-        return ApiClient.post(ApiEndpoints.TRANSFER_ORDERS, token, payload);
+        return ApiClient.post(ApiEndpoints.TRANSFER_ORDERS, token, payload, newKey());
     }
 
     /** GET /transfer-orders — Lấy danh sách phiếu điều chuyển */
@@ -62,12 +68,12 @@ public class TransferClient {
 
     /** POST /transfer-orders/{id}/submit — Gửi phiếu chờ duyệt */
     public static Response submitTransfer(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_SUBMIT, id), token, null);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_SUBMIT, id), token, null, newKey());
     }
 
     /** POST /transfer-orders/{id}/approve — Quản lý phê duyệt phiếu điều chuyển */
     public static Response approveTransfer(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_APPROVE, id), token, null);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_APPROVE, id), token, null, newKey());
     }
 
     /**
@@ -78,7 +84,7 @@ public class TransferClient {
      *   - Trạng thái phiếu → "Đang vận chuyển"
      */
     public static Response dispatchTransfer(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_DISPATCH, id), token, null);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_DISPATCH, id), token, null, newKey());
     }
 
     /**
@@ -98,9 +104,9 @@ public class TransferClient {
         );
     }
 
-    /** POST /transfer-orders/{id}/receive — Không dùng idempotency key */
+    /** POST /transfer-orders/{id}/receive — Tự động sinh idempotency key */
     public static Response receiveTransfer(String token, String id) {
-        return receiveTransfer(token, id, null);
+        return receiveTransfer(token, id, newKey());
     }
 
     /**
@@ -108,7 +114,7 @@ public class TransferClient {
      * Hàng hao hụt sẽ bị trừ khỏi In-Transit nhưng không cộng vào kho đích.
      */
     public static Response recordLoss(String token, String id, Object payload) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_RECORD_LOSS, id), token, payload);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_RECORD_LOSS, id), token, payload, newKey());
     }
 
     /**
@@ -119,16 +125,16 @@ public class TransferClient {
      *   - Trạng thái phiếu → "Bị trả lại"
      */
     public static Response returnTransfer(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_RETURN, id), token, null);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_RETURN, id), token, null, newKey());
     }
 
     /** POST /transfer-orders/{id}/reject — Từ chối phiếu điều chuyển */
     public static Response rejectTransfer(String token, String id, Object payload) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_REJECT, id), token, payload);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_REJECT, id), token, payload, newKey());
     }
 
     /** POST /transfer-orders/{id}/cancel — Hủy phiếu điều chuyển (chỉ hủy được trước khi dispatch) */
     public static Response cancelTransfer(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_CANCEL, id), token, null);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.TRANSFER_CANCEL, id), token, null, newKey());
     }
 }

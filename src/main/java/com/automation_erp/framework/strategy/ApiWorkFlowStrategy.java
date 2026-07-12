@@ -1,6 +1,6 @@
 package com.automation_erp.framework.strategy;
 
-import com.automation_erp.framework.api.ApiClient;
+import com.automation_erp.framework.api.AuthManager;
 import com.automation_erp.framework.api.clients.InboundClient;
 import com.automation_erp.framework.api.clients.OutboundClient;
 import com.automation_erp.framework.api.clients.TransferClient;
@@ -30,14 +30,12 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
             return "inbound-mock-123";
         }
 
-        String staffToken = ApiClient.login(ConfigReader.getProperty("staff.username"),
-                                            ConfigReader.getProperty("staff.password"));
-        String adminToken = ApiClient.login(ConfigReader.getProperty("admin.username"),
-                                            ConfigReader.getProperty("admin.password"));
+        String adminToken = AuthManager.getToken(ConfigReader.getProperty("admin.username"),
+                                                  ConfigReader.getProperty("admin.password"));
 
         // Build request dùng Model thay vì Map
         ItemDetail item = ItemDetail.builder()
-                .productId(3) // mock productId thay cho sku
+                .productId(ConfigReader.getDefaultProductId())
                 .qtyPlanned((Integer) testData.get("quantity"))
                 .unitCost(testData.containsKey("price") ? (Double) testData.get("price") : 50000.0)
                 .build();
@@ -45,18 +43,18 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
         InboundRequest inboundPayload = InboundRequest.builder()
                 .docNo("NK-" + System.currentTimeMillis())
                 .docDate("2026-06-29")
-                .dstWarehouseId(1)
+                .dstWarehouseId(ConfigReader.getDefaultWarehouseId())
                 .lines(List.of(item))
                 .note("API Automation Inbound Test")
                 .build();
 
         // Step 1: Tạo nháp
-        Response createRes = InboundClient.createInbound(staffToken, inboundPayload);
+        Response createRes = InboundClient.createInbound(adminToken, inboundPayload);
         String inboundId = createRes.jsonPath().getString("data.id");
         System.out.println("[API Strategy] Tạo phiếu nháp: ID=" + inboundId);
 
         // Step 2: Gửi duyệt
-        InboundClient.submitInbound(staffToken, inboundId);
+        InboundClient.submitInbound(adminToken, inboundId);
         System.out.println("[API Strategy] Đã gửi duyệt phiếu: ID=" + inboundId);
 
         // Step 3: Duyệt phiếu
@@ -65,8 +63,8 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
 
         // Step 4: Nhập kho thực tế (với idempotency key)
         String idempotencyKey = (String) testData.get("idempotencyKey");
-        Object payload = Map.of("lines", List.of(Map.of("id", 1))); // Mock line id for stub
-        Response receiptRes = InboundClient.postReceipt(staffToken, inboundId, idempotencyKey, payload);
+        Object payload = Map.of("lines", List.of(Map.of("id", 1)));
+        Response receiptRes = InboundClient.postReceipt(adminToken, inboundId, idempotencyKey, payload);
         System.out.println("[API Strategy] Nhập kho hoàn tất: Status=" + receiptRes.getStatusCode());
 
         return inboundId;
@@ -86,14 +84,12 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
             return "outbound-mock-123";
         }
 
-        String staffToken = ApiClient.login(ConfigReader.getProperty("staff.username"),
-                                            ConfigReader.getProperty("staff.password"));
-        String adminToken = ApiClient.login(ConfigReader.getProperty("admin.username"),
-                                            ConfigReader.getProperty("admin.password"));
+        String adminToken = AuthManager.getToken(ConfigReader.getProperty("admin.username"),
+                                                  ConfigReader.getProperty("admin.password"));
 
         // Build request
         ItemDetail item = ItemDetail.builder()
-                .productId(3)
+                .productId(ConfigReader.getDefaultProductId())
                 .qtyPlanned((Integer) testData.get("quantity"))
                 .build();
 
@@ -105,12 +101,12 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
                 .build();
 
         // Step 1: Tạo nháp
-        Response createRes = OutboundClient.createOutbound(staffToken, outboundPayload);
+        Response createRes = OutboundClient.createOutbound(adminToken, outboundPayload);
         String outboundId = createRes.jsonPath().getString("data.id");
         System.out.println("[API Strategy] Tạo phiếu xuất nháp: ID=" + outboundId);
 
         // Step 2: Gửi duyệt
-        OutboundClient.submitOutbound(staffToken, outboundId);
+        OutboundClient.submitOutbound(adminToken, outboundId);
         System.out.println("[API Strategy] Đã gửi duyệt phiếu xuất: ID=" + outboundId);
 
         // Step 3: Duyệt (validate available stock tại bước này)
@@ -119,7 +115,7 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
 
         // Step 4: Xuất kho thực tế
         String idempotencyKey = (String) testData.getOrDefault("idempotencyKey", null);
-        Response issueRes = OutboundClient.postIssue(staffToken, outboundId, idempotencyKey);
+        Response issueRes = OutboundClient.postIssue(adminToken, outboundId, idempotencyKey);
         System.out.println("[API Strategy] Xuất kho hoàn tất: Status=" + issueRes.getStatusCode());
 
         return outboundId;
@@ -139,14 +135,12 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
             return "transfer-mock-123";
         }
 
-        String staffToken = ApiClient.login(ConfigReader.getProperty("staff.username"),
-                                            ConfigReader.getProperty("staff.password"));
-        String adminToken = ApiClient.login(ConfigReader.getProperty("admin.username"),
-                                            ConfigReader.getProperty("admin.password"));
+        String adminToken = AuthManager.getToken(ConfigReader.getProperty("admin.username"),
+                                                  ConfigReader.getProperty("admin.password"));
 
         // Build request
         ItemDetail item = ItemDetail.builder()
-                .productId(3)
+                .productId(ConfigReader.getDefaultProductId())
                 .qtyPlanned((Integer) testData.get("quantity"))
                 .build();
 
@@ -158,12 +152,12 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
                 .build();
 
         // Step 1: Tạo nháp
-        Response createRes = TransferClient.createTransfer(staffToken, transferPayload);
+        Response createRes = TransferClient.createTransfer(adminToken, transferPayload);
         String transferId = createRes.jsonPath().getString("data.id");
         System.out.println("[API Strategy] Tạo phiếu điều chuyển nháp: ID=" + transferId);
 
         // Step 2: Gửi duyệt
-        TransferClient.submitTransfer(staffToken, transferId);
+        TransferClient.submitTransfer(adminToken, transferId);
         System.out.println("[API Strategy] Đã gửi duyệt phiếu điều chuyển: ID=" + transferId);
 
         // Step 3: Duyệt
@@ -171,15 +165,14 @@ public class ApiWorkFlowStrategy implements WorkFlowStrategy {
         System.out.println("[API Strategy] Admin đã duyệt phiếu điều chuyển: ID=" + transferId);
 
         // Step 4: Xuất điều chuyển (kho nguồn giảm, In-Transit tăng)
-        TransferClient.dispatchTransfer(staffToken, transferId);
+        TransferClient.dispatchTransfer(adminToken, transferId);
         System.out.println("[API Strategy] Đã xuất điều chuyển - hàng đang In-Transit: ID=" + transferId);
 
         // Step 5: Nhận tại kho đích (In-Transit giảm, kho đích tăng)
         String idempotencyKey = (String) testData.getOrDefault("idempotencyKey", null);
-        Response receiveRes = TransferClient.receiveTransfer(staffToken, transferId, idempotencyKey);
+        Response receiveRes = TransferClient.receiveTransfer(adminToken, transferId, idempotencyKey);
         System.out.println("[API Strategy] Nhận hàng tại kho đích hoàn tất: Status=" + receiveRes.getStatusCode());
 
         return transferId;
     }
 }
-

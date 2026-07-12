@@ -6,6 +6,7 @@ import com.automation_erp.framework.models.InboundRequest;
 import io.restassured.response.Response;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * API Client cho nhóm Inbound Document endpoints:
@@ -22,18 +23,37 @@ import java.util.Map;
  *   Nháp → (submit) → Chờ duyệt → (approve) → Đã duyệt → (post-receipt) → Đã nhập kho
  *   Nháp/Chờ duyệt → (cancel) → Hủy
  *   Chờ duyệt → (reject) → Bị từ chối
+ *
+ * Lưu ý: Server yêu cầu header Idempotency-Key cho tất cả POST mutating requests.
+ * Các method không nhận idempotencyKey sẽ tự động sinh UUID mới.
  */
 public class InboundClient {
 
     private InboundClient() {}
 
+    /** Sinh một Idempotency-Key UUID ngẫu nhiên */
+    private static String newKey() {
+        return UUID.randomUUID().toString();
+    }
+
     // =====================================================================
     // CRUD
     // =====================================================================
 
-    /** POST /inbound-documents — Tạo phiếu nhập kho (trạng thái Nháp) */
+    /**
+     * POST /inbound-documents — Tạo phiếu nhập kho (trạng thái Nháp).
+     * Tự động sinh Idempotency-Key.
+     */
     public static Response createInbound(String token, InboundRequest payload) {
-        return ApiClient.post(ApiEndpoints.INBOUND_DOCUMENTS, token, payload);
+        return ApiClient.post(ApiEndpoints.INBOUND_DOCUMENTS, token, payload, newKey());
+    }
+
+    /**
+     * POST /inbound-documents — Tạo phiếu nhập kho với Idempotency-Key cụ thể.
+     * Dùng khi cần kiểm tra tính idempotent (retry cùng key → kết quả giống nhau).
+     */
+    public static Response createInbound(String token, InboundRequest payload, String idempotencyKey) {
+        return ApiClient.post(ApiEndpoints.INBOUND_DOCUMENTS, token, payload, idempotencyKey);
     }
 
     /** GET /inbound-documents — Lấy danh sách phiếu nhập kho */
@@ -62,12 +82,12 @@ public class InboundClient {
 
     /** POST /inbound-documents/{id}/submit — Gửi phiếu chờ duyệt */
     public static Response submitInbound(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_SUBMIT, id), token, null);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_SUBMIT, id), token, null, newKey());
     }
 
     /** POST /inbound-documents/{id}/approve — Quản lý phê duyệt phiếu */
     public static Response approveInbound(String token, String id) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_APPROVE, id), token, null);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_APPROVE, id), token, null, newKey());
     }
 
     /**
@@ -80,36 +100,42 @@ public class InboundClient {
             ApiEndpoints.path(ApiEndpoints.INBOUND_POST_RECEIPT, id),
             token,
             null,
-            idempotencyKey
+            idempotencyKey != null ? idempotencyKey : newKey()
         );
     }
 
-    /** POST /inbound-documents/{id}/post-receipt — Không dùng idempotency key */
+    /** POST /inbound-documents/{id}/post-receipt — Tự động sinh idempotency key */
     public static Response postReceipt(String token, String id) {
-        return postReceipt(token, id, null);
+        return postReceipt(token, id, newKey());
     }
+
+    /** POST /inbound-documents/{id}/post-receipt — Với body và idempotency key cụ thể */
+    public static Response postReceipt(String token, String id, String idempotencyKey, Object payload) {
+        return ApiClient.post(
+            ApiEndpoints.path(ApiEndpoints.INBOUND_POST_RECEIPT, id),
+            token,
+            payload,
+            idempotencyKey != null ? idempotencyKey : newKey()
+        );
+    }
+
+    /** POST /inbound-documents/{id}/post-receipt — Với body, tự động sinh idempotency key */
+    public static Response postReceipt(String token, String id, Object payload) {
+        return postReceipt(token, id, newKey(), payload);
+    }
+
     /** POST /inbound-documents/{id}/record-loss — Ghi nhận hao hụt khi nhập kho */
     public static Response recordLoss(String token, String id, Object payload) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_RECORD_LOSS, id), token, payload);
-    }
-
-    /** POST /inbound-documents/{id}/post-receipt — Thực tế nhập kho */
-    public static Response postReceipt(String token, String id, String idempotencyKey, Object payload) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_POST_RECEIPT, id), token, payload, idempotencyKey);
-    }
-
-    /** POST /inbound-documents/{id}/post-receipt — Không dùng idempotency key */
-    public static Response postReceipt(String token, String id, Object payload) {
-        return postReceipt(token, id, null, payload);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_RECORD_LOSS, id), token, payload, newKey());
     }
 
     /** POST /inbound-documents/{id}/reject — Từ chối phiếu nhập */
     public static Response rejectInbound(String token, String id, Object payload) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_REJECT, id), token, payload);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_REJECT, id), token, payload, newKey());
     }
 
     /** POST /inbound-documents/{id}/cancel — Hủy phiếu nhập (chỉ được hủy khi chưa hoàn tất) */
     public static Response cancelInbound(String token, String id, Object payload) {
-        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_CANCEL, id), token, payload);
+        return ApiClient.post(ApiEndpoints.path(ApiEndpoints.INBOUND_CANCEL, id), token, payload, newKey());
     }
 }

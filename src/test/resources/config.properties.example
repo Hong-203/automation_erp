@@ -25,6 +25,10 @@ timeout.seconds=15
 admin.username=YOUR_ADMIN_USERNAME
 admin.password=YOUR_ADMIN_PASSWORD
 
-# Tài khoản staff
-staff.username=YOUR_STAFF_USERNAME
-staff.password=YOUR_STAFF_PASSWORD
+# ============================================================
+# Default Entity IDs (cần khớp với dữ liệu Master Data trên môi trường test)
+# Thay đổi các giá trị này cho phù hợp với từng môi trường (staging/dev/prod)
+# ============================================================
+default.warehouse.id=1
+default.supplier.id=1
+default.product.id=3

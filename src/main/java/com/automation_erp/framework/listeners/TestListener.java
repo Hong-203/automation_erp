@@ -1,14 +1,22 @@
 package com.automation_erp.framework.listeners;
 
+import com.automation_erp.framework.config.ConfigReader;
+import com.automation_erp.framework.driver.DriverManager;
+import com.automation_erp.framework.pages.BasePage;
 import com.automation_erp.framework.reporters.ExtentReportManager;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.File;
+
 /**
  * TestNG Listener kết nối kết quả test với ExtentReports.
+ * Tự động chụp ảnh màn hình khi test UI thất bại và đính kèm vào báo cáo.
  *
  * Đăng ký listener trong testng.xml:
  *   <listeners>
@@ -92,6 +100,9 @@ public class TestListener implements ITestListener {
             if (throwable != null) {
                 test.fail(throwable);
             }
+
+            // Chụp ảnh màn hình khi test UI thất bại
+            captureAndAttachScreenshot(test, testName);
         }
         ExtentReportManager.removeTest();
     }
@@ -114,5 +125,56 @@ public class TestListener implements ITestListener {
             }
         }
         ExtentReportManager.removeTest();
+    }
+
+    // =====================================================================
+    // Private: Screenshot helper
+    // =====================================================================
+
+    /**
+     * Chụp ảnh màn hình và đính kèm vào ExtentReport node.
+     * Chỉ thực hiện khi đang ở chế độ UI (execution.type=UI).
+     *
+     * @param test     ExtentTest node hiện tại
+     * @param testName Tên test case (để đặt tên file ảnh)
+     */
+    private void captureAndAttachScreenshot(ExtentTest test, String testName) {
+        try {
+            String executionType = ConfigReader.getExecutionType();
+            if (!"UI".equalsIgnoreCase(executionType)) {
+                return; // Chỉ chụp ảnh khi chạy UI test
+            }
+
+            WebDriver driver = DriverManager.getDriver();
+            if (driver == null) {
+                return; // Driver đã bị đóng hoặc chưa khởi tạo
+            }
+
+            // Chụp ảnh dạng byte array
+            byte[] screenshotBytes = BasePage.takeScreenshotAsBytes(driver);
+            if (screenshotBytes == null) {
+                return;
+            }
+
+            // Lưu file ảnh ra đĩa (để CI/CD có thể upload artifact)
+            String timestamp = String.valueOf(System.currentTimeMillis());
+            String safeTestName = testName.replaceAll("[^a-zA-Z0-9_\\-]", "_");
+            String screenshotDir = "target/screenshots/";
+            String fileName = safeTestName + "_" + timestamp + ".png";
+            File destFile = new File(screenshotDir + fileName);
+            destFile.getParentFile().mkdirs();
+            java.nio.file.Files.write(destFile.toPath(), screenshotBytes);
+
+            System.out.printf("[TestListener] Screenshot đã lưu: %s%n", destFile.getAbsolutePath());
+
+            // Đính kèm ảnh vào ExtentReport dạng Base64 inline
+            String base64 = java.util.Base64.getEncoder().encodeToString(screenshotBytes);
+            test.fail("📸 Screenshot lúc thất bại:",
+                MediaEntityBuilder.createScreenCaptureFromBase64String(base64, testName).build());
+
+        } catch (Exception e) {
+            System.err.printf("[TestListener] Không thể chụp ảnh màn hình cho test '%s': %s%n",
+                testName, e.getMessage());
+        }
     }
 }

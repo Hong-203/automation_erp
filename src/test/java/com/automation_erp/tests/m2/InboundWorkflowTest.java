@@ -19,10 +19,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+// NOTE: IDs (warehouse, supplier, product) được đọc từ config.properties thay vì hard-code.
+// Xem default.warehouse.id, default.supplier.id, default.product.id trong config.properties.
+
 public class InboundWorkflowTest extends BaseTest {
 
     private String adminToken;
-    private String staffToken;
 
     private String happyPathInboundId;
     private Integer happyPathLineId;
@@ -32,8 +34,6 @@ public class InboundWorkflowTest extends BaseTest {
     public void setupTokens() {
         adminToken = AuthManager.getToken(ConfigReader.getProperty("admin.username"),
                 ConfigReader.getProperty("admin.password"));
-        staffToken = AuthManager.getToken(ConfigReader.getProperty("staff.username"),
-                ConfigReader.getProperty("staff.password"));
     }
 
     // =====================================================================
@@ -45,10 +45,14 @@ public class InboundWorkflowTest extends BaseTest {
         InboundRequest req = InboundRequest.builder()
                 .docNo("NK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase())
                 .docDate(DateUtils.todayAsIso())
-                .dstWarehouseId(1)
-                .supplierId(1)
+                .dstWarehouseId(ConfigReader.getDefaultWarehouseId())
+                .supplierId(ConfigReader.getDefaultSupplierId())
                 .lines(List.of(
-                        ItemDetail.builder().productId(3).qtyPlanned(happyPathQtyPlanned).unitCost(50000.0).build()))
+                        ItemDetail.builder()
+                                .productId(ConfigReader.getDefaultProductId())
+                                .qtyPlanned(happyPathQtyPlanned)
+                                .unitCost(50000.0)
+                                .build()))
                 .note("Luồng Happy Path tự động")
                 .build();
 
@@ -106,7 +110,7 @@ public class InboundWorkflowTest extends BaseTest {
         Response res = InboundClient.postReceipt(adminToken, happyPathInboundId, idempotencyKey, payload);
 
         AssertionUtils.assertStatusCode(res, HttpStatus.OK);
-        AssertionUtils.assertStringFieldEquals(res, "data.status", "completed");
+        AssertionUtils.assertStringFieldEquals(res, "data.status", "received");
         AssertionUtils.assertFieldNotNull(res, "data.stock_movements");
     }
 
@@ -115,8 +119,12 @@ public class InboundWorkflowTest extends BaseTest {
         InboundRequest req = InboundRequest.builder()
                 .docNo("NK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase())
                 .docDate(DateUtils.todayAsIso())
-                .dstWarehouseId(1)
-                .lines(List.of(ItemDetail.builder().productId(3).qtyPlanned(10).unitCost(100.0).build()))
+                .dstWarehouseId(ConfigReader.getDefaultWarehouseId())
+                .lines(List.of(ItemDetail.builder()
+                        .productId(ConfigReader.getDefaultProductId())
+                        .qtyPlanned(10)
+                        .unitCost(100.0)
+                        .build()))
                 .build();
         Response createRes = InboundClient.createInbound(adminToken, req);
         AssertionUtils.assertStatusCode(createRes, HttpStatus.CREATED);
@@ -138,8 +146,12 @@ public class InboundWorkflowTest extends BaseTest {
         InboundRequest req = InboundRequest.builder()
                 .docNo("NK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase())
                 .docDate(DateUtils.todayAsIso())
-                .dstWarehouseId(1)
-                .lines(List.of(ItemDetail.builder().productId(3).qtyPlanned(5).unitCost(50.0).build()))
+                .dstWarehouseId(ConfigReader.getDefaultWarehouseId())
+                .lines(List.of(ItemDetail.builder()
+                        .productId(ConfigReader.getDefaultProductId())
+                        .qtyPlanned(5)
+                        .unitCost(50.0)
+                        .build()))
                 .build();
         Response createRes = InboundClient.createInbound(adminToken, req);
         AssertionUtils.assertStatusCode(createRes, HttpStatus.CREATED);

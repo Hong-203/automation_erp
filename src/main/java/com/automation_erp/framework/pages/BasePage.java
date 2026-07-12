@@ -5,6 +5,14 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import java.time.Duration;
 
@@ -171,6 +179,57 @@ public class BasePage {
     /** Thoát khỏi iframe, trở về frame mặc định */
     protected void switchToDefaultContent() {
         driver.switchTo().defaultContent();
+    }
+
+    // =====================================================================
+    // Screenshot
+    // =====================================================================
+
+    /**
+     * Chụp màn hình hiện tại và lưu vào thư mục target/screenshots/.
+     * Tên file theo format: {testName}_{timestamp}.png
+     *
+     * @param testName Tên test case (dùng để đặt tên file)
+     * @return Đường dẫn tuyệt đối đến file ảnh đã lưu, hoặc null nếu thất bại
+     */
+    public String takeScreenshot(String testName) {
+        if (driver == null) {
+            return null;
+        }
+        try {
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_SSS"));
+            String safeTestName = testName.replaceAll("[^a-zA-Z0-9_\\-]", "_");
+            String fileName = safeTestName + "_" + timestamp + ".png";
+            String screenshotDir = "target/screenshots/";
+
+            File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destFile = new File(screenshotDir + fileName);
+            destFile.getParentFile().mkdirs();
+            FileUtils.copyFile(srcFile, destFile);
+
+            System.out.printf("[BasePage] Screenshot saved: %s%n", destFile.getAbsolutePath());
+            return destFile.getAbsolutePath();
+        } catch (IOException e) {
+            System.err.printf("[BasePage] Không thể chụp màn hình: %s%n", e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Chụp màn hình dạng byte array (dùng để đính kèm trực tiếp vào ExtentReport).
+     *
+     * @return byte array của ảnh PNG, hoặc null nếu thất bại
+     */
+    public static byte[] takeScreenshotAsBytes(WebDriver webDriver) {
+        if (webDriver == null) {
+            return null;
+        }
+        try {
+            return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
+        } catch (Exception e) {
+            System.err.printf("[BasePage] Không thể chụp màn hình (bytes): %s%n", e.getMessage());
+            return null;
+        }
     }
 }
 
